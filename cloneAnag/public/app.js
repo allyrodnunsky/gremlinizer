@@ -207,6 +207,8 @@ jQuery(function($){
              */
             players : [],
 
+            rounds: [],
+
             /**
              * Flag to indicate if a new game is starting.
              * This is used after the first game ends, and players initiate a new game
