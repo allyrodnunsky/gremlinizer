@@ -1,0 +1,17 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "Gremlin Game",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "fastclick": "^1.0.6",
+    "jquery": "^3.6.0",
+    "socketio": "^1.0.0"
+  }
+}
