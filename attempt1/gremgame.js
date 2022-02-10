@@ -10,6 +10,7 @@ exports.initGame = function(sio, socket){
     gameSocket.emit('connected', { message: "You are connected!" });
     console.log("init game ran!")
 
+
     
     //host functions
     gameSocket.on('hostCreateNewGame', hostCreateNewGame);
@@ -28,9 +29,10 @@ exports.initGame = function(sio, socket){
 
 //** create game button is clicked, create game room and join*/
 function hostCreateNewGame() {
+    console.log("thisGameID");
     //create unique game room ID
     var thisGameID = (Math.random() * 100000) | 0;
-    console.log(thisGameID);
+    
     //return game room ID and socket ID to browser client
     this.emit('newGameCreated', {gameID: thisGameID, mySocketID: this.id});
 
@@ -46,6 +48,7 @@ function hostPrepareGame(gameID) {
         mySocketID : sock.id,
         gameID : gameID
     };
+    io.sockets.in(data.gameId).emit('beginNewGame', data);
 }
 
 

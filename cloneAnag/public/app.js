@@ -39,7 +39,7 @@ jQuery(function($){
         onConnected : function() {
             // Cache a copy of the client's socket.IO session ID on the App
             App.mySocketId = IO.socket.socket.sessionid;
-            // console.log(data.message);
+            console.log(IO.socket);
         },
 
         /**

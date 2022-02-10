@@ -22,24 +22,31 @@ jQuery(function($){
         bindEvents : function() {
             IO.socket.on('connected', IO.onConnected );//cache
             IO.socket.on('newGameCreated', IO.onNewGameCreated );
-            IO.socket.on('playerJoinedRoom', IO.playerJoinedRoom );
-            IO.socket.on('beginNewGame', IO.beginNewGame );
-            IO.socket.on('newPhraseData', IO.onNewPhraseData);
-            IO.socket.on('hostCheckAnswer', IO.hostCheckAnswer);
-            IO.socket.on('gameOver', IO.gameOver);
+            //IO.socket.on('playerJoinedRoom', IO.playerJoinedRoom );
+            //IO.socket.on('beginNewGame', IO.beginNewGame );
+            //IO.socket.on('newPhraseData', IO.onNewPhraseData);
+            //IO.socket.on('hostCheckAnswer', IO.hostCheckAnswer);
+            //IO.socket.on('gameOver', IO.gameOver);
             IO.socket.on('error', IO.error );
         },
 
         onConnected : function() {
-            App.mySocketID = IO.socket.socket.sessionid;
-            console.log(data.message);
+            console.log("IO");
+            App.mySocketID = IO.socket.id;
+            console.log(App.mySocketID);
+            
         },
+
+        
 
         onNewGameCreated : function(data) {
             console.log('onNewGame Create calls game init');
             console.log(data);
             App.Host.gameInit(data);
             
+        },
+        error : function(data) {
+            alert(data.message);
         }
 
     };
@@ -94,6 +101,7 @@ jQuery(function($){
             //handler for "create game" button on title screen
             onCreateClick: function () {
                 console.log('clicked create a game');
+                console.log(IO);
                 IO.socket.emit('hostCreateNewGame');
                
             },
@@ -119,7 +127,7 @@ jQuery(function($){
                 //display URL
                 $('gameURL').text(window.location.href);
 
-                $('#spanNewGameCode').text(app.gameID);
+                $('#spanNewGameCode').text(App.gameID);
 
             },
 
