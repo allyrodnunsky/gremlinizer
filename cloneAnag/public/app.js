@@ -27,7 +27,7 @@ jQuery(function($){
             IO.socket.on('newGameCreated', IO.onNewGameCreated );
             IO.socket.on('playerJoinedRoom', IO.playerJoinedRoom );
             IO.socket.on('beginNewGame', IO.beginNewGame );
-            IO.socket.on('newWordData', IO.onNewWordData);
+            IO.socket.on('newPhraseData', IO.onNewPhraseData);
             IO.socket.on('hostCheckAnswer', IO.hostCheckAnswer);
             IO.socket.on('gameOver', IO.gameOver);
             IO.socket.on('error', IO.error );
@@ -117,7 +117,7 @@ jQuery(function($){
         /**
          * Keep track of the gameId, which is identical to the ID
          * of the Socket.IO Room used for the players and host to communicate
-         *
+         *  
          */
         gameId: 0,
 
