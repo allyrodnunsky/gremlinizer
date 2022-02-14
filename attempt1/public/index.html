@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Gremlinizer</title>
+    <!-- <link href="styles.css" rel="stylesheet" /> -->
+  </head>
+
+  <body>
+    <div id="gameArea">
+      <!-- this area is where the templates below will be used -->
+    </div>
+
+    <script id="title-screen-template" type="text/template" >
+      <div class="titleWrapper">
+        
+        <div class="title">
+        <h1> GREMLINIZER </h1>
+       </div>
+        <div class="buttons">
+          <button id="btnCreateGame" class="btn"> CREATE GAME </button>
+          <button id="btnJoinGame" class="btn"> JOIN GAME </button>
+          <div style="clear:both"></div>
+        </div>
+      
+      </div>
+    </script>
+
+<!-- host screen -->
+    <script id="create-game-template" type="text/template">
+      <div class="createGameWrapper">
+
+        <div class="info">Open this site on your mobile device:</div>
+        <div id="gameURL" class="infoBig">Error!</div>
+
+        <div class="info">Then click <strong>JOIN</strong> and <br/> enter the following Game ID:</div>
+        <div id="spanNewGameCode" class="gameID">Error!</div>
+
+        <!-- <div id="playersWaiting"></div> -->
+    </div>
+
+    </script>
+
+<!-- player screen -->
+    <script id="join-game-template" type="text/template">
+      <div class="joinGameWrapper">
+          <div class="info">
+              <label for="inputPlayerName">Your Name:</label>
+              <input id="inputPlayerName" type="text" />
+          </div>
+
+          <div class="info">
+              <label for="inputGameId">Game ID:</label>
+              <input id="inputGameId" type="text"/>
+          </div>
+
+          <div class="info buttons">
+              <button id="btnStart" class="btn">Start</button>
+              <div id="playerWaitingMessage"></div>
+          </div>
+      </div>
+  </script>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script> -->
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+
+  </body>
+</html>
