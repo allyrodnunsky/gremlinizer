@@ -272,12 +272,13 @@ jQuery(function($){
                 if ( App.Host.isNewGame ) {
                     App.Host.displayNewGameScreen();
                 }
-                // Update host screen
+
+                // Updates host screen with the name of player once joined
                 $('#playersWaiting')
                     .append('<p/>')
                     .text('Player ' + data.playerName + ' joined the game.');
 
-                // Store the new player's data on the Host.
+                // ** Store the new player's data on the Host.
                 App.Host.players.push(data);
 
                 // Increment the number of players in the room

@@ -22,7 +22,11 @@ jQuery(function($){
         bindEvents : function() {
             IO.socket.on('connected', IO.onConnected );//cache
             IO.socket.on('newGameCreated', IO.onNewGameCreated );
+<<<<<<< HEAD
             //IO.socket.on('playerJoinedRoom', IO.playerJoinedRoom );
+=======
+            IO.socket.on('playerJoinedRoom', IO.playerJoinedRoom );
+>>>>>>> 5fb56abbe09b166428bc6747c37b92487e0333da
             //IO.socket.on('beginNewGame', IO.beginNewGame );
             //IO.socket.on('newPhraseData', IO.onNewPhraseData);
             //IO.socket.on('hostCheckAnswer', IO.hostCheckAnswer);
@@ -37,6 +41,7 @@ jQuery(function($){
             
         },
 
+<<<<<<< HEAD
         
 
         onNewGameCreated : function(data) {
@@ -45,6 +50,21 @@ jQuery(function($){
             App.Host.gameInit(data);
             
         },
+=======
+        onNewGameCreated : function(data) {
+            console.log('onNewGame Create calls game init');
+            //console.log(data);
+            App.Host.gameInit(data);
+            
+        },
+
+        playerJoinedRoom : function(data) {
+            console.log('player joined room called');
+            App[App.myRole].updateWaitingScreen(data);
+        },
+
+
+>>>>>>> 5fb56abbe09b166428bc6747c37b92487e0333da
         error : function(data) {
             alert(data.message);
         }
@@ -74,6 +94,10 @@ jQuery(function($){
             App.$templateTitleScreen = $('#title-screen-template').html();
             App.$templateNewGame = $('#create-game-template').html();
             App.$templateJoinGame = $('#join-game-template').html();
+<<<<<<< HEAD
+=======
+            App.$templateWaitingRoom = $('#waiting-room-template').html();
+>>>>>>> 5fb56abbe09b166428bc6747c37b92487e0333da
         },
 
         //bind events - events triggered by button clicks
@@ -83,6 +107,10 @@ jQuery(function($){
 
             //PLAYER
             App.$doc.on('click', '#btnJoinGame', App.Player.onJoinClick);
+<<<<<<< HEAD
+=======
+            App.$doc.on('click', '#btnJoinWaitingRoom', App.Player.onJoinWaitingRoomClick);
+>>>>>>> 5fb56abbe09b166428bc6747c37b92487e0333da
         },
 
         //show intial title screen
@@ -91,8 +119,13 @@ jQuery(function($){
         },
 
        
+<<<<<<< HEAD
 
         //host code
+=======
+        /////////////////
+        /****HOST CODE */
+>>>>>>> 5fb56abbe09b166428bc6747c37b92487e0333da
         Host : {
             players: [], //contains references to player data
             isNewGame: false, //flag to indicate if a new game is starting
@@ -131,10 +164,25 @@ jQuery(function($){
 
             },
 
+<<<<<<< HEAD
 
 
 
         
+=======
+            updateWaitingScreen : function(data) {
+                if( App.Host.isNewGame) {
+                    App.Host.displayNewGameScreen();
+                }
+                $('#playersWaiting')
+                    .append('<p/>')
+                    .text('Player' + data.playerName + 'joined the game.');
+
+                App.Host.players.push(data);
+                App.Host.numPlayersInRoom += 1;
+            },
+
+>>>>>>> 5fb56abbe09b166428bc6747c37b92487e0333da
         },
 
         Player : {
@@ -147,6 +195,7 @@ jQuery(function($){
                 App.$gameArea.html(App.$templateJoinGame);
             },
 
+<<<<<<< HEAD
             //player enters name and gameID and clicks start
             // onPlayerStartClick: function () {
 
@@ -161,6 +210,38 @@ jQuery(function($){
 
             //     }
             // },
+=======
+            //player enters name and gameID and clicks join room
+            onJoinWaitingRoomClick: function () {
+                console.log('waiting room click');
+                var data = {
+                    gameID: +($('#inputGameId').val()),
+                    playerName: +($('#inputPlayerName').val) || 'anon'
+                };
+                
+                //emit waiting room in this function
+                IO.socket.emit('playerJoinGame', data);
+
+                App.myRole = 'Player';
+                App.Player.myName = data.playerName;
+            },
+
+            updateWaitingScreen : function(data) {
+                //bug here
+                console.log('io.socket.id is: ' + IO.socket.id);
+                console.log('data.mySocketID: ' + data.mySocketID);
+
+                if(IO.socket.id === data.mySocketID){
+                    console.log('player update Waiting Screen called');
+                    App.myRole = 'Player';
+                    App.gameID = data.gameID;
+
+                    //display waiting room screen
+                    App.$gameArea.html(App.$templateWaitingRoom);
+
+                }
+            },
+>>>>>>> 5fb56abbe09b166428bc6747c37b92487e0333da
             
         },
 

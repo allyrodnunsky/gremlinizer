@@ -129,8 +129,18 @@ function playerAnswer(data) {
 
     // The player's answer is attached to the data object.  \
     // Emit an event with the answer so it can be checked by the 'Host'
+<<<<<<< HEAD
 
     //TODO: STORE PLAYER ANSWER 
+=======
+<<<<<<< HEAD
+    
+    //TODO: STORE PLAYER ANSWER
+=======
+
+    //TODO: STORE PLAYER ANSWER 
+>>>>>>> 421577eebee5bdae7638f7b522627eef9dcf2727
+>>>>>>> 5fb56abbe09b166428bc6747c37b92487e0333da
     io.sockets.in(data.gameId).emit('hostCheckAnswer', data);
 }
 
