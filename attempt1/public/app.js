@@ -139,15 +139,25 @@ jQuery(function($){
             },
 
             updateWaitingScreen : function(data) {
+                //if game is a restarted game, show the join screen
                 if( App.Host.isNewGame) {
                     App.Host.displayNewGameScreen();
                 }
+
                 $('#playersWaiting')
                     .append('<p/>')
                     .text('Player' + data.playerName + 'joined the game.');
 
                 App.Host.players.push(data);
                 App.Host.numPlayersInRoom += 1;
+                
+                $('#startGameButton')
+                    .button('Start Game')
+                
+                //show start button once correct num of players entered room
+                if(App.Host.numPlayersInRoom >= 3 && App.Host.numPlayersInRoom <= 6){
+                   
+                }
             },
 
         },
@@ -178,9 +188,8 @@ jQuery(function($){
             },
 
             updateWaitingScreen : function(data) {
-                //bug here
-                console.log('io.socket.id is: ' + IO.socket.id);
-                console.log('data.mySocketID: ' + data.mySocketID);
+                // console.log('io.socket.id is: ' + IO.socket.id);
+                // console.log('data.mySocketID: ' + data.mySocketID);
 
                 if(IO.socket.id === data.mySocketID){
                     console.log('player update Waiting Screen called');
