@@ -3,14 +3,15 @@
 
 var io;
 var gameSocket;
+var roundTimer;
 
 exports.initGame = function(sio, socket){
     io = sio;
     gameSocket = socket;
     gameSocket.emit('connected', { message: "You are connected!" });
-    console.log("init game ran!")
+    //console.log("init game ran!")
 
-
+    gameSocket.on('storePlayerInfo', storePlayerInfo);
     
     //host functions
     gameSocket.on('hostCreateNewGame', hostCreateNewGame);
@@ -21,7 +22,7 @@ exports.initGame = function(sio, socket){
     //gameSocket.on('checkGremStatus', hostCheckGremStatus);
     //gameSocket.on('stolenLetters', player);
     //gameSocket.on('playerAnswer', playerAnswer);
-    //gameSocket.on('playerJoinGame', playerJoinGame);
+    gameSocket.on('playerJoinGame', playerJoinGame);
 
 
 }
@@ -29,7 +30,6 @@ exports.initGame = function(sio, socket){
 
 //** create game button is clicked, create game room and join*/
 function hostCreateNewGame() {
-    console.log("thisGameID");
     //create unique game room ID
     var thisGameID = (Math.random() * 100000) | 0;
     
@@ -51,7 +51,52 @@ function hostPrepareGame(gameID) {
     io.sockets.in(data.gameId).emit('beginNewGame', data);
 }
 
+function playerJoinGame(data) {
+    var sock = this;
+    var room = gameSocket.manager.rooms["/" + data.gameId];
+    if( room != undefined ){
+        // attach the socket id to the data object.
+        data.mySocketId = sock.id;
+
+        // Join the room
+        sock.join(data.gameId);
+
+        console.log('Player ' + data.playerName + ' joining game: ' + data.gameId );
+
+        // Emit an event notifying the clients that the player has joined the room.
+        io.sockets.in(data.gameId).emit('playerJoinedRoom', data);
+
+    } else {
+        // Otherwise, send an error message back to the player.
+        this.emit('error',{message: "This room does not exist."} );
+    }
+}
+
+function hostStartGame(gameId) {
+    console.log('Game Started.');
+    roundTimer = performance.now();
+    sendWord(0,gameId);
+};
+
 
 function hostNextRound() {
 
+}
+
+var playerInfo = {};
+
+/**
+ * 
+ * 
+ * 
+ * 
+ * @param data hopefully player name and ID
+ * 
+ * 
+ */
+
+
+function storePlayerInfo(data) {
+    playerInfo.append(data);
+    console.log(playerInfo[0]);
 }

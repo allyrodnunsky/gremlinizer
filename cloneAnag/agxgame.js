@@ -1,6 +1,6 @@
 var io;
 var gameSocket;
-
+var roundTimer;
 /**
  * This function is called by index.js to initialize a new game instance.
  *
@@ -64,6 +64,7 @@ function hostPrepareGame(gameId) {
  */
 function hostStartGame(gameId) {
     console.log('Game Started.');
+    roundTimer = performance.now();
     sendWord(0,gameId);
 };
 
@@ -74,6 +75,7 @@ function hostStartGame(gameId) {
 function hostNextRound(data) {
     if(data.round < wordPool.length ){
         // Send a new set of words back to the host and players.
+        roundTimer = performance.now();
         sendWord(data.round, data.gameId);
     } else {
         // If the current round exceeds the number of words, send the 'gameOver' event.
@@ -127,7 +129,7 @@ function playerJoinGame(data) {
 function playerAnswer(data) {
     console.log('Player ID: ' + data.playerId + ' answered a question with: ' + data.answer);
 
-    // The player's answer is attached to the data object.  \
+    // The player's answer is attached to the data object.  
     // Emit an event with the answer so it can be checked by the 'Host'
 
     //TODO: STORE PLAYER ANSWER 
@@ -244,12 +246,8 @@ var prompts = [
     }
 ]
 
-var roundsOfPlayers = [
-    {
-        "1"  : [ "take ____ me","take ____ me","take ____ me","take ____ me" ],
-        "1" : [ "lead","lamp","seed","eels","lean","cels","lyse","sloe","tels","self" ]
-    }
-]
+var roundsOfPlayers = {};
+
 
 
 

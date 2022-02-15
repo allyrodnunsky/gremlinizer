@@ -33,15 +33,15 @@ jQuery(function($){
         onConnected : function() {
             console.log("IO");
             App.mySocketID = IO.socket.id;
-            console.log(App.mySocketID);
+            //console.log(App.mySocketID);
             
         },
 
         
 
         onNewGameCreated : function(data) {
-            console.log('onNewGame Create calls game init');
-            console.log(data);
+            //console.log('onNewGame Create calls game init');
+            //console.log(data);
             App.Host.gameInit(data);
             
         },
@@ -82,7 +82,7 @@ jQuery(function($){
             App.$doc.on('click', '#btnCreateGame', App.Host.onCreateClick);
 
             //PLAYER
-            App.$doc.on('click', '#btnJoinGame', App.Player.onJoinClick);
+            App.$doc.on('click', '#btnStart', App.Player.onJoinClick);
         },
 
         //show intial title screen
@@ -100,8 +100,8 @@ jQuery(function($){
 
             //handler for "create game" button on title screen
             onCreateClick: function () {
-                console.log('clicked create a game');
-                console.log(IO);
+                //console.log('clicked create a game');
+                //console.log(IO);
                 IO.socket.emit('hostCreateNewGame');
                
             },
@@ -161,6 +161,31 @@ jQuery(function($){
 
             //     }
             // },
+            onPlayerSubmitClick: function() {
+                // console.log('Clicked Answer Button');
+                var $btn = $("#inputPlayerSub");      // the tapped button
+                console.log($btn);
+                var answer = $btn.val(); // The tapped word
+                let votes, timesSlow, gremRound, score = 0;
+                let gremStatus = false;
+                let timeSub = 
+
+                // Send the player info and tapped word to the server so
+                // the host can check the answer.
+                var data = {
+                    gameId: App.gameId,
+                    playerId: App.mySocketId,
+                    answer: answer,
+                    round: App.currentRound,
+                    votes: votes, 
+                    score: score,
+                    timesSlow: timesSlow,
+                    gremRound: gremRound,
+                    gremStatus: gremStatus,
+                    timeSub: timeSub
+                }
+                IO.socket.emit('playerAnswer',data);
+            },
             
         },
 

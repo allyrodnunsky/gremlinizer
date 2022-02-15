@@ -16,6 +16,7 @@ jQuery(function($){
         init: function() {
             IO.socket = io.connect();
             IO.bindEvents();
+            var startTime = performance.now();
         },
 
         /**
@@ -476,7 +477,9 @@ jQuery(function($){
                 var $btn = $("#inputPlayerSub");      // the tapped button
                 console.log($btn);
                 var answer = $btn.val(); // The tapped word
-
+                let votes, timesSlow, gremRound, score = 0;
+                let gremStatus = false;
+                let timeSub = 
 
                 // Send the player info and tapped word to the server so
                 // the host can check the answer.
@@ -484,7 +487,14 @@ jQuery(function($){
                     gameId: App.gameId,
                     playerId: App.mySocketId,
                     answer: answer,
-                    round: App.currentRound
+                    round: App.currentRound,
+                    votes: votes, 
+                    score: score,
+                    timesSlow: timesSlow,
+                    gremRound: gremRound,
+                    gremStatus: gremStatus,
+                    timeSub: timeSub
+
                 }
                 IO.socket.emit('playerAnswer',data);
             },
