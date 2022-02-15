@@ -79,7 +79,7 @@ jQuery(function($){
             App.$templateTitleScreen = $('#title-screen-template').html();
             App.$templateNewGame = $('#create-game-template').html();
             App.$templateJoinGame = $('#join-game-template').html();
-            App.$templateWaitingRoom = $('waiting-room-template').html();
+            App.$templateWaitingRoom = $('#waiting-room-template').html();
         },
 
         //bind events - events triggered by button clicks
@@ -164,34 +164,31 @@ jQuery(function($){
 
             //player enters name and gameID and clicks join room
             onJoinWaitingRoomClick: function () {
-                App.$gameArea.html(App.$templateWaitingRoom);
-
+                console.log('waiting room click');
                 var data = {
                     gameID: +($('#inputGameId').val()),
                     playerName: +($('#inputPlayerName').val) || 'anon'
                 };
-
-                IO.socket.emit('playerJoinGame', data);
-                // console.log('waiting room click');
+                
                 //emit waiting room in this function
+                IO.socket.emit('playerJoinGame', data);
+
                 App.myRole = 'Player';
                 App.Player.myName = data.playerName;
             },
 
             updateWaitingScreen : function(data) {
                 //bug here
-                console.log(IO.socket.sessionid);
-                console.log(data.mySocketID);
+                console.log('io.socket.id is: ' + IO.socket.id);
+                console.log('data.mySocketID: ' + data.mySocketID);
 
-                if(IO.socket.sessionid === data.mySocketID){
+                if(IO.socket.id === data.mySocketID){
                     console.log('player update Waiting Screen called');
                     App.myRole = 'Player';
                     App.gameID = data.gameID;
 
-                    $('#playerWaitingMessage')
-                        .append('<p/>')
-                        .text('Joined Game ' + data.gameID + '. Please wait for game to begin.');
-                    // App.$gameArea.html(App.$templateWaitingRoom);
+                    //display waiting room screen
+                    App.$gameArea.html(App.$templateWaitingRoom);
 
                 }
             },
