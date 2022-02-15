@@ -61,6 +61,7 @@ jQuery(function($){
             //
             // So on the 'host' browser window, the App.Host.updateWiatingScreen function is called.
             // And on the player's browser, App.Player.updateWaitingScreen is called.
+            console.log('player joined room');
             App[App.myRole].updateWaitingScreen(data);
         },
 
