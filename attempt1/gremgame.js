@@ -55,3 +55,43 @@ function hostPrepareGame(gameID) {
 function hostNextRound() {
 
 }
+
+var songs = [
+                     [   "She's a ______ girl",
+                        "loves her ______ ",
+                        "Loves Jesus and ______ , too",
+                        "She's a good ______" ,
+                        "crazy 'bout ______ ",
+                        "Loves ______" , 
+                        "and her ______ , too", 
+                        "And it's a ______ day",
+                        " livin' in ______ ",
+                        "There's a ______  runnin' through the yard"
+                    ],
+                    [
+                        "She's a ______ girl",
+                        "loves her ______ ",
+                        "Loves Jesus and ______ , too",
+                        "She's a good ______" ,
+                        "crazy 'bout ______ ",
+                        "Loves ______" , 
+                        "and her ______ , too", 
+                        "And it's a ______ day",
+                        " livin' in ______ ",
+                        "There's a ______  runnin' through the yard"
+                    ],
+                    [
+                        "She's a ______ girl",
+                        "loves her ______ ",
+                        "Loves Jesus and ______ , too",
+                        "She's a good ______" ,
+                        "crazy 'bout ______ ",
+                        "Loves ______" , 
+                        "and her ______ , too", 
+                        "And it's a ______ day",
+                        " livin' in ______ ",
+                        "There's a ______  runnin' through the yard"
+                    ]
+]
+    
+    
