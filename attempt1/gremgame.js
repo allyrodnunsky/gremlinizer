@@ -50,6 +50,9 @@ function hostPrepareGame(gameID) {
         mySocketID : sock.id,
         gameID : gameID
     };
+    console.log('host prepare game called');
+    
+    //game starting
     io.sockets.in(data.gameID).emit('beginNewGame', data);
 }
 

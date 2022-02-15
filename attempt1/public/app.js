@@ -23,7 +23,7 @@ jQuery(function($){
             IO.socket.on('connected', IO.onConnected );//cache
             IO.socket.on('newGameCreated', IO.onNewGameCreated );
             IO.socket.on('playerJoinedRoom', IO.playerJoinedRoom );
-            //IO.socket.on('beginNewGame', IO.beginNewGame );
+            IO.socket.on('beginNewGame', IO.beginNewGame );
             //IO.socket.on('newPhraseData', IO.onNewPhraseData);
             //IO.socket.on('hostCheckAnswer', IO.hostCheckAnswer);
             //IO.socket.on('gameOver', IO.gameOver);
@@ -47,6 +47,10 @@ jQuery(function($){
         playerJoinedRoom : function(data) {
             console.log('player joined room called');
             App[App.myRole].updateWaitingScreen(data);
+        },
+
+        beginNewGame : function(data) {
+            App[App.myRole].gameCountdown(data);
         },
 
 
@@ -80,6 +84,9 @@ jQuery(function($){
             App.$templateNewGame = $('#create-game-template').html();
             App.$templateJoinGame = $('#join-game-template').html();
             App.$templateWaitingRoom = $('#waiting-room-template').html();
+            App.$templatePlayerScreen = $('#round-response-template').html();
+            App.$templateHostScreen = $('#round-x-template').html();
+            
         },
 
         //bind events - events triggered by button clicks
@@ -90,6 +97,8 @@ jQuery(function($){
             //PLAYER
             App.$doc.on('click', '#btnJoinGame', App.Player.onJoinClick);
             App.$doc.on('click', '#btnJoinWaitingRoom', App.Player.onJoinWaitingRoomClick);
+            
+            App.$doc.on('click', '#btnPlayerStartsGame', App.Player.onPlayerStartGameClick);
         },
 
         //show intial title screen
@@ -144,6 +153,8 @@ jQuery(function($){
                     App.Host.displayNewGameScreen();
                 }
 
+                console.log('host update waiting screen called');
+
                 $('#playersWaiting')
                     .append('<p/>')
                     .text('Player' + data.playerName + 'joined the game.');
@@ -151,14 +162,46 @@ jQuery(function($){
                 App.Host.players.push(data);
                 App.Host.numPlayersInRoom += 1;
                 
-                $('#startGameButton')
-                    .button('Start Game')
                 
                 //show start button once correct num of players entered room
-                if(App.Host.numPlayersInRoom >= 3 && App.Host.numPlayersInRoom <= 6){
-                   
+                if(App.Host.numPlayersInRoom ==1){
+                   //call host room start in gremgame
+                   IO.socket.emit('hostRoomStart', App.gameID); 
                 }
             },
+
+            onPlayerStartGameClick : function() {
+                console.log('host screen template game pls');
+                App.$gameArea.html(App.$templateHostScreen);
+            },
+
+            gameCountdown : function() {
+
+                // Prepare the game screen with new HTML
+                App.$gameArea.html(App.$templateHostScreen);
+                //App.doTextFit('#hostWord');
+
+                // // Begin the on-screen countdown timer
+                // var $secondsLeft = $('#hostWord');
+                // App.countDown( $secondsLeft, 5, function(){
+                //     IO.socket.emit('hostCountdownFinished', App.gameId);
+                // });
+
+                // // Display the players' names on screen
+                // $('#player1Score')
+                //     .find('.playerName')
+                //     .html(App.Host.players[0].playerName);
+
+                // $('#player2Score')
+                //     .find('.playerName')
+                //     .html(App.Host.players[1].playerName);
+
+                // // Set the Score section on screen to 0 for each player.
+                // $('#player1Score').find('.score').attr('id',App.Host.players[0].mySocketId);
+                // $('#player2Score').find('.score').attr('id',App.Host.players[1].mySocketId);
+            },
+
+
 
         },
 
@@ -199,7 +242,15 @@ jQuery(function($){
                     //display waiting room screen
                     App.$gameArea.html(App.$templateWaitingRoom);
 
+                    $('#playerWaitingMessage')
+                        .append('<p/>')
+                        .text('Joined Game ' + App.gameID + '. Please wait for game to begin.');
+
                 }
+            },
+
+            onPlayerStartGameClick : function() {
+                App.$gameArea.html(App.$templatePlayerScreen);
             },
             
         },
