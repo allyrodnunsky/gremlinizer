@@ -10,7 +10,7 @@ var gameSocket;
 exports.initGame = function(sio, socket){
     io = sio;
     gameSocket = socket;
-    console.log(gameSocket.manager);
+    
     gameSocket.emit('connected', { message: "You are connected!" });
 
     // Host Events
