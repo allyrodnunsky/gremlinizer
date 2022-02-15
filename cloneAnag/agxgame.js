@@ -129,6 +129,13 @@ function playerAnswer(data) {
 
     // The player's answer is attached to the data object.  \
     // Emit an event with the answer so it can be checked by the 'Host'
+<<<<<<< HEAD
+    
+    //TODO: STORE PLAYER ANSWER
+=======
+
+    //TODO: STORE PLAYER ANSWER 
+>>>>>>> 421577eebee5bdae7638f7b522627eef9dcf2727
     io.sockets.in(data.gameId).emit('hostCheckAnswer', data);
 }
 
@@ -217,6 +224,8 @@ function shuffle(array) {
     return array;
 }
 
+//TODO: build arrays to accept info about players, rounds and states see whiteboard picture
+
 /**
  * Each element in the array provides data for a single round in the game.
  *
@@ -232,3 +241,20 @@ var wordPool = [
         "decoys" : [ "lead","lamp","seed","eels","lean","cels","lyse","sloe","tels","self" ]
     }
 ]
+
+var prompts = [
+    {
+        "words"  : [ "take ____ me","take ____ me","take ____ me","take ____ me" ],
+        "decoys" : [ "lead","lamp","seed","eels","lean","cels","lyse","sloe","tels","self" ]
+    }
+]
+
+var roundsOfPlayers = [
+    {
+        "1"  : [ "take ____ me","take ____ me","take ____ me","take ____ me" ],
+        "1" : [ "lead","lamp","seed","eels","lean","cels","lyse","sloe","tels","self" ]
+    }
+]
+
+
+

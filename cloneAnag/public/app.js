@@ -27,7 +27,7 @@ jQuery(function($){
             IO.socket.on('newGameCreated', IO.onNewGameCreated );
             IO.socket.on('playerJoinedRoom', IO.playerJoinedRoom );
             IO.socket.on('beginNewGame', IO.beginNewGame );
-            IO.socket.on('newWordData', IO.onNewWordData);
+            IO.socket.on('newPhraseData', IO.onNewPhraseData);
             IO.socket.on('hostCheckAnswer', IO.hostCheckAnswer);
             IO.socket.on('gameOver', IO.gameOver);
             IO.socket.on('error', IO.error );
@@ -39,7 +39,7 @@ jQuery(function($){
         onConnected : function() {
             // Cache a copy of the client's socket.IO session ID on the App
             App.mySocketId = IO.socket.socket.sessionid;
-            // console.log(data.message);
+            console.log(IO.socket);
         },
 
         /**
@@ -117,7 +117,7 @@ jQuery(function($){
         /**
          * Keep track of the gameId, which is identical to the ID
          * of the Socket.IO Room used for the players and host to communicate
-         *
+         *  
          */
         gameId: 0,
 
@@ -207,6 +207,8 @@ jQuery(function($){
              */
             players : [],
 
+            rounds: [],
+
             /**
              * Flag to indicate if a new game is starting.
              * This is used after the first game ends, and players initiate a new game
@@ -270,12 +272,13 @@ jQuery(function($){
                 if ( App.Host.isNewGame ) {
                     App.Host.displayNewGameScreen();
                 }
-                // Update host screen
+
+                // Updates host screen with the name of player once joined
                 $('#playersWaiting')
                     .append('<p/>')
                     .text('Player ' + data.playerName + ' joined the game.');
 
-                // Store the new player's data on the Host.
+                // ** Store the new player's data on the Host.
                 App.Host.players.push(data);
 
                 // Increment the number of players in the room
