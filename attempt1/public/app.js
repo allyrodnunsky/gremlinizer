@@ -38,7 +38,7 @@ jQuery(function($){
         onConnected : function() {
             console.log("IO");
             App.mySocketID = IO.socket.id;
-            console.log(App.mySocketID);
+            //console.log(App.mySocketID);
             
         },
 
@@ -141,8 +141,8 @@ jQuery(function($){
 
             //handler for "create game" button on title screen
             onCreateClick: function () {
-                console.log('clicked create a game');
-                console.log(IO);
+                //console.log('clicked create a game');
+                //console.log(IO);
                 IO.socket.emit('hostCreateNewGame');
                
             },

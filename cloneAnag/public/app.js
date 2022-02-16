@@ -16,6 +16,7 @@ jQuery(function($){
         init: function() {
             IO.socket = io.connect();
             IO.bindEvents();
+            var startTime = performance.now();
         },
 
         /**
