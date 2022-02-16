@@ -8,11 +8,11 @@ var roundTimer;
 exports.initGame = function(sio, socket){
     io = sio;
     gameSocket = socket;
-    console.log(gameSocket);
+    //console.log(gameSocket);
     gameSocket.emit('connected', { message: "You are connected!" });
     //console.log("init game ran!")
 
-    gameSocket.on('storePlayerInfo', storePlayerInfo);
+    //gameSocket.on('storePlayerInfo', storePlayerInfo);
     
     //host functions
     gameSocket.on('hostCreateNewGame', hostCreateNewGame);
@@ -28,12 +28,6 @@ exports.initGame = function(sio, socket){
     //gameSocket.on('checkGremStatus', hostCheckGremStatus);
     //gameSocket.on('stolenLetters', player);
     gameSocket.on('playerAnswer', playerAnswer);
-
-    
-    //gameSocket.on('checkGremStatus', hostCheckGremStatus);
-    //gameSocket.on('stolenLetters', player);
-    //gameSocket.on('playerAnswer', playerAnswer);
-    gameSocket.on('playerJoinGame', playerJoinGame);
 
 
 }
@@ -52,8 +46,8 @@ function hostCreateNewGame() {
     this.join(thisGameID.toString());
 }
 
-function hostStartGame(gameId) {
-    console.log('Game Started.');
+function hostStartGame(gameID) {
+    //console.log('Game Started.');
     roundTimer = performance.now();
     //sendWord(0,gameId);
 }
@@ -66,16 +60,16 @@ function hostNextRound(data) {
         //sendWord(data.round, data.gameId);
     } else {
         // If the current round exceeds the number of words, send the 'gameOver' event.
-        io.sockets.in(data.gameId).emit('gameOver',data);
+        io.sockets.in(data.gameID).emit('gameOver',data);
     }
 }
 
 function allAnswered (gameID) {
-    gameSocket.to(gameID).emit('loadVote');
+    gameSocket.in(gameID).emit('loadVote');
 }
 
 function playerAnswer(data) {
-    console.log('Player ID: ' + data.playerId + ' answered a question with: ' + data.answer);
+    console.log('Player ID: ' + data.playerID + ' answered a question with: ' + data.answer);
 
     // The player's answer is attached to the data object.  \
     // Emit an event with the answer so it can be checked by the 'Host'
@@ -83,13 +77,14 @@ function playerAnswer(data) {
     //TODO: STORE PLAYER ANSWER
     //TODO: STORE PLAYER ANSWER 
     //TODO: STORE PLAYER ANSWER 
+    //Saturday Morning 
     var answerTimer = performance.now();
-    console.log(answerTimer);
+    //console.log(answerTimer);
 
     data.timeSub = answerTimer - roundTimer;
-    console.log(answerTimer - roundTimer);
+    console.log('submission time: '+ data.timeSub);
 
-    io.sockets.in(data.gameId).emit('storePlayerAnswer', data);
+    io.sockets.to(data.gameID).emit('storePlayerAnswer', data);
 }
 
 //host prepare game emits the beginNewGame function in app.js, which begins the countdown. 
@@ -100,7 +95,7 @@ function hostPrepareGame(gameID) {
         mySocketID : sock.id,
         gameID : gameID
     };
-    console.log('host prepare game called');
+    //console.log('host prepare game called');
     
     //game starting
     io.sockets.in(data.gameID).emit('beginNewGame', data);
@@ -108,40 +103,12 @@ function hostPrepareGame(gameID) {
 
 
 function votingMachine(data) {
-    io.sockets.in(data.gameId).emit('storeVote', data);
+    io.sockets.in(data.gameID).emit('storeVote', data);
 }
 
 function playerJoinGame(data) {
     var sock = this;
-    var room = gameSocket.manager.rooms["/" + data.gameId];
-    if( room != undefined ){
-        // attach the socket id to the data object.
-        data.mySocketId = sock.id;
-
-        // Join the room
-        sock.join(data.gameId);
-
-        console.log('Player ' + data.playerName + ' joining game: ' + data.gameId );
-
-        // Emit an event notifying the clients that the player has joined the room.
-        io.sockets.in(data.gameId).emit('playerJoinedRoom', data);
-
-    } else {
-        // Otherwise, send an error message back to the player.
-        this.emit('error',{message: "This room does not exist."} );
-    }
-}
-
-function hostStartGame(gameId) {
-    console.log('Game Started.');
-    roundTimer = performance.now();
-    sendWord(0,gameId);
-};
-
-
-function playerJoinGame(data) {
-    var sock = this;
-    console.log(data);
+    //console.log(data);
     // var room = gameSocket.rooms["/" + data.gameID];
     var room = data.gameID;
 

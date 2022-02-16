@@ -43,14 +43,14 @@ jQuery(function($){
         },
 
         onNewGameCreated : function(data) {
-            console.log('onNewGame Create calls game init');
+            //console.log('onNewGame Create calls game init');
             //console.log(data);
             App.Host.gameInit(data);
         },
 
 
         playerJoinedRoom : function(data) {
-            console.log('player joined room called');
+            //console.log('player joined room called');
             App[App.myRole].updateWaitingScreen(data);
         },
 
@@ -61,6 +61,7 @@ jQuery(function($){
 
 
         storePlayerAnswer : function(data) {
+            console.log('storePlayer helper function')
             if(App.myRole === 'Host') {
                 App.Host.storeAnswer(data);
             }
@@ -73,6 +74,7 @@ jQuery(function($){
         },
 
         loadVote : function() {
+            console.log('raounds' + App.Host.rounds[0]);
             App.Player.triggerVote();
         },
 
@@ -162,7 +164,7 @@ jQuery(function($){
             //show the host screen with the URL
             displayNewGameScreen : function() {
                 //fill game screen with html
-                console.log('display joining screen');
+                //console.log('display joining screen');
                 App.$gameArea.html(App.$templateNewGame);
 
                 //display URL
@@ -174,7 +176,7 @@ jQuery(function($){
 
             storeAnswer : function(data) {
                 console.log('Datums');
-                console.log(data);
+                //console.log(data);
                 
                 App.Host.rounds.push(data);
                 App.Host.answerCheck();
@@ -185,13 +187,17 @@ jQuery(function($){
 
             answerCheck : function () {
                 var numAnswers = 0;
-                for (i in App.Host.rounds.length()) {
+                console.log('answerCheck running');
+                for (let i = 0; i < App.Host.rounds.length; i++) {
                     if (App.Host.rounds[i].round == App.currentRound) {
                         numAnswers ++;
+                        console.log('answerCheck: '+numAnswers+ '  i:' +i + ' numPlayersInRoom: ' + App.Host.numPlayersInRoom + ' players length:' + App.Host.players.length);
                     }
                 }
-                if (numAnswers == numPlayersInRoom) {
-                    IO.socket.emit('allAnswered', App.gameID)
+                if (numAnswers == App.Host.numPlayersInRoom) {
+                    console.log('allAnswered');
+                    numAnswers = 0;
+                    IO.socket.emit('allAnswered', App.gameID);
                 }
             },
 
@@ -201,7 +207,7 @@ jQuery(function($){
              */
 
             storeVote : function (data) {
-                for (i in App.Host.rounds.length()) {
+                for (let i = 0; i < App.Host.rounds.length; i++) {
                     if (App.Host.rounds[i].answer == data.vote && data.round == App.currentRound) {
                         App.Host.rounds[i].votes +=1;
                         this.numPlayersVoted ++;//watch out for this :0
@@ -212,7 +218,7 @@ jQuery(function($){
                     var leadPlayer = 0; //index for most voted player
                     var slowestSub = 0;
                     var slowPoke = 0;//index for slowest player
-                    for (i in this.rounds.length()) {
+                    for (let i = 0; i < App.Host.rounds.length; i++) {
                         if (this.rounds[i].timeSub > slowestSub && this.rounds[i].round == App.currentRound) {
                             slowPoke = i;
                             slowestSub = this.rounds[i].timeSub;
@@ -251,11 +257,14 @@ jQuery(function($){
 
                 App.Host.players.push(data);
                 App.Host.numPlayersInRoom += 1;
+                console.log('times check');
+
                 
                 
                 //show start button once correct num of players entered room
                 if(App.Host.numPlayersInRoom == 1){
                    //call host room start in gremgame
+                   console.log('early Num players in room' +App.Host.numPlayersInRoom)
                    IO.socket.emit('hostRoomStart', App.gameID); 
                 }
             },
@@ -341,6 +350,12 @@ jQuery(function($){
                 }
             },
 
+            gameCountdown : function() {
+
+                // Prepare the game screen with new HTML
+                //eliminate all the errors :)
+            },
+
             onPlayerStartGameClick : function() {
                 App.$gameArea.html(App.$templatePlayerScreen);
 
@@ -369,7 +384,8 @@ jQuery(function($){
                     gremStatus: gremStatus,
                     timeSub: timeSub
                 }
-                console.log("sazaahhh");
+                $('#gameArea').html('<div class="wait"> Wait For Other Players Submissions </div>');
+                //console.log("sazaahhh");
                 IO.socket.emit('playerAnswer',data);
             },
 
@@ -377,8 +393,10 @@ jQuery(function($){
                 var $list = $('<ul/>').attr('id','ulRoundWords');
                 var roundWords = [];
 
-                for (i in App.Host.rounds.length()) {//find the answers from each player in this round
+
+                for (let i = 0; i < App.Host.rounds.length; i++) {//find the answers from each player in this round
                     if (App.Host.rounds[i].round == App.currentRound) {
+                        console.log('comp worked');
                         roundWords.push(App.Host.rounds[i].answer);
                     }
                 }
@@ -392,9 +410,13 @@ jQuery(function($){
                                 .addClass('btn')         //  <ul> <li> <button class='btnAnswer'> </button> </li> </ul>
                                 .val(this)               //  <ul> <li> <button class='btnAnswer' value='word'> </button> </li> </ul>
                                 .html(this)              //  <ul> <li> <button class='btnAnswer' value='word'>word</button> </li> </ul>
+                                
                             )
                         )
+                    console.log(this);
                 });
+                console.log($list);
+                
 
                 // Insert the list onto the screen.
                 $('#gameArea').html($list);
