@@ -57,8 +57,7 @@
           </div>
 
           <div class="info buttons">
-              <button id="btnStart" class="btn">Start</button>
-              <div id="playerWaitingMessage"></div>
+              <button id="btnJoinWaitingRoom" class="btn">Join Room</button>
           </div>
       </div>
   </script>
@@ -68,6 +67,11 @@
     <div class="waitingRoomWrapper">
 
         <div class="info"> waiting room for room !!!!!!! </div>
+        <div id="playerWaitingMessage"></div>
+        
+        <div class="start button">
+          <button id="btnPlayerStartsGame" class="btn">Start Game</button>
+
 
     <!-- Round x screen (host)-->
     <script id="round-x-template" type="text/template">
@@ -92,6 +96,31 @@
       </div>
     </script>
 
+    <!-- Round x screen (host)-->
+    <script id="round-x-template" type="text/template">
+      <div class="roundTextTemplate">
+        <div class="displayed-text">
+          <h1 id="roundPrompt">Prompt will go here when _________.</h1>
+        </div>
+      </div>
+    </script>
+
+    <!-- player response screen (player)-->
+    <script id="round-response-template" type="text/template">
+      <div class="roundResponseWrapper">
+        <div class="response">
+          <div id="roundPrompt"></div>
+          <input id="inputPlayerResponse" type="text" />
+        </div>
+        <div class="submitResponse">
+          <button id="btnSubmit" class="btn">Submit</button>
+          <div id="playerWaitingMessage"></div>
+        </div>
+      </div>
+    </script>
+
+
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script> -->
 

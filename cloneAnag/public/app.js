@@ -61,7 +61,6 @@ jQuery(function($){
             //
             // So on the 'host' browser window, the App.Host.updateWiatingScreen function is called.
             // And on the player's browser, App.Player.updateWaitingScreen is called.
-            console.log('player joined room');
             App[App.myRole].updateWaitingScreen(data);
         },
 
@@ -180,7 +179,7 @@ jQuery(function($){
             // Player
             App.$doc.on('click', '#btnJoinGame', App.Player.onJoinClick);
             App.$doc.on('click', '#btnStart',App.Player.onPlayerStartClick);
-            App.$doc.on('click', '.btnAnswer',App.Player.onPlayerAnswerClick);
+            App.$doc.on('click', '#btnAnswer',App.Player.onPlayerAnswerClick);
             App.$doc.on('click', '#btnPlayerRestart', App.Player.onPlayerRestart);
         },
 
@@ -244,6 +243,8 @@ jQuery(function($){
                 App.mySocketId = data.mySocketId;
                 App.myRole = 'Host';
                 App.Host.numPlayersInRoom = 0;
+                
+
 
                 App.Host.displayNewGameScreen();
                 // console.log("Game started with ID: " + App.gameId + ' by host: ' + App.mySocketId);
@@ -273,13 +274,12 @@ jQuery(function($){
                 if ( App.Host.isNewGame ) {
                     App.Host.displayNewGameScreen();
                 }
-
-                // Updates host screen with the name of player once joined
+                // Update host screen
                 $('#playersWaiting')
                     .append('<p/>')
                     .text('Player ' + data.playerName + ' joined the game.');
 
-                // ** Store the new player's data on the Host.
+                // Store the new player's data on the Host.
                 App.Host.players.push(data);
 
                 // Increment the number of players in the room
@@ -478,7 +478,9 @@ jQuery(function($){
                 var $btn = $("#inputPlayerSub");      // the tapped button
                 console.log($btn);
                 var answer = $btn.val(); // The tapped word
-
+                let votes, timesSlow, gremRound, score = 0;
+                let gremStatus = false;
+                let timeSub = 0;
 
                 // Send the player info and tapped word to the server so
                 // the host can check the answer.
@@ -486,7 +488,14 @@ jQuery(function($){
                     gameId: App.gameId,
                     playerId: App.mySocketId,
                     answer: answer,
-                    round: App.currentRound
+                    round: App.currentRound,
+                    votes: votes, 
+                    score: score,
+                    timesSlow: timesSlow,
+                    gremRound: gremRound,
+                    gremStatus: gremStatus,
+                    timeSub: timeSub
+
                 }
                 IO.socket.emit('playerAnswer',data);
             },

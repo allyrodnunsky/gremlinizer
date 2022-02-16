@@ -3,6 +3,7 @@
 
 var io;
 var gameSocket;
+var roundTimer;
 
 exports.initGame = function(sio, socket){
     io = sio;
@@ -16,13 +17,18 @@ exports.initGame = function(sio, socket){
     //host functions
     gameSocket.on('hostCreateNewGame', hostCreateNewGame);
     gameSocket.on('hostRoomStart', hostPrepareGame);
-    gameSocket.on('hostNextRound', hostNextRound);
+    gameSocket.on('hostStartGame', hostStartGame);
+    gameSocket.on('allAnswered', allAnswered);
+    gameSocket.on('playerVote', votingMachine);
+    gameSocket.on('allVoted', hostNextRound);
+
 
     //player functions
     gameSocket.on('playerJoinGame', playerJoinGame); //playerJoinGameRoom
     //gameSocket.on('checkGremStatus', hostCheckGremStatus);
     //gameSocket.on('stolenLetters', player);
-    //gameSocket.on('playerAnswer', playerAnswer);
+    gameSocket.on('playerAnswer', playerAnswer);
+
     
     //gameSocket.on('checkGremStatus', hostCheckGremStatus);
     //gameSocket.on('stolenLetters', player);
@@ -35,7 +41,7 @@ exports.initGame = function(sio, socket){
 
 //** create game button is clicked, create game room and join*/
 function hostCreateNewGame() {
-    console.log("thisGameID");
+    // console.log("thisGameID");
     //create unique game room ID
     var thisGameID = (Math.random() * 100000) | 0;
     
@@ -46,6 +52,46 @@ function hostCreateNewGame() {
     this.join(thisGameID.toString());
 }
 
+function hostStartGame(gameId) {
+    console.log('Game Started.');
+    roundTimer = performance.now();
+    //sendWord(0,gameId);
+}
+
+function hostNextRound(data) {
+    
+    if(data.round < 10 ){
+        // new phrase to host, players get submit screen
+        roundTimer = performance.now();
+        //sendWord(data.round, data.gameId);
+    } else {
+        // If the current round exceeds the number of words, send the 'gameOver' event.
+        io.sockets.in(data.gameId).emit('gameOver',data);
+    }
+}
+
+function allAnswered (gameID) {
+    gameSocket.to(gameID).emit('loadVote');
+}
+
+function playerAnswer(data) {
+    console.log('Player ID: ' + data.playerId + ' answered a question with: ' + data.answer);
+
+    // The player's answer is attached to the data object.  \
+    // Emit an event with the answer so it can be checked by the 'Host'
+    //TODO: STORE PLAYER ANSWER 
+    //TODO: STORE PLAYER ANSWER
+    //TODO: STORE PLAYER ANSWER 
+    //TODO: STORE PLAYER ANSWER 
+    var answerTimer = performance.now();
+    console.log(answerTimer);
+
+    data.timeSub = answerTimer - roundTimer;
+    console.log(answerTimer - roundTimer);
+
+    io.sockets.in(data.gameId).emit('storePlayerAnswer', data);
+}
+
 //host prepare game emits the beginNewGame function in app.js, which begins the countdown. 
 // we dont want a countdown so we need to figure that out
 function hostPrepareGame(gameID) {
@@ -54,13 +100,15 @@ function hostPrepareGame(gameID) {
         mySocketID : sock.id,
         gameID : gameID
     };
-    io.sockets.in(data.gameId).emit('beginNewGame', data);
+    console.log('host prepare game called');
+    
+    //game starting
+    io.sockets.in(data.gameID).emit('beginNewGame', data);
 }
 
 
-function hostNextRound() {
-
-
+function votingMachine(data) {
+    io.sockets.in(data.gameId).emit('storeVote', data);
 }
 
 
@@ -82,3 +130,41 @@ function playerJoinGame(data) {
     }
 
 }
+
+var songs = [
+    [   "She's a ______ girl",
+       "loves her ______ ",
+       "Loves Jesus and ______ , too",
+       "She's a good ______" ,
+       "crazy 'bout ______ ",
+       "Loves ______" , 
+       "and her ______ , too", 
+       "And it's a ______ day",
+       " livin' in ______ ",
+       "There's a ______  runnin' through the yard"
+   ],
+   [
+       "She's a ______ girl",
+       "loves her ______ ",
+       "Loves Jesus and ______ , too",
+       "She's a good ______" ,
+       "crazy 'bout ______ ",
+       "Loves ______" , 
+       "and her ______ , too", 
+       "And it's a ______ day",
+       " livin' in ______ ",
+       "There's a ______  runnin' through the yard"
+   ],
+   [
+       "She's a ______ girl",
+       "loves her ______ ",
+       "Loves Jesus and ______ , too",
+       "She's a good ______" ,
+       "crazy 'bout ______ ",
+       "Loves ______" , 
+       "and her ______ , too", 
+       "And it's a ______ day",
+       " livin' in ______ ",
+       "There's a ______  runnin' through the yard"
+   ]
+]
