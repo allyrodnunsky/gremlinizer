@@ -3,31 +3,31 @@
 
 var io;
 var gameSocket;
+var roundTimer;
 
 exports.initGame = function(sio, socket){
     io = sio;
     gameSocket = socket;
-    console.log(gameSocket);
+    //console.log(gameSocket);
     gameSocket.emit('connected', { message: "You are connected!" });
-    console.log("init game ran!")
+    //console.log("init game ran!")
 
-
+    //gameSocket.on('storePlayerInfo', storePlayerInfo);
     
     //host functions
     gameSocket.on('hostCreateNewGame', hostCreateNewGame);
     gameSocket.on('hostRoomStart', hostPrepareGame);
-    gameSocket.on('hostNextRound', hostNextRound);
+    gameSocket.on('hostStartGame', hostStartGame);
+    gameSocket.on('allAnswered', allAnswered);
+    gameSocket.on('playerVote', votingMachine);
+    gameSocket.on('allVoted', hostNextRound);
+
 
     //player functions
     gameSocket.on('playerJoinGame', playerJoinGame); //playerJoinGameRoom
     //gameSocket.on('checkGremStatus', hostCheckGremStatus);
     //gameSocket.on('stolenLetters', player);
-    //gameSocket.on('playerAnswer', playerAnswer);
-    
-    //gameSocket.on('checkGremStatus', hostCheckGremStatus);
-    //gameSocket.on('stolenLetters', player);
-    //gameSocket.on('playerAnswer', playerAnswer);
-    //gameSocket.on('playerJoinGame', playerJoinGame);
+    gameSocket.on('playerAnswer', playerAnswer);
 
 
 }
@@ -35,7 +35,7 @@ exports.initGame = function(sio, socket){
 
 //** create game button is clicked, create game room and join*/
 function hostCreateNewGame() {
-    console.log("thisGameID");
+    // console.log("thisGameID");
     //create unique game room ID
     var thisGameID = (Math.random() * 100000) | 0;
     
@@ -46,6 +46,56 @@ function hostCreateNewGame() {
     this.join(thisGameID.toString());
 }
 
+function hostStartGame(gameID) {
+
+    var gremlins = [];
+    var gremlinData = {
+        gameID: gameID,
+        round: 0,
+        gremlins: gremlins
+    }
+    //console.log('Game Started.');
+    roundTimer = performance.now();
+    sendWord(gremlinData);
+}
+
+function hostNextRound(data) {
+    console.log('hostNextRound!');
+    if(data.round < 5 ){
+        console.log(data.gremlins[0]);
+        // new phrase to host, players get submit screen
+        roundTimer = performance.now();
+        sendWord(data);
+    } else {
+        // If the current round exceeds the number of words, send the 'gameOver' event.
+        io.sockets.in(data.gameID).emit('gameOver',data);
+    }
+}
+
+function allAnswered (data) {
+    console.log(data.roundAnswers);
+    io.sockets.in(data.gameID).emit('loadVote', data);
+}
+
+function playerAnswer(data) {
+    console.log('Player ID: ' + data.playerID + ' answered a question with: ' + data.answer);
+
+    // The player's answer is attached to the data object.  \
+    // Emit an event with the answer so it can be checked by the 'Host'
+    //TODO: STORE PLAYER ANSWER 
+    //TODO: STORE PLAYER ANSWER
+    //TODO: STORE PLAYER ANSWER 
+    //TODO: STORE PLAYER ANSWER 
+    //Saturday Morning 
+    var answerTimer = performance.now();
+    //console.log(answerTimer);
+
+    data.timeSub = answerTimer - roundTimer;
+    console.log('submission time: '+ data.timeSub);
+
+    io.sockets.to(data.gameID).emit('storePlayerAnswer', data);
+}
+
 //host prepare game emits the beginNewGame function in app.js, which begins the countdown. 
 // we dont want a countdown so we need to figure that out
 function hostPrepareGame(gameID) {
@@ -54,19 +104,20 @@ function hostPrepareGame(gameID) {
         mySocketID : sock.id,
         gameID : gameID
     };
-    io.sockets.in(data.gameId).emit('beginNewGame', data);
+    //console.log('host prepare game called');
+    
+    //game starting
+    io.sockets.in(data.gameID).emit('beginNewGame', data);
 }
 
 
-function hostNextRound() {
-
-
+function votingMachine(data) {
+    io.sockets.in(data.gameID).emit('storeVote', data);
 }
-
 
 function playerJoinGame(data) {
     var sock = this;
-    console.log(data);
+    //console.log(data);
     // var room = gameSocket.rooms["/" + data.gameID];
     var room = data.gameID;
 
@@ -82,3 +133,53 @@ function playerJoinGame(data) {
     }
 
 }
+
+function sendWord (gremlinData) {
+    var newPhrase = songs[0][gremlinData.round];
+    var data = {
+        gameID: gremlinData.gameID,
+        round: gremlinData.round,
+        gremlins: gremlinData.gremlins,
+        phrase: newPhrase
+    }
+    console.log(gremlinData.gremlins +': should be gremlinized')
+    io.sockets.in(gremlinData.gameID).emit('nextRoundInit', data);
+}
+
+var songs = [
+    [   "She's a ______ girl",
+       "loves her ______ ",
+       "Loves Jesus and ______ , too",
+       "She's a good ______" ,
+       "crazy 'bout ______ ",
+       "Loves ______" , 
+       "and her ______ , too", 
+       "And it's a ______ day",
+       " livin' in ______ ",
+       "There's a ______  runnin' through the yard"
+   ],
+   [
+       "She's a ______ girl",
+       "loves her ______ ",
+       "Loves Jesus and ______ , too",
+       "She's a good ______" ,
+       "crazy 'bout ______ ",
+       "Loves ______" , 
+       "and her ______ , too", 
+       "And it's a ______ day",
+       " livin' in ______ ",
+       "There's a ______  runnin' through the yard"
+   ],
+   [
+       "She's a ______ girl",
+       "loves her ______ ",
+       "Loves Jesus and ______ , too",
+       "She's a good ______" ,
+       "crazy 'bout ______ ",
+       "Loves ______" , 
+       "and her ______ , too", 
+       "And it's a ______ day",
+       " livin' in ______ ",
+       "There's a ______  runnin' through the yard"
+   ]
+]

@@ -1,5 +1,6 @@
 var io;
 var gameSocket;
+var timerEvent;
 
 /**
  * This function is called by index.js to initialize a new game instance.
@@ -64,6 +65,7 @@ function hostPrepareGame(gameId) {
  * @param gameId The game ID / room ID
  */
 function hostStartGame(gameId) {
+
     console.log('Game Started.');
     sendWord(0,gameId);
 };

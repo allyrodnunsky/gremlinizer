@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -57,8 +58,7 @@
           </div>
 
           <div class="info buttons">
-              <button id="btnStart" class="btn">Start</button>
-              <div id="playerWaitingMessage"></div>
+              <button id="btnJoinWaitingRoom" class="btn">Join Room</button>
           </div>
       </div>
   </script>
@@ -68,6 +68,15 @@
     <div class="waitingRoomWrapper">
 
         <div class="info"> waiting room for room !!!!!!! </div>
+        <div id="playerWaitingMessage"></div>
+        
+        <div class="start button">
+          <button id="btnPlayerStartsGame" class="btn">Start Game</button>
+
+
+
+    </div>
+</script>
 
     <!-- Round x screen (host)-->
     <script id="round-x-template" type="text/template">
@@ -92,10 +101,14 @@
       </div>
     </script>
 
+
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script> -->
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="app.js"></script>
+
   </body>
 </html>
