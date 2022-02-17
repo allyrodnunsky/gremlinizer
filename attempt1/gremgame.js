@@ -73,7 +73,7 @@ function hostNextRound(data) {
 
 function allAnswered (data) {
     console.log(data.roundAnswers);
-    gameSocket.in(data.gameID).emit('loadVote', data);
+    io.sockets.in(data.gameID).emit('loadVote', data);
 }
 
 function playerAnswer(data) {
@@ -141,6 +141,7 @@ function sendWord (gremlinData) {
         gremlins: gremlinData.gremlins,
         phrase: newPhrase
     }
+    console.log(gremlinData.gremlins +': should be gremlinized')
     io.sockets.in(gremlinData.gameID).emit('nextRoundInit', data);
 }
 

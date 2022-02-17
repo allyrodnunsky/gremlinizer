@@ -183,7 +183,7 @@ jQuery(function($){
 
             storeAnswer : function(data) {
                 //console.log('Datums');
-                //console.log(data);
+                console.log('time slow on store: ' + data.timesSlow);
                 
                 App.Host.rounds.push(data);
                 App.Host.answerCheck();
@@ -221,8 +221,8 @@ jQuery(function($){
 
             storeVote : function (data) {
                 for (let i = 0; i < App.Host.rounds.length; i++) {
-                    if (App.Host.rounds[i].answer == data.vote && data.round == App.currentRound) {
-                        App.Host.rounds[i].votes +=1;
+                    if (App.Host.rounds[i].answer == data.vote && data.round == App.currentRound && App.Host.rounds[i].round == App.currentRound) {
+                        App.Host.rounds[i].votes +=1;//stores the vote from player
                         this.numPlayersVoted ++;//watch out for this :0
                         console.log('numpvoted: '+App.Host.numPlayersVoted);
                     }
@@ -243,19 +243,53 @@ jQuery(function($){
                             leadPlayer = i;
                             maxVotes = this.rounds[i].votes
                         }
-                        if (this.rounds[i].gremStatus == true && this.rounds[i].round == App.currentRound) { //test me!
-                            gremlins.push(this.rounds[i].playerID);
-                            this.rounds[i].gremRound+=1;
+                        // if (this.rounds[i].gremStatus == true && this.rounds[i].round == App.currentRound) { //test me!
+                        //     gremlins.push(this.rounds[i].playerID);
+                        //     this.rounds[i].gremRound+=1;
+                        // }
+                        // if (this.rounds[i].timesSlow == 1 && this.rounds[i].round -1 == App.currentRound) {
+                        //     this.rounds[i].timesSlow +=1;
+                        // }
+                        // if (this.rounds[i].gremStatus == true && this.rounds[i].round == App.currentRound -1) {
+                        //     this.rounds[i].gremRounds +=1;
+                        //     if (this.rounds[i].gremRounds ==3) {
+                        //         this.rounds[i].gremStatus = false;
+                        //         this.rounds[i].gremRounds = 0;
+                        //     }
+                        // }
+                    }
+                    var slowPlayer = this.rounds[slowPoke].playerID;
+                    var leadPlayer = this.rounds[leadPlayer].playerID;
+                    console.log('slowpoke is: ' + this.rounds[slowPoke].playerID +'their times slow'+ this.rounds[slowPoke].timesSlow);
+                    // if (this.rounds[slowPoke].timesSlow == 2) {
+                    //     this.rounds[slowPoke].gremStatus = true;
+                    //     this.rounds[slowPoke].timesSlow = 0;
+                    //     this.rounds[slowPoke].gremRound+=1;
+                    //     gremlins.push(this.rounds[slowPoke].playerID);
+                    // }
+                    for (let i = 0; i < App.Host.players.length; i++) {
+                        if (App.Host.players[i].gremStatus == true) {
+                            App.Host.players[i].gremRound +=1; 
+                            gremlins.push(this.players[i].playerID);
+                            if (App.Host.players[i].gremRound == 2) {
+                                App.Host.players[i].gremStatus = false;
+                                App.Host.players[i].gremRound = 0;
+                            }
+                        }
+                        if (App.Host.players[i].playerID == slowPlayer) {
+                            App.Host.players[i].timesSlow +=1;
+                            if (App.Host.players[i].timesSlow == 2) {
+                                gremlins.push(this.players[i].playerID);
+                                App.Host.players[i].gremStatus = true;
+                                App.Host.players[i].timesSlow =0;
+
+                            }
+                        }
+                        if (App.Host.players[i].playerID == leadPlayer) {
+                            App.Host.players[i].score += 10;
                         }
                     }
-                    this.rounds[slowPoke].timesSlow += 1;
-                    if (this.rounds[slowPoke].timesSlow == 2) {
-                        this.rounds[slowPoke].gremStatus = true;
-                        this.rounds[slowPoke].timesSlow = 0;
-                        this.rounds[slowPoke].gremRound+=1;
-                        gremlins.push(this.rounds[slowPoke].playerID);
-                    }
-                    this.rounds[leadPlayer].score = 10;
+                    //this.rounds[leadPlayer].score = 10;
                     //console.log(this.rounds[leadPlayer].playerID +'has score'+ this.rounds[leadPlayer].score + '||||||' + this.rounds[slowPoke].playerID + ': is the slowpoke');
                 
 
@@ -285,13 +319,14 @@ jQuery(function($){
                     .text('Player' + data.playerName + 'joined the game.');
 
                 App.Host.players.push(data);
+                console.log('my name is: ' +data);
                 App.Host.numPlayersInRoom += 1;
                 //console.log('times check');
 
                 
                 
                 //show start button once correct num of players entered room
-                if(App.Host.numPlayersInRoom == 1){
+                if(App.Host.numPlayersInRoom == 2){
                    //call host room start in gremgame
                    //console.log('early Num players in room' +App.Host.numPlayersInRoom)
                    IO.socket.emit('hostRoomStart', App.gameID); 
@@ -355,7 +390,12 @@ jQuery(function($){
                 //console.log('waiting room click');
                 var data = {
                     gameID: +($('#inputGameId').val()),
-                    playerName: +($('#inputPlayerName').val) || 'anon'
+                    playerName: +($('#inputPlayerName').val) || 'anon',
+                    score: 0,
+                    timesSlow: 0,
+                    gremRound: 0,
+                    gremStatus: false,
+                    playerID: App.mySocketID
                 };
                 
                 //emit waiting room in this function
@@ -411,7 +451,10 @@ jQuery(function($){
                 var $sub = $("#inputPlayerResponse");      // the tapped button
                 //console.log($sub);
                 var answer = $sub.val(); // The tapped word
-                var votes, timesSlow, gremRound, score = 0;
+                var votes = 0;
+                var timesSlow = 0;
+                var gremRound = 0;
+                var score = 0;
                 var gremStatus = false;
                 var timeSub = 0;
                 console.log('current round on player submit' + App.currentRound);
@@ -424,10 +467,10 @@ jQuery(function($){
                     answer: answer,
                     round: App.currentRound,
                     votes: votes, 
-                    score: score,
-                    timesSlow: timesSlow,
-                    gremRound: gremRound,
-                    gremStatus: gremStatus,
+                    score: score, //inPlayer
+                    timesSlow: timesSlow,//inPlayer
+                    gremRound: gremRound,//inPlayer
+                    gremStatus: gremStatus,//inPlayer
                     timeSub: timeSub
                 }
                 //console.log('myRole1'+App.myRole);
