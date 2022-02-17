@@ -26,6 +26,7 @@ jQuery(function($){
             IO.socket.on('beginNewGame', IO.beginNewGame );
             IO.socket.on('loadVote', IO.loadVote );
             IO.socket.on('storeVote', IO.storePlayerVote );
+            IO.socket.on('nextRoundInit', IO.nextRound );
 
             //IO.socket.on('beginNewGame', IO.beginNewGame );
             //IO.socket.on('newPhraseData', IO.onNewPhraseData);
@@ -36,7 +37,7 @@ jQuery(function($){
         },
 
         onConnected : function() {
-            console.log("IO");
+            //console.log("IO");
             App.mySocketID = IO.socket.id;
             console.log(App.mySocketID + ' myRole: ' + App.myRole);
             
@@ -59,9 +60,13 @@ jQuery(function($){
             App[App.myRole].gameCountdown(data);
         },
 
+        nextRound : function (data) {
+            App[App.myRole].newRound(data);
+        },
+
 
         storePlayerAnswer : function(data) {
-            console.log('storePlayer helper function')
+            //console.log('storePlayer helper function')
             if(App.myRole === 'Host') {
                 App.Host.storeAnswer(data);
             }
@@ -177,20 +182,20 @@ jQuery(function($){
             },
 
             storeAnswer : function(data) {
-                console.log('Datums');
+                //console.log('Datums');
                 //console.log(data);
                 
                 App.Host.rounds.push(data);
                 App.Host.answerCheck();
                 
                 
-                console.log(App.Host.gameID);
+                //console.log(App.Host.gameID);
             },
 
             answerCheck : function () {
                 var numAnswers = 0;
                 var roundAnswers = [];
-                console.log('answerCheck running');
+                console.log('answerCheck running: current round:' +App.currentRound);
                 for (let i = 0; i < App.Host.rounds.length; i++) {
                     if (App.Host.rounds[i].round == App.currentRound) {
                         roundAnswers.push(App.Host.rounds[i].answer);
@@ -224,6 +229,7 @@ jQuery(function($){
                 }
                 if (App.Host.numPlayersVoted == App.Host.numPlayersInRoom) {
                     console.log('score+gremlinizing!');
+                    var gremlins = [];
                     var maxVotes = 0;
                     var leadPlayer = 0; //index for most voted player
                     var slowestSub = 0;
@@ -237,22 +243,32 @@ jQuery(function($){
                             leadPlayer = i;
                             maxVotes = this.rounds[i].votes
                         }
+                        if (this.rounds[i].gremStatus == true && this.rounds[i].round == App.currentRound) { //test me!
+                            gremlins.push(this.rounds[i].playerID);
+                            this.rounds[i].gremRound+=1;
+                        }
                     }
                     this.rounds[slowPoke].timesSlow += 1;
                     if (this.rounds[slowPoke].timesSlow == 2) {
                         this.rounds[slowPoke].gremStatus = true;
                         this.rounds[slowPoke].timesSlow = 0;
-                        //this.rounds[slowPoke].gremRound +=1; //Do we update this here? feels like it would work since the next time would look back?
+                        this.rounds[slowPoke].gremRound+=1;
+                        gremlins.push(this.rounds[slowPoke].playerID);
                     }
                     this.rounds[leadPlayer].score = 10;
-                    console.log(this.rounds[leadPlayer].playerID +'has score'+ this.rounds[leadPlayer].score + '||||||' + this.rounds[slowPoke].playerID + ': is the slowpoke');
+                    //console.log(this.rounds[leadPlayer].playerID +'has score'+ this.rounds[leadPlayer].score + '||||||' + this.rounds[slowPoke].playerID + ': is the slowpoke');
                 
 
                     App.Host.numPlayersVoted = 0;
                     App.currentRound +=1;
-                    data.round = App.currentRound; //updating round number b/c all have voted
 
-                    IO.socket.emit('allVoted', data);
+                    var gremlinData = {
+                        gameID: data.gameID,
+                        round: App.currentRound,
+                        gremlins: gremlins
+                    }
+
+                    IO.socket.emit('allVoted', gremlinData);//calls host next round
                 }
             },
 
@@ -262,7 +278,7 @@ jQuery(function($){
                     App.Host.displayNewGameScreen();
                 }
 
-                console.log('host update waiting screen called');
+                //console.log('host update waiting screen called');
 
                 $('#playersWaiting')
                     .append('<p/>')
@@ -270,22 +286,29 @@ jQuery(function($){
 
                 App.Host.players.push(data);
                 App.Host.numPlayersInRoom += 1;
-                console.log('times check');
+                //console.log('times check');
 
                 
                 
                 //show start button once correct num of players entered room
                 if(App.Host.numPlayersInRoom == 1){
                    //call host room start in gremgame
-                   console.log('early Num players in room' +App.Host.numPlayersInRoom)
+                   //console.log('early Num players in room' +App.Host.numPlayersInRoom)
                    IO.socket.emit('hostRoomStart', App.gameID); 
                 }
             },
 
             onPlayerStartGameClick : function() {
-                console.log('host screen template game pls');
+                //console.log('host screen template game pls');
                 App.$gameArea.html(App.$templateHostScreen);
             },
+
+
+            newRound : function (data) {
+                App.$gameArea.html(App.$templateHostScreen);
+                $('#roundPrompt').html(data.phrase);
+            },
+
 
             gameCountdown : function() {
 
@@ -329,7 +352,7 @@ jQuery(function($){
 
             //player enters name and gameID and clicks join room
             onJoinWaitingRoomClick: function () {
-                console.log('waiting room click');
+                //console.log('waiting room click');
                 var data = {
                     gameID: +($('#inputGameId').val()),
                     playerName: +($('#inputPlayerName').val) || 'anon'
@@ -349,7 +372,7 @@ jQuery(function($){
                 // console.log('data.mySocketID: ' + data.mySocketID);
 
                 if(IO.socket.id === data.mySocketID){
-                    console.log('player update Waiting Screen called');
+                    //console.log('player update Waiting Screen called');
                     App.myRole = 'Player';
                     App.gameID = data.gameID;
 
@@ -370,18 +393,28 @@ jQuery(function($){
             },
 
             onPlayerStartGameClick : function() {
-                if (App.Player)
                 App.$gameArea.html(App.$templatePlayerScreen);
+            },
+
+            newRound : function (data) {
+                App.$gameArea.html(App.$templatePlayerScreen);
+                App.currentRound = data.round;
+                for (let i =0; i < data.gremlins.length; i++) {
+                    if (data.gremlins[i] == this.mySocketID) {
+                        $('#playerWaitingMessage').html('U R GREM, USE NOT: <A> or <K>');
+                    }
+                }
             },
 
             onPlayerSubmitClick: function() {
                 // console.log('Clicked Answer Button');
                 var $sub = $("#inputPlayerResponse");      // the tapped button
-                console.log($sub);
+                //console.log($sub);
                 var answer = $sub.val(); // The tapped word
                 var votes, timesSlow, gremRound, score = 0;
                 var gremStatus = false;
                 var timeSub = 0;
+                console.log('current round on player submit' + App.currentRound);
 
                 // Send the player info and tapped word to the server so
                 // the host can check the answer.
@@ -397,7 +430,7 @@ jQuery(function($){
                     gremStatus: gremStatus,
                     timeSub: timeSub
                 }
-                console.log('myRole1'+App.myRole);
+                //console.log('myRole1'+App.myRole);
                 $('#gameArea').html('<div class="wait"> Wait For Other Players Submissions </div>');
                 //console.log("sazaahhh");
                 IO.socket.emit('playerAnswer',data);
@@ -420,7 +453,7 @@ jQuery(function($){
                             )
                         )
                 });
-                console.log($list);
+                //console.log($list);
                 
 
                 // Insert the list onto the screen.
@@ -442,7 +475,7 @@ jQuery(function($){
                     round: App.currentRound
                 }
 
-                console.log('iVoted data: ' +data.vote);
+                //console.log('iVoted data: ' +data.vote);
                 IO.socket.emit('playerVote', data);
             }
 

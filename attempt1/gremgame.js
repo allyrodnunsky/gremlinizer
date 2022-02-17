@@ -47,17 +47,24 @@ function hostCreateNewGame() {
 }
 
 function hostStartGame(gameID) {
+
+    var gremlins = [];
+    var gremlinData = {
+        gameID: gameID,
+        round: 0,
+        gremlins: gremlins
+    }
     //console.log('Game Started.');
     roundTimer = performance.now();
-    //sendWord(0,gameId);
+    sendWord(gremlinData);
 }
 
 function hostNextRound(data) {
     console.log('hostNextRound!');
-    if(data.round < 10 ){
+    if(data.round < 5 ){
         // new phrase to host, players get submit screen
         roundTimer = performance.now();
-        //sendWord(data.round, data.gameId);
+        sendWord(data);
     } else {
         // If the current round exceeds the number of words, send the 'gameOver' event.
         io.sockets.in(data.gameID).emit('gameOver',data);
@@ -124,6 +131,17 @@ function playerJoinGame(data) {
         this.emit('error',{message: "This room does not exist."} ); //error message
     }
 
+}
+
+function sendWord (gremlinData) {
+    var newPhrase = songs[0][gremlinData.round];
+    var data = {
+        gameID: gremlinData.gameID,
+        round: gremlinData.round,
+        gremlins: gremlinData.gremlins,
+        phrase: newPhrase
+    }
+    io.sockets.in(gremlinData.gameID).emit('nextRoundInit', data);
 }
 
 var songs = [
