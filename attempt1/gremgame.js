@@ -53,7 +53,7 @@ function hostStartGame(gameID) {
 }
 
 function hostNextRound(data) {
-    
+    console.log('hostNextRound!');
     if(data.round < 10 ){
         // new phrase to host, players get submit screen
         roundTimer = performance.now();
@@ -64,8 +64,9 @@ function hostNextRound(data) {
     }
 }
 
-function allAnswered (gameID) {
-    gameSocket.in(gameID).emit('loadVote');
+function allAnswered (data) {
+    console.log(data.roundAnswers);
+    gameSocket.in(data.gameID).emit('loadVote', data);
 }
 
 function playerAnswer(data) {

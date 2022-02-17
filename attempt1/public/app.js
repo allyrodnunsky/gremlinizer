@@ -38,7 +38,7 @@ jQuery(function($){
         onConnected : function() {
             console.log("IO");
             App.mySocketID = IO.socket.id;
-            //console.log(App.mySocketID);
+            console.log(App.mySocketID + ' myRole: ' + App.myRole);
             
         },
 
@@ -73,9 +73,11 @@ jQuery(function($){
             }
         },
 
-        loadVote : function() {
-            console.log('raounds' + App.Host.rounds[0]);
-            App.Player.triggerVote();
+        loadVote : function(data) {
+            console.log(App.mySocketID + ' myRole: ' + App.myRole + 'triggerVote');
+            if(App.myRole === 'Player') {
+                App.Player.triggerVote(data);
+            }
         },
 
 
@@ -182,14 +184,16 @@ jQuery(function($){
                 App.Host.answerCheck();
                 
                 
-                console.log(App.Host.rounds[App.currentRound]);
+                console.log(App.Host.gameID);
             },
 
             answerCheck : function () {
                 var numAnswers = 0;
+                var roundAnswers = [];
                 console.log('answerCheck running');
                 for (let i = 0; i < App.Host.rounds.length; i++) {
                     if (App.Host.rounds[i].round == App.currentRound) {
+                        roundAnswers.push(App.Host.rounds[i].answer);
                         numAnswers ++;
                         console.log('answerCheck: '+numAnswers+ '  i:' +i + ' numPlayersInRoom: ' + App.Host.numPlayersInRoom + ' players length:' + App.Host.players.length);
                     }
@@ -197,7 +201,11 @@ jQuery(function($){
                 if (numAnswers == App.Host.numPlayersInRoom) {
                     console.log('allAnswered');
                     numAnswers = 0;
-                    IO.socket.emit('allAnswered', App.gameID);
+                    var data = {
+                        gameID: App.gameID,
+                        roundAnswers: roundAnswers
+                    }
+                    IO.socket.emit('allAnswered', data);
                 }
             },
 
@@ -211,9 +219,11 @@ jQuery(function($){
                     if (App.Host.rounds[i].answer == data.vote && data.round == App.currentRound) {
                         App.Host.rounds[i].votes +=1;
                         this.numPlayersVoted ++;//watch out for this :0
+                        console.log('numpvoted: '+App.Host.numPlayersVoted);
                     }
                 }
                 if (App.Host.numPlayersVoted == App.Host.numPlayersInRoom) {
+                    console.log('score+gremlinizing!');
                     var maxVotes = 0;
                     var leadPlayer = 0; //index for most voted player
                     var slowestSub = 0;
@@ -227,14 +237,17 @@ jQuery(function($){
                             leadPlayer = i;
                             maxVotes = this.rounds[i].votes
                         }
-                        this.rounds[slowPoke].timesSlow += 1;
-                        if (this.rounds[slowPoke].timesSlow == 2) {
-                            this.rounds[slowPoke].gremStatus = true;
-                            this.rounds[slowPoke].timesSlow = 0;
-                            //this.rounds[slowPoke].gremRound +=1; //Do we update this here? feels like it would work since the next time would look back?
-                        }
-                        this.rounds[leadPlayer].score = 10;
                     }
+                    this.rounds[slowPoke].timesSlow += 1;
+                    if (this.rounds[slowPoke].timesSlow == 2) {
+                        this.rounds[slowPoke].gremStatus = true;
+                        this.rounds[slowPoke].timesSlow = 0;
+                        //this.rounds[slowPoke].gremRound +=1; //Do we update this here? feels like it would work since the next time would look back?
+                    }
+                    this.rounds[leadPlayer].score = 10;
+                    console.log(this.rounds[leadPlayer].playerID +'has score'+ this.rounds[leadPlayer].score + '||||||' + this.rounds[slowPoke].playerID + ': is the slowpoke');
+                
+
                     App.Host.numPlayersVoted = 0;
                     App.currentRound +=1;
                     data.round = App.currentRound; //updating round number b/c all have voted
@@ -357,8 +370,8 @@ jQuery(function($){
             },
 
             onPlayerStartGameClick : function() {
+                if (App.Player)
                 App.$gameArea.html(App.$templatePlayerScreen);
-
             },
 
             onPlayerSubmitClick: function() {
@@ -384,22 +397,15 @@ jQuery(function($){
                     gremStatus: gremStatus,
                     timeSub: timeSub
                 }
+                console.log('myRole1'+App.myRole);
                 $('#gameArea').html('<div class="wait"> Wait For Other Players Submissions </div>');
                 //console.log("sazaahhh");
                 IO.socket.emit('playerAnswer',data);
             },
 
-            triggerVote : function() {
+            triggerVote (data) {
                 var $list = $('<ul/>').attr('id','ulRoundWords');
-                var roundWords = [];
-
-
-                for (let i = 0; i < App.Host.rounds.length; i++) {//find the answers from each player in this round
-                    if (App.Host.rounds[i].round == App.currentRound) {
-                        console.log('comp worked');
-                        roundWords.push(App.Host.rounds[i].answer);
-                    }
-                }
+                var roundWords = data.roundAnswers;
                 // Insert a list item for each word in the word list
                 // received from the server.
                 $.each(roundWords, function(){
@@ -413,7 +419,6 @@ jQuery(function($){
                                 
                             )
                         )
-                    console.log(this);
                 });
                 console.log($list);
                 
@@ -437,7 +442,7 @@ jQuery(function($){
                     round: App.currentRound
                 }
 
-                console.log(data);
+                console.log('iVoted data: ' +data.vote);
                 IO.socket.emit('playerVote', data);
             }
 
