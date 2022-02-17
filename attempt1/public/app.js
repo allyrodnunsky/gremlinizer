@@ -1,7 +1,7 @@
 //Jquery Help https://api.jquery.com
 // https://www.w3schools.com/jquery/jquery_ref_overview.asp
 
-;
+; 
 jQuery(function($){    
     'use strict';
     var IO = {
@@ -267,7 +267,8 @@ jQuery(function($){
                     //     this.rounds[slowPoke].gremRound+=1;
                     //     gremlins.push(this.rounds[slowPoke].playerID);
                     // }
-                    for (let i = 0; i < App.Host.players.length; i++) {
+                    console.log('length of players aray' +App.Host.players.length)
+                    for (let i = 0; i < App.Host.players.length; i++) {                       
                         if (App.Host.players[i].gremStatus == true) {
                             App.Host.players[i].gremRound +=1; 
                             gremlins.push(this.players[i].playerID);
@@ -288,7 +289,9 @@ jQuery(function($){
                         if (App.Host.players[i].playerID == leadPlayer) {
                             App.Host.players[i].score += 10;
                         }
+                        console.log('players name and times slow' + this.players[i].playerName + '|||||' + this.players[i].timesSlow)
                     }
+                    console.log (gremlins[0]);
                     //this.rounds[leadPlayer].score = 10;
                     //console.log(this.rounds[leadPlayer].playerID +'has score'+ this.rounds[leadPlayer].score + '||||||' + this.rounds[slowPoke].playerID + ': is the slowpoke');
                 
@@ -390,7 +393,7 @@ jQuery(function($){
                 //console.log('waiting room click');
                 var data = {
                     gameID: +($('#inputGameId').val()),
-                    playerName: +($('#inputPlayerName').val) || 'anon',
+                    playerName: +($('#inputPlayerName').val()) || 'anon',
                     score: 0,
                     timesSlow: 0,
                     gremRound: 0,
@@ -439,8 +442,11 @@ jQuery(function($){
             newRound : function (data) {
                 App.$gameArea.html(App.$templatePlayerScreen);
                 App.currentRound = data.round;
+                console.log (data.gremlins[0]);
+                console.log (App.mySocketID);
                 for (let i =0; i < data.gremlins.length; i++) {
-                    if (data.gremlins[i] == this.mySocketID) {
+                    if (data.gremlins[i] == App.mySocketID) {
+                        console.log(this.mySocketID +"3n33 should be gremlinized");
                         $('#playerWaitingMessage').html('U R GREM, USE NOT: <A> or <K>');
                     }
                 }
