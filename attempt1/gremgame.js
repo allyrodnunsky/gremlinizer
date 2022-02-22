@@ -61,7 +61,7 @@ function hostStartGame(gameID) {
 
 function hostNextRound(data) {
     console.log('hostNextRound!');
-    if(data.round < 2 ){
+    if(data.round < 5 ){
         console.log(data.gremlins[0]);
         // new phrase to host, players get submit screen
         roundTimer = performance.now();

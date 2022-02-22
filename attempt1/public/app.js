@@ -290,7 +290,7 @@ jQuery(function($){
                         
                         if (App.Host.players[i].playerID == slowPlayer) {
                             App.Host.players[i].timesSlow +=1;
-                            if (App.Host.players[i].timesSlow == 1) {
+                            if (App.Host.players[i].timesSlow == 2) {
                                 App.Host.players[i].gremStatus = true;
                                 App.Host.players[i].timesSlow =0;
 
@@ -299,7 +299,7 @@ jQuery(function($){
                         if (App.Host.players[i].gremStatus == true) {
                             App.Host.players[i].gremRound +=1; 
                             gremlins.push(this.players[i].playerID);
-                            if (App.Host.players[i].gremRound == 1) {
+                            if (App.Host.players[i].gremRound == 2) {
                                 App.Host.players[i].gremStatus = false;
                                 App.Host.players[i].gremRound = 0;
                             }
