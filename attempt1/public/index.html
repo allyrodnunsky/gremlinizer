@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Gremlinizer</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <!-- <link href="styles.css" rel="stylesheet" /> -->
   </head>
 
@@ -96,7 +97,25 @@
         </div>
         <div class="submitResponse">
           <button id="btnSubmit" class="btn">Submit</button>
-          <div id="playerWaitingMessage"></div>
+          <div id = "gremBox">
+            <div id="gremlinizedMSG"></div>
+            <div id="gremlinizedLTRA" style="display: inline-block"></div><div id="spaceLetters" style="display: inline-block">&nbsp;&nbsp;&nbsp;</div><div id="gremlinizedLTRB" style="display: inline-block"></div>  
+          </div>
+          </div>
+      </div>
+    </script>
+
+    <script id="game-end-template" type="text/template">
+      <div class="gameEndWrapper">
+        <div class="finalStory">
+          <h1>Here is your final Story:</h1>
+          <br>
+          <div id="storyOutput"></div>
+        </div>
+        <div class="gameLeaderBoard">
+          <h1>Winners</h1>
+          <br>
+          <div id="finalLeaderBoard"></div>
         </div>
       </div>
     </script>

@@ -32,6 +32,8 @@ jQuery(function($){
             //IO.socket.on('newPhraseData', IO.onNewPhraseData);
 
             IO.socket.on('storePlayerAnswer', IO.storePlayerAnswer);
+            IO.socket.on('gameOver', IO.gameOver);
+            
             //IO.socket.on('gameOver', IO.gameOver);
             IO.socket.on('error', IO.error );
         },
@@ -85,6 +87,12 @@ jQuery(function($){
             }
         },
 
+        gameOver : function (data) {
+            if(App.myRole === 'Host') {
+                App.Host.endGame(data);
+            }
+        },
+
 
         error : function(data) {
             alert(data.message);
@@ -118,6 +126,7 @@ jQuery(function($){
             App.$templateWaitingRoom = $('#waiting-room-template').html();
             App.$templatePlayerScreen = $('#round-response-template').html();
             App.$templateHostScreen = $('#round-x-template').html();
+            App.$templateEndGame = $('#game-end-template').html();
         },
 
         //bind events - events triggered by button clicks
@@ -183,9 +192,17 @@ jQuery(function($){
 
             storeAnswer : function(data) {
                 //console.log('Datums');
-                console.log('time slow on store: ' + data.timesSlow);
+                console.log('score should be 0 ' + data.score);
+                for (let i = 0; i < App.Host.players.length; i++) {
+                    if (data.playerID == App.Host.players[i].playerID && App.Host.players[i].gremStatus ==true) {
+                        data.timeSub = 0;
+                    }
+                }
+
+                console.log(data.playerID + ' had timeSlow on store: ' + data.timesSlow);
                 
                 App.Host.rounds.push(data);
+                console.log(this.rounds[0].score);
                 App.Host.answerCheck();
                 
                 
@@ -259,8 +276,9 @@ jQuery(function($){
                         // }
                     }
                     var slowPlayer = this.rounds[slowPoke].playerID;
-                    var leadPlayer = this.rounds[leadPlayer].playerID;
-                    console.log('slowpoke is: ' + this.rounds[slowPoke].playerID +'their times slow'+ this.rounds[slowPoke].timesSlow);
+                    var bestPlayer = this.rounds[leadPlayer].playerID;
+                    this.rounds[leadPlayer].score =10;
+                    console.log('winning answer is ' + this.rounds[leadPlayer].answer);
                     // if (this.rounds[slowPoke].timesSlow == 2) {
                     //     this.rounds[slowPoke].gremStatus = true;
                     //     this.rounds[slowPoke].timesSlow = 0;
@@ -269,24 +287,24 @@ jQuery(function($){
                     // }
                     console.log('length of players aray' +App.Host.players.length)
                     for (let i = 0; i < App.Host.players.length; i++) {                       
-                        if (App.Host.players[i].gremStatus == true) {
-                            App.Host.players[i].gremRound +=1; 
-                            gremlins.push(this.players[i].playerID);
-                            if (App.Host.players[i].gremRound == 2) {
-                                App.Host.players[i].gremStatus = false;
-                                App.Host.players[i].gremRound = 0;
-                            }
-                        }
+                        
                         if (App.Host.players[i].playerID == slowPlayer) {
                             App.Host.players[i].timesSlow +=1;
-                            if (App.Host.players[i].timesSlow == 2) {
-                                gremlins.push(this.players[i].playerID);
+                            if (App.Host.players[i].timesSlow == 1) {
                                 App.Host.players[i].gremStatus = true;
                                 App.Host.players[i].timesSlow =0;
 
                             }
                         }
-                        if (App.Host.players[i].playerID == leadPlayer) {
+                        if (App.Host.players[i].gremStatus == true) {
+                            App.Host.players[i].gremRound +=1; 
+                            gremlins.push(this.players[i].playerID);
+                            if (App.Host.players[i].gremRound == 1) {
+                                App.Host.players[i].gremStatus = false;
+                                App.Host.players[i].gremRound = 0;
+                            }
+                        }
+                        if (App.Host.players[i].playerID == bestPlayer) {
                             App.Host.players[i].score += 10;
                         }
                         console.log('players name and times slow' + this.players[i].playerName + '|||||' + this.players[i].timesSlow)
@@ -347,6 +365,53 @@ jQuery(function($){
                 $('#roundPrompt').html(data.phrase);
             },
 
+            endGame : function (data) {
+                var topAnswers = [];
+                var temp = [];
+                console.log('currentRound at endgame:  ' + App.currentRound);
+
+                App.$gameArea.html(App.$templateEndGame);
+
+                var $fs = $('<p/>');
+                var $plrs = $('<ul/>').attr('id','leaders');
+
+                this.players.sort(function(a, b){return a.score - b.score});
+
+                for (let i = 0; i < this.rounds.length; i++) {
+                    console.log (this.rounds[i].score);
+                    console.log (this.rounds[i].answer);
+                    if (this.rounds[i].score == 10) {
+                        topAnswers.push(this.rounds[i].answer);
+                        //console.log(topAnswers[i]);
+                    }
+                }
+                for (let i = 0; i <topAnswers.length; i++) {
+                    temp[i] = data.phrases[i].replace('______', topAnswers[i]);
+                    console.log(temp[i]);
+                }
+
+
+                $.each(temp, function(){
+                    $fs                                //  <p> </p>           
+                        .append(this + '<br>');    //  <p> <br> </p>       //  <p> <br> Story </p>
+                });
+
+                $.each(this.players, function(){
+                    $plrs                                //  <p> </p>           
+                    .append( $('<li/>')             
+                            .html(this.playerID + ' Score: ' + this.score)         
+                    )
+                });
+                //console.log($fs);
+                $('#storyOutput').html($fs);
+                $('#finalLeaderBoard').html($plrs);
+
+                
+
+
+
+            },
+
 
             gameCountdown : function() {
 
@@ -382,6 +447,7 @@ jQuery(function($){
             hostSocketID: '',
             myName: '',
             playerAnswer: '',
+            
 
             //click handler for on JoinClick
             onJoinClick: function () {
@@ -398,7 +464,8 @@ jQuery(function($){
                     timesSlow: 0,
                     gremRound: 0,
                     gremStatus: false,
-                    playerID: App.mySocketID
+                    playerID: App.mySocketID,
+                    gremLett: []
                 };
                 
                 //emit waiting room in this function
@@ -440,14 +507,18 @@ jQuery(function($){
             },
 
             newRound : function (data) {
+                var gremLett1= ["A", "E", "O", "I", "U"];
+                var gremLett2= ["S", "D", "V", "X", "F"];
                 App.$gameArea.html(App.$templatePlayerScreen);
                 App.currentRound = data.round;
-                console.log (data.gremlins[0]);
-                console.log (App.mySocketID);
+                //console.log (data.gremlins[0]);
+                //console.log (App.mySocketID);
                 for (let i =0; i < data.gremlins.length; i++) {
                     if (data.gremlins[i] == App.mySocketID) {
-                        console.log(this.mySocketID +"3n33 should be gremlinized");
-                        $('#playerWaitingMessage').html('U R GREM, USE NOT: <A> or <K>');
+                        console.log(this.mySocketID +" should be gremlinized");
+                        $('#gremlinizedMSG').html(`U R GREM, USE NOT:`);
+                        $('#gremlinizedLTRA').html(gremLett1[i]);
+                        $('#gremlinizedLTRB').html(gremLett2[i]);
                     }
                 }
             },
@@ -455,35 +526,102 @@ jQuery(function($){
             onPlayerSubmitClick: function() {
                 // console.log('Clicked Answer Button');
                 var $sub = $("#inputPlayerResponse");      // the tapped button
+                var $ltr1 = $("#gremlinizedLTRA");
+                var $ltr2 = $("#gremlinizedLTRB");
+                
+                
+
                 //console.log($sub);
                 var answer = $sub.val(); // The tapped word
-                var votes = 0;
-                var timesSlow = 0;
-                var gremRound = 0;
-                var score = 0;
-                var gremStatus = false;
-                var timeSub = 0;
-                console.log('current round on player submit' + App.currentRound);
+                var l1 = $ltr1.html();
+                var l2 = $ltr2.html();
+                // console.log('answer' + answer + 'L1, L2'+ l1 + l2);
+                // console.log(answer.includes(l1));
+                // console.log(answer.includes(l2));
+                // console.log(typeof l1);
+                // console.log(l1 === '');
+                var chkAnswer = answer.toUpperCase();
 
-                // Send the player info and tapped word to the server so
-                // the host can check the answer.
-                var data = {
-                    gameID: App.gameID,
-                    playerID: App.mySocketID,
-                    answer: answer,
-                    round: App.currentRound,
-                    votes: votes, 
-                    score: score, //inPlayer
-                    timesSlow: timesSlow,//inPlayer
-                    gremRound: gremRound,//inPlayer
-                    gremStatus: gremStatus,//inPlayer
-                    timeSub: timeSub
+                if (!(chkAnswer.includes(l1) || chkAnswer.includes(l2))|| l1 === '') {
+                    var votes = 0;
+                    var timesSlow = 0;
+                    var gremRound = 0;
+                    var score = 0;
+                    var gremStatus = false;
+                    var timeSub = 0;
+                    console.log('current round on player submit' + App.currentRound);
+
+                    // Send the player info and tapped word to the server so
+                    // the host can check the answer.
+                    var data = {
+                        gameID: App.gameID,
+                        playerID: App.mySocketID,
+                        answer: answer,
+                        round: App.currentRound,
+                        votes: votes, 
+                        score: score, 
+                        timesSlow: timesSlow,
+                        gremRound: gremRound,
+                        gremStatus: gremStatus,
+                        timeSub: timeSub
+                    }
+                    //console.log('myRole1'+App.myRole);
+                    $('#gameArea').html('<div class="wait"> Wait For Other Players Submissions </div>');
+                    //console.log("sazaahhh");
+                    IO.socket.emit('playerAnswer',data);
                 }
-                //console.log('myRole1'+App.myRole);
-                $('#gameArea').html('<div class="wait"> Wait For Other Players Submissions </div>');
-                //console.log("sazaahhh");
-                IO.socket.emit('playerAnswer',data);
+
+                else {
+                    $('#gremlinizedMSG').html(`Did you misunderstand?? U R GREM, USE NOT:`);
+                }
+                
             },
+
+            // onPlayerSubmitClick: function() {
+            //     // console.log('Clicked Answer Button');
+            //     var $sub = $("#inputPlayerResponse");      // the tapped button
+            //     var $ltr1 = $("#gremlinizedLTR1");
+            //     var $ltr2 = $("#gremlinizedLTR2");
+                
+                
+
+            //     //console.log($sub);
+            //     var answer = $sub.val(); // The tapped word
+            //     var l1 = $ltr1.val();
+            //     var l2 = $ltr2.val();
+            //     console.log('answer, L1, L2' + answer + l1 + l2);
+            //     if ((answer.includes(l1) || answer.includes(l2)) && l1 !== '') {
+            //         console.log('check right');
+            //         $('#gremlinizedMSG').html(`Did you misunderstand?? U R GREM, USE NOT:`);
+            //         return;
+            //     }
+            //     var votes = 0;
+            //     var timesSlow = 0;
+            //     var gremRound = 0;
+            //     var score = 0;
+            //     var gremStatus = false;
+            //     var timeSub = 0;
+            //     console.log('current round on player submit' + App.currentRound);
+
+            //     // Send the player info and tapped word to the server so
+            //     // the host can check the answer.
+            //     var data = {
+            //         gameID: App.gameID,
+            //         playerID: App.mySocketID,
+            //         answer: answer,
+            //         round: App.currentRound,
+            //         votes: votes, 
+            //         score: score, 
+            //         timesSlow: timesSlow,
+            //         gremRound: gremRound,
+            //         gremStatus: gremStatus,
+            //         timeSub: timeSub
+            //     }
+            //     //console.log('myRole1'+App.myRole);
+            //     $('#gameArea').html('<div class="wait"> Wait For Other Players Submissions </div>');
+            //     //console.log("sazaahhh");
+            //     IO.socket.emit('playerAnswer',data);
+            // },
 
             triggerVote (data) {
                 var $list = $('<ul/>').attr('id','ulRoundWords');
@@ -524,7 +662,7 @@ jQuery(function($){
                     round: App.currentRound
                 }
 
-                //console.log('iVoted data: ' +data.vote);
+                console.log('iVoted data: ' +data.vote);
                 IO.socket.emit('playerVote', data);
             }
 

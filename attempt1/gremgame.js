@@ -61,15 +61,25 @@ function hostStartGame(gameID) {
 
 function hostNextRound(data) {
     console.log('hostNextRound!');
-    if(data.round < 5 ){
+    if(data.round < 2 ){
         console.log(data.gremlins[0]);
         // new phrase to host, players get submit screen
         roundTimer = performance.now();
         sendWord(data);
     } else {
         // If the current round exceeds the number of words, send the 'gameOver' event.
-        io.sockets.in(data.gameID).emit('gameOver',data);
+        endGame(data);
     }
+}
+
+function endGame(data) {
+    var endData = {
+        gameID: data.gameID,
+        round: 5,
+        gremlins: data.gremlins,
+        phrases: songs[0]
+    }
+    io.sockets.in(data.gameID).emit('gameOver',endData);
 }
 
 function allAnswered (data) {
