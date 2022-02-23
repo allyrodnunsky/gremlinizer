@@ -190,16 +190,49 @@ jQuery(function($){
 
             },
 
+
+            //update host waiting screen
+            updateWaitingScreen : function(data) {
+                //if game is a restarted game, show the join screen
+                if( App.Host.isNewGame) {
+                    App.Host.displayNewGameScreen();
+                }
+
+                //console.log('host update waiting screen called');
+
+                $('#playersWaiting')
+                    .append('<p/>')
+                    .text('Player' + data.playerName + 'joined the game.');
+
+                //populate players[] with data
+                App.Host.players.push(data);
+                console.log('my name is: ' + data.playerName);
+                App.Host.numPlayersInRoom += 1;
+                //console.log('times check');
+                
+                //show start button once correct num of players entered room
+                if(App.Host.numPlayersInRoom == 2){
+                   //call host room start in gremgame
+                   //console.log('early Num players in room' +App.Host.numPlayersInRoom)
+                   IO.socket.emit('hostRoomStart', App.gameID); 
+                }
+            },
+
             storeAnswer : function(data) {
                 //console.log('Datums');
                 console.log('score should be 0 ' + data.score);
                 for (let i = 0; i < App.Host.players.length; i++) {
-                    if (data.playerID == App.Host.players[i].playerID && App.Host.players[i].gremStatus ==true) {
+                    if (data.playerID == App.Host.players[i].playerName && App.Host.players[i].gremStatus ==true) {
                         data.timeSub = 0;
                     }
                 }
+                
+                //these show the correct names
+                console.log('1 player name: ', App.Host.players[0].playerName);
+                console.log('2 player name: ', App.Host.players[1].playerName);
 
-                console.log(data.playerID + ' had timeSlow on store: ' + data.timesSlow);
+                //this was giving an error bc i
+                //console.log(App.Host.players[i].gremStatus + ' had timeSlow on store: ' + data.timesSlow);
                 
                 App.Host.rounds.push(data);
                 console.log(this.rounds[0].score);
@@ -307,7 +340,8 @@ jQuery(function($){
                         if (App.Host.players[i].playerID == bestPlayer) {
                             App.Host.players[i].score += 10;
                         }
-                        console.log('players name and times slow' + this.players[i].playerName + '|||||' + this.players[i].timesSlow)
+                        //check this log
+                        console.log('players name and times slow' + this.players[i].playerName + ' ||||| ' + this.players[i].timesSlow);
                     }
                     console.log (gremlins[0]);
                     //this.rounds[leadPlayer].score = 10;
@@ -327,32 +361,6 @@ jQuery(function($){
                 }
             },
 
-            updateWaitingScreen : function(data) {
-                //if game is a restarted game, show the join screen
-                if( App.Host.isNewGame) {
-                    App.Host.displayNewGameScreen();
-                }
-
-                //console.log('host update waiting screen called');
-
-                $('#playersWaiting')
-                    .append('<p/>')
-                    .text('Player' + data.playerName + 'joined the game.');
-
-                App.Host.players.push(data);
-                console.log('my name is: ' +data);
-                App.Host.numPlayersInRoom += 1;
-                //console.log('times check');
-
-                
-                
-                //show start button once correct num of players entered room
-                if(App.Host.numPlayersInRoom == 2){
-                   //call host room start in gremgame
-                   //console.log('early Num players in room' +App.Host.numPlayersInRoom)
-                   IO.socket.emit('hostRoomStart', App.gameID); 
-                }
-            },
 
             onPlayerStartGameClick : function() {
                 //console.log('host screen template game pls');
@@ -399,7 +407,7 @@ jQuery(function($){
                 $.each(this.players, function(){
                     $plrs                                //  <p> </p>           
                     .append( $('<li/>')             
-                            .html(this.playerID + ' Score: ' + this.score)         
+                            .html(this.playerName + ' Score: ' + this.score)         
                     )
                 });
                 //console.log($fs);
@@ -456,10 +464,9 @@ jQuery(function($){
 
             //player enters name and gameID and clicks join room
             onJoinWaitingRoomClick: function () {
-                //console.log('waiting room click');
                 var data = {
                     gameID: +($('#inputGameId').val()),
-                    playerName: +($('#inputPlayerName').val()) || 'anon',
+                    playerName: $('#inputPlayerName').val() || 'anon',
                     score: 0,
                     timesSlow: 0,
                     gremRound: 0,
@@ -467,7 +474,10 @@ jQuery(function($){
                     playerID: App.mySocketID,
                     gremLett: []
                 };
+
+                console.log('waiting room click');
                 
+                ///console.log('playername html input: ', data.playerName);
                 //emit waiting room in this function
                 IO.socket.emit('playerJoinGame', data);
 
@@ -475,8 +485,7 @@ jQuery(function($){
                 App.Player.myName = data.playerName;
             },
 
-            
-
+            //update player waiting screen
             updateWaitingScreen : function(data) {
                 // console.log('io.socket.id is: ' + IO.socket.id);
                 // console.log('data.mySocketID: ' + data.mySocketID);
@@ -671,8 +680,6 @@ jQuery(function($){
 
 
     };
-
-   
 
 
     IO.init();

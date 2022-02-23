@@ -130,6 +130,7 @@ function playerJoinGame(data) {
     //console.log(data);
     // var room = gameSocket.rooms["/" + data.gameID];
     var room = data.gameID;
+    console.log('player html input: ', data.playerName);
 
     if(room != undefined) {
         data.mySocketID = sock.id;
@@ -145,6 +146,8 @@ function playerJoinGame(data) {
 }
 
 function sendWord (gremlinData) {
+    //add a game counter to iterate through songs array
+    //also mayve have buttons for a thing
     var newPhrase = songs[0][gremlinData.round];
     var data = {
         gameID: gremlinData.gameID,
