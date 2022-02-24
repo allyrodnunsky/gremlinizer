@@ -10,7 +10,9 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
-
+ul{
+    list-style-type: none;
+}
 /***********************************************
 
 ****************large screen*******************
@@ -27,6 +29,17 @@ html {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+  }
+  .setUpNoTranslate {
+    font-size: 45px;
+    font-family: "Gugi", cursive;
+    color: #f7f3e3;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0%);
     justify-content: center;
     align-items: center;
   }
