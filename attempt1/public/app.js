@@ -211,7 +211,7 @@ jQuery(function($){
                 //console.log('times check');
                 
                 //show start button once correct num of players entered room
-                if(App.Host.numPlayersInRoom == 2){
+                if(App.Host.numPlayersInRoom == 3){
                    //call host room start in gremgame
                    //console.log('early Num players in room' +App.Host.numPlayersInRoom)
                    IO.socket.emit('hostRoomStart', App.gameID); 
@@ -222,12 +222,8 @@ jQuery(function($){
                 //console.log('Datums');
                 console.log('score should be 0 ' + data.score);
                 for (let i = 0; i < App.Host.players.length; i++) {
-<<<<<<< HEAD
                     console.log('playerID grem status'+App.Host.players[i].playerID + '  ' + App.Host.players[i].gremStatus)
                     if (data.playerID == App.Host.players[i].playerID && App.Host.players[i].gremStatus ==true) {
-=======
-                    if (data.playerID == App.Host.players[i].playerName && App.Host.players[i].gremStatus ==true) {
->>>>>>> fe53ada1612cddb8737d79c9fcba0e9f9df3b7a6
                         data.timeSub = 0;
                         console.log('set PlayerID: '+ App.Host.players[i].playerID + 'got zoeroed timesub');
                     }
@@ -464,7 +460,7 @@ jQuery(function($){
                     gremLett: []
                 };
 
-                console.log('waiting room click');
+                console.log('waiting room click: pN' +data.playerName);
                 
                 ///console.log('playername html input: ', data.playerName);
                 //emit waiting room in this function
@@ -513,8 +509,8 @@ jQuery(function($){
                 //console.log (App.mySocketID);
                 for (let i =0; i < data.gremlins.length; i++) {
                     if (data.gremlins[i] == App.mySocketID) {
-                        console.log(this.mySocketID +" should be gremlinized");
-                        $('#gremlinizedMSG').html(`U R GREM, USE NOT:`);
+                        console.log(App.mySocketID +" should be gremlinized");
+                        $('#gremlinizedMSG').html(`You've been Gremlinized! <br> No using the letters:`);
                         $('#gremlinizedLTRA').html(gremLett1[i]);
                         $('#gremlinizedLTRB').html(gremLett2[i]);
                     }
@@ -564,28 +560,29 @@ jQuery(function($){
                         timeSub: timeSub
                     }
                     //console.log('myRole1'+App.myRole);
-                    $('#gameArea').html('<div class="wait"> Wait For Other Players Submissions </div>');
+                    $('#gameArea').html('<div class="setUp"> Wait For Other Players Submissions </div>');
                     //console.log("sazaahhh");
                     IO.socket.emit('playerAnswer',data);
                 }
 
                 else {
-                    $('#gremlinizedMSG').html(`Did you misunderstand?? U R GREM, USE NOT:`);
+                    $('#gremlinizedMSG').html(`Did you misunderstand?? <br> You've been Gremlinized! <br> No using the letters:`);
                 }
                 
             },
 
 
             triggerVote (data) {
-                var $list = $('<ul/>').attr('id','ulRoundWords');
+                var $list = $('<ul/>').attr('id','ulRoundWords').addClass('setUp');
                 var roundWords = data.roundAnswers;
                 // Insert a list item for each word in the word list
                 // received from the server.
                 $.each(roundWords, function(){
                     $list                                //  <ul> </ul>
                         .append( $('<li/>')              //  <ul> <li> </li> </ul>
+
                             .append( $('<button/>')      //  <ul> <li> <button> </button> </li> </ul>
-                                .addClass('btnVote')   //  <ul> <li> <button class='btnAnswer'> </button> </li> </ul>
+                                //.addClass('btnVote')   //  <ul> <li> <button class='btnAnswer'> </button> </li> </ul>
                                 .attr('id', 'btnVote')
                                 .addClass('btn')         //  <ul> <li> <button class='btnAnswer'> </button> </li> </ul>
                                 .val(this)               //  <ul> <li> <button class='btnAnswer' value='word'> </button> </li> </ul>
@@ -593,11 +590,14 @@ jQuery(function($){
                                 
                             )
                         )
+
+                        .append('<br>')
                 });
                 //console.log($list);
                 
 
                 // Insert the list onto the screen.
+                $('#gameArea').html('');
                 $('#gameArea').html($list);
             },
             
@@ -605,10 +605,14 @@ jQuery(function($){
                 var $btn = $(this);
                 var vote = $btn.val();
 
-
+                $('#gameArea').html('');
                 $('#gameArea')
-                        .append('<p/>')
-                        .text('Thanks For Voting!');
+                        .append($('<div/>')
+                        .text('Thanks For Voting!')
+                        .addClass('setUp')
+                        );
+
+
 
                 var data = {
                     gameID: App.gameID,
