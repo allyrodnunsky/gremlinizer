@@ -61,13 +61,13 @@ function hostStartGame(gameID) {
 
 function hostNextRound(data) {
     console.log('hostNextRound!');
-    if(data.round < 5 ){
-        console.log(data.gremlins[0]);
+    if(data.round < songs[0].length){
+        // console.log(data.gremlins[0]);
         // new phrase to host, players get submit screen
-        roundTimer = performance.now();
+        roundTimer = performance.now();//starts the round timer to track how long each player takes to answer
         sendWord(data);
     } else {
-        // If the current round exceeds the number of words, send the 'gameOver' event.
+        // If the current round exceeds the number of phrases, send the 'gameOver' event.
         endGame(data);
     }
 }
@@ -91,16 +91,10 @@ function playerAnswer(data) {
     console.log('Player ID: ' + data.playerID + ' answered a question with: ' + data.answer);
 
     // The player's answer is attached to the data object.  \
-    // Emit an event with the answer so it can be checked by the 'Host'
-    //TODO: STORE PLAYER ANSWER 
-    //TODO: STORE PLAYER ANSWER
-    //TODO: STORE PLAYER ANSWER 
-    //TODO: STORE PLAYER ANSWER 
-    //Saturday Morning 
-    var answerTimer = performance.now();
+    var answerTimer = performance.now();//tracks when any particular answer is submitted
     //console.log(answerTimer);
 
-    data.timeSub = answerTimer - roundTimer;
+    data.timeSub = answerTimer - roundTimer;//tracks the time it took for that player to submit
     console.log('submission time: '+ data.timeSub);
 
     io.sockets.to(data.gameID).emit('storePlayerAnswer', data);
