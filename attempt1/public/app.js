@@ -4,6 +4,7 @@
 ; 
 jQuery(function($){    
     'use strict';
+    var playerses = 3;
     var IO = {
 
         /**
@@ -211,7 +212,7 @@ jQuery(function($){
                 //console.log('times check');
                 
                 //show start button once correct num of players entered room
-                if(App.Host.numPlayersInRoom == 3){
+                if(App.Host.numPlayersInRoom == playerses){
                    //call host room start in gremgame
                    //console.log('early Num players in room' +App.Host.numPlayersInRoom)
                    IO.socket.emit('hostRoomStart', App.gameID); 
@@ -392,7 +393,7 @@ jQuery(function($){
                 $.each(this.players, function(){
                     $plrs                                //  <p> </p>           
                     .append( $('<li/>')             
-                            .html(this.playerName + ' Score: ' + this.score)         
+                            .html(this.playerName + "'s Score: " + this.score)         
                     )
                 });
                 //console.log($fs);
