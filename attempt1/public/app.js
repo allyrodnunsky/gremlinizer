@@ -128,6 +128,7 @@ jQuery(function($){
             App.$templatePlayerScreen = $('#round-response-template').html();
             App.$templateHostScreen = $('#round-x-template').html();
             App.$templateEndGame = $('#game-end-template').html();
+            App.$templateInstructionScreen = $('#instruction-screen-template').html();
         },
 
         //bind events - events triggered by button clicks
@@ -141,6 +142,8 @@ jQuery(function($){
             App.$doc.on('click', '#btnSubmit',App.Player.onPlayerSubmitClick);
             App.$doc.on('click', '#btnJoinWaitingRoom', App.Player.onJoinWaitingRoomClick);
             App.$doc.on('click', '#btnPlayerStartsGame', App.Player.onPlayerStartGameClick);
+            App.$doc.on('click', '#btnInstructions', App.Player.onInstructionClick);
+            App.$doc.on('click', '#btnTitleScreen', App.Player.onTitleScreenClick);
         },
 
         //show intial title screen
@@ -151,6 +154,7 @@ jQuery(function($){
        
         /////////////////
         /****HOST CODE */
+        /***************/
         Host : {
             players: [], //contains references to player data
             isNewGame: false, //flag to indicate if a new game is starting
@@ -400,13 +404,10 @@ jQuery(function($){
                 $('#storyOutput').html($fs);
                 $('#finalLeaderBoard').html($plrs);
 
-                
-
-
 
             },
 
-
+            //host countdown pg
             gameCountdown : function() {
 
                 // Prepare the game screen with new HTML
@@ -446,6 +447,14 @@ jQuery(function($){
             //click handler for on JoinClick
             onJoinClick: function () {
                 App.$gameArea.html(App.$templateJoinGame);
+            },
+
+            onInstructionClick: function () {
+                App.$gameArea.html(App.$templateInstructionScreen);
+            },
+
+            onTitleScreenClick: function () {
+                App.$gameArea.html(App.$templateTitleScreen);
             },
 
             //player enters name and gameID and clicks join room
