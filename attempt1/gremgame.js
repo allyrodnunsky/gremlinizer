@@ -4,7 +4,7 @@
 var io;
 var gameSocket;
 var roundTimer;
-var songChoice = 3;
+var songChoice = 2;
 
 exports.initGame = function(sio, socket){
     io = sio;
@@ -36,15 +36,15 @@ exports.initGame = function(sio, socket){
 
 //** create game button is clicked, create game room and join*/
 function hostCreateNewGame() {
-    // console.log("thisGameID");
+    console.log("thisGameID" + this.id);
     //create unique game room ID
     var thisGameID = (Math.random() * 100000) | 0;
     
     //return game room ID and socket ID to browser client
-    this.emit('newGameCreated', {gameID: thisGameID, mySocketID: this.id});
+    this.emit('newGameCreated', {gameID: thisGameID, mySocketID: gameSocket.id});
 
     //join the room, wait for players
-    this.join(thisGameID.toString());
+    gameSocket.join(thisGameID.toString());
 }
 
 function hostStartGame(gameID) {
@@ -80,12 +80,12 @@ function endGame(data) {
         gremlins: data.gremlins,
         phrases: songs[songChoice]
     }
-    io.sockets.in(data.gameID).emit('gameOver',endData);
+    io.in(data.gameID).emit('gameOver',endData);
 }
 
 function allAnswered (data) {
     console.log(data.roundAnswers);
-    io.sockets.in(data.gameID).emit('loadVote', data);
+    io.in(data.gameID).emit('loadVote', data);
 }
 
 function playerAnswer(data) {
@@ -98,7 +98,7 @@ function playerAnswer(data) {
     data.timeSub = answerTimer - roundTimer;//tracks the time it took for that player to submit
     console.log('submission time: '+ data.timeSub);
 
-    io.sockets.to(data.gameID).emit('storePlayerAnswer', data);
+    io.in(data.gameID).emit('storePlayerAnswer', data);
 }
 
 //host prepare game emits the beginNewGame function in app.js, which begins the countdown. 
@@ -112,17 +112,17 @@ function hostPrepareGame(gameID) {
     //console.log('host prepare game called');
     
     //game starting
-    io.sockets.in(data.gameID).emit('beginNewGame', data);
+    io.in(data.gameID).emit('beginNewGame', data);
 }
 
 
 function votingMachine(data) {
-    io.sockets.in(data.gameID).emit('storeVote', data);
+    io.in(data.gameID).emit('storeVote', data);
 }
 
 function playerJoinGame(data) {
-    var sock = this;
-    //console.log(data);
+    var sock = gameSocket;
+    console.log(data);
     // var room = gameSocket.rooms["/" + data.gameID];
     var room = data.gameID;
     console.log('player html input: ', data.playerName);
@@ -132,10 +132,10 @@ function playerJoinGame(data) {
         sock.join(data.gameID);
         console.log("playerjoin game func");
 
-        io.sockets.in(data.gameID).emit('playerJoinedRoom', data);
+        io.in(data.gameID).emit('playerJoinedRoom', data);
 
     } else {
-        this.emit('error',{message: "This room does not exist."} ); //error message
+        gameSocket.emit('error',{message: "This room does not exist."} ); //error message
     }
 
 }
@@ -151,7 +151,7 @@ function sendWord (gremlinData) {
         phrase: newPhrase
     }
     console.log(gremlinData.gremlins +': should be gremlinized')
-    io.sockets.in(gremlinData.gameID).emit('nextRoundInit', data);
+    io.in(gremlinData.gameID).emit('nextRoundInit', data);
 }
 
 var songs = [
@@ -229,6 +229,39 @@ var songs = [
         "We're going to ______ a big one,",
         "I'm not ______",
         "What a ______ day!"
+    ],
+    [
+        "Use of ______ notes or study aids;",
+        "Allowing another party to do one's work/exam and ______ in that work/exam as one's own;",
+        "Copying coursework from another student or from a ______ source;",
+        "______ on course work when prohibited;" ,
+        "Failing to ______ by the specific written course instructions, including, but not limited to, exams, homework assignments, and syllabi;",
+        "Use of electronic devices when not ______ permitted;" , 
+        "Clicker Fraud. Using, or ______ someone else use, clicker technology improperly in an effort to receive academic credit.", 
+    ],
+
+    [
+        "Tonight's the night, let's ______ it up",
+        "I got my money, let's ______ it up (I feel-)",
+        "Go out and ______ it like oh my God",
+        "Jump off that sofa, let's ______ it off (I feel-)",
+        "I know that we'll have a ______" , 
+        "If we get down and go out and just ______ it all", 
+        "I feel ______ out, I wanna let it go",
+        "Let's go way out, ______ out, and losin' all control",
+    ],
+
+    [
+        "If love and peace is so ______",
+        "Why are there ______ of love that don't belong?",
+        "Nations ______' bombs",
+        "Chemical gases ______ lungs of little ones" ,
+        "With ongoing sufferin' as the youth ______ young" , 
+        "With this world that we livin' in? People keep on ______' in", 
+        "So I can ______ myself, really, what is going wrong",
+        "Makin' wrong ______, only visions of them dividends",
+        "Not respectin' each other, ______ thy brother",
+        "A war is goin' on, but the reason's ______",
     ],
 
 

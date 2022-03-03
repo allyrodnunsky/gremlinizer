@@ -19,13 +19,23 @@ app.use(express.static(path.join(__dirname,'public')));
 var server = require('http').createServer(app).listen(process.env.PORT || 8080);
 
 // Create a Socket.IO server and attach it to the http server
-var io = require('socket.io').listen(server);
+//var io = require('socket.io').listen(server);
 
 // Reduce the logging output of Socket.IO
 // io.set('log level',1);
+//const express = require("express");
+//const { createServer } = require("http");
+const { Server } = require("socket.io");
+
+//const app = express();
+//const httpServer = createServer(app);
+const io = new Server(server, { /* options */ });
+
+
+
 
 // Listen for Socket.IO Connections. Once connected, start the game logic.
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
     //console.log('client connected');
     grem.initGame(io, socket);
 });
