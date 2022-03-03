@@ -511,9 +511,27 @@ jQuery(function($){
                 for (let i =0; i < data.gremlins.length; i++) {
                     if (data.gremlins[i] == App.mySocketID) {
                         console.log(App.mySocketID +" should be gremlinized");
+                        var x = document.getElementById("gremlinizedImg");
+                        if (x.style.display === "none") {
+                            x.style.display = "block";
+                          } else {
+                            x.style.display = "none";
+                          }
+                          var y = document.getElementById("gremlinizedLTRA");
+                        if (y.style.display === "none") {
+                            y.style.display = "inline-block";
+                          } else {
+                            y.style.display = "none";
+                          }
+                          var z = document.getElementById("gremlinizedLTRB");
+                          if (z.style.display === "none") {
+                              z.style.display = "inline-block";
+                            } else {
+                              z.style.display = "none";
+                            }
                         $('#gremlinizedMSG').html(`You've been Gremlinized! <br> No using the letters:`);
-                        $('#gremlinizedLTRA').html(gremLett1[i]);
-                        $('#gremlinizedLTRB').html(gremLett2[i]);
+                        $('#gremlinizedLTRA').html(gremLett1[i]).css("display, inline-block");
+                        $('#gremlinizedLTRB').html(gremLett2[i]).css("display, inline-block");
                     }
                 }
             },
@@ -561,7 +579,7 @@ jQuery(function($){
                         timeSub: timeSub
                     }
                     //console.log('myRole1'+App.myRole);
-                    $('#gameArea').html('<div class="setUp"> Wait For Other Players Submissions </div>');
+                    $('#gameArea').html('<div class="flexContainer setUp"> Wait For Other Players Submissions </div>');
                     //console.log("sazaahhh");
                     IO.socket.emit('playerAnswer',data);
                 }
@@ -574,7 +592,7 @@ jQuery(function($){
 
 
             triggerVote (data) {
-                var $list = $('<ul/>').attr('id','ulRoundWords').addClass('setUp');
+                var $list = $('<ul/>').attr('id','ulRoundWords').addClass('flexContainer setUp');
                 var roundWords = data.roundAnswers;
                 // Insert a list item for each word in the word list
                 // received from the server.
@@ -610,7 +628,7 @@ jQuery(function($){
                 $('#gameArea')
                         .append($('<div/>')
                         .text('Thanks For Voting!')
-                        .addClass('setUp')
+                        .addClass('flexContainer setUp')
                         );
 
 
