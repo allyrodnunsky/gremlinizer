@@ -4,7 +4,7 @@
 ; 
 jQuery(function($){    
     'use strict';
-    var playerses = 3;
+    var playerses = 2;
     var IO = {
 
         /**
@@ -14,6 +14,7 @@ jQuery(function($){
         init: function() {
             IO.socket = io.connect();
             IO.bindEvents();
+            var startTime = performance.now();
         }, 
 
         /**
@@ -367,6 +368,13 @@ jQuery(function($){
             newRound : function (data) {
                 App.$gameArea.html(App.$templateHostScreen);
                 $('#roundPrompt').html(data.phrase);
+
+                //countdown until new round
+                var $secondsLeft = $('#hostWord');
+                App.countDown( $secondsLeft, 60, function(){
+                    IO.socket.emit('allAnswered', data); //move to vote screen
+                });
+                
             },
 
             endGame : function (data) {
@@ -419,14 +427,7 @@ jQuery(function($){
                 // Prepare the game screen with new HTML
                 App.$gameArea.html(App.$templateHostScreen);
                 IO.socket.emit('hostStartGame', App.gameID);
-                //App.doTextFit('#hostWord');
-
-                // // Begin the on-screen countdown timer
-                // var $secondsLeft = $('#hostWord');
-                // App.countDown( $secondsLeft, 5, function(){
-                //     IO.socket.emit('hostCountdownFinished', App.gameID);
-                // });
-
+                    
                 // // Display the players' names on screen
                 // $('#player1Score')
                 //     .find('.playerName')
@@ -643,6 +644,32 @@ jQuery(function($){
             
         },
 
+        countDown : function( $el, startTime, callback) {
+
+            // Display the starting time on the screen.
+            $el.text(startTime);
+
+            console.log('Starting Countdown...');
+
+            // Start a 1 second timer
+            var timer = setInterval(countItDown,1000);
+
+            // Decrement the displayed timer value on each 'tick'
+            function countItDown(){
+                startTime -= 1
+                $el.text(startTime);
+
+                if( startTime <= 0 ){
+                    // console.log('Countdown Finished.');
+
+                    // Stop the timer and do the callback.
+                    clearInterval(timer);
+                    callback();
+                    return;
+                }
+            }
+
+        }
 
     };
 
