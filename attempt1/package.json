@@ -4,7 +4,9 @@
   "description": "Gremlin Game",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "node index.js",
+    "run": "node index.js",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
