@@ -142,7 +142,8 @@ function sendWord (gremlinData) {
         gremlins: gremlinData.gremlins,
         phrase: newPhrase
     }
-    console.log(gremlinData.gremlins +': should be gremlinized')
+    console.log(gremlinData.gremlins +': should be gremlinized');
+    
     io.sockets.in(gremlinData.gameID).emit('nextRoundInit', data);
 }
 
