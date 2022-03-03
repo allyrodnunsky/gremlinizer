@@ -477,14 +477,22 @@ jQuery(function($){
                     gremLett: []
                 };
 
+
+                console.log('hi');
+
+                //TODO: IMPLEMENT IF STATEMENT TO MAKE SURE JOIN ROOM IS NOT BLANK OR NOT A ROOM
+               
                 console.log('waiting room click: pN' +data.playerName);
                 
-                ///console.log('playername html input: ', data.playerName);
+                //console.log('playername html input: ', data.playerName);
                 //emit waiting room in this function
                 IO.socket.emit('playerJoinGame', data);
 
                 App.myRole = 'Player';
                 App.Player.myName = data.playerName;
+            
+
+                
             },
 
             //update player waiting screen
@@ -540,8 +548,6 @@ jQuery(function($){
                 var $ltr1 = $("#gremlinizedLTRA");
                 var $ltr2 = $("#gremlinizedLTRB");
                 
-                
-
                 //console.log($sub);
                 var answer = $sub.val(); // The tapped word
                 var l1 = $ltr1.html();
