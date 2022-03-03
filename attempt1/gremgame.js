@@ -4,6 +4,7 @@
 var io;
 var gameSocket;
 var roundTimer;
+var songChoice = 3;
 
 exports.initGame = function(sio, socket){
     io = sio;
@@ -61,15 +62,25 @@ function hostStartGame(gameID) {
 
 function hostNextRound(data) {
     console.log('hostNextRound!');
-    if(data.round < 5 ){
-        console.log(data.gremlins[0]);
+    if(data.round < songs[songChoice].length){
+        // console.log(data.gremlins[0]);
         // new phrase to host, players get submit screen
-        roundTimer = performance.now();
+        roundTimer = performance.now();//starts the round timer to track how long each player takes to answer
         sendWord(data);
     } else {
-        // If the current round exceeds the number of words, send the 'gameOver' event.
-        io.sockets.in(data.gameID).emit('gameOver',data);
+        // If the current round exceeds the number of phrases, send the 'gameOver' event.
+        endGame(data);
     }
+}
+
+function endGame(data) {
+    var endData = {
+        gameID: data.gameID,
+        round: 5,
+        gremlins: data.gremlins,
+        phrases: songs[songChoice]
+    }
+    io.sockets.in(data.gameID).emit('gameOver',endData);
 }
 
 function allAnswered (data) {
@@ -81,16 +92,10 @@ function playerAnswer(data) {
     console.log('Player ID: ' + data.playerID + ' answered a question with: ' + data.answer);
 
     // The player's answer is attached to the data object.  \
-    // Emit an event with the answer so it can be checked by the 'Host'
-    //TODO: STORE PLAYER ANSWER 
-    //TODO: STORE PLAYER ANSWER
-    //TODO: STORE PLAYER ANSWER 
-    //TODO: STORE PLAYER ANSWER 
-    //Saturday Morning 
-    var answerTimer = performance.now();
+    var answerTimer = performance.now();//tracks when any particular answer is submitted
     //console.log(answerTimer);
 
-    data.timeSub = answerTimer - roundTimer;
+    data.timeSub = answerTimer - roundTimer;//tracks the time it took for that player to submit
     console.log('submission time: '+ data.timeSub);
 
     io.sockets.to(data.gameID).emit('storePlayerAnswer', data);
@@ -120,6 +125,7 @@ function playerJoinGame(data) {
     //console.log(data);
     // var room = gameSocket.rooms["/" + data.gameID];
     var room = data.gameID;
+    console.log('player html input: ', data.playerName);
 
     if(room != undefined) {
         data.mySocketID = sock.id;
@@ -135,7 +141,9 @@ function playerJoinGame(data) {
 }
 
 function sendWord (gremlinData) {
-    var newPhrase = songs[0][gremlinData.round];
+    //add a game counter to iterate through songs array
+    //also mayve have buttons for a thing
+    var newPhrase = songs[songChoice][gremlinData.round];
     var data = {
         gameID: gremlinData.gameID,
         round: gremlinData.round,
@@ -160,27 +168,69 @@ var songs = [
        "There's a ______  runnin' through the yard"
    ],
    [
-       "She's a ______ girl",
-       "loves her ______ ",
-       "Loves Jesus and ______ , too",
-       "She's a good ______" ,
-       "crazy 'bout ______ ",
-       "Loves ______" , 
-       "and her ______ , too", 
-       "And it's a ______ day",
-       " livin' in ______ ",
-       "There's a ______  runnin' through the yard"
+       "Take ______ Me",
+       "We're ______ away",
+       "I don't ______ what I'm to say",
+       "I'll ______ it anyway" ,
+       "Today's another day to ______ you",
+       "______ away" , 
+       "______ on me (Take on me)", 
+       "______ me on (Take on me)",
+       "I'll be coming for your ______, okay?",
+       "I'll be ______"
+       
    ],
    [
-       "She's a ______ girl",
-       "loves her ______ ",
-       "Loves Jesus and ______ , too",
-       "She's a good ______" ,
-       "crazy 'bout ______ ",
-       "Loves ______" , 
-       "and her ______ , too", 
-       "And it's a ______ day",
-       " livin' in ______ ",
-       "There's a ______  runnin' through the yard"
-   ]
+       "Just a small town ______",
+       "Living in a ______",
+       "She took the ______",
+       "Going ______" ,
+       "Just a ______ boy",
+       "Born and raised in ______" , 
+       "He took the ______", 
+       "Going ______",
+       "A ______ in a smokey room",
+       "The smell of ______ and cheap perfume",
+       "and cheap ______"
+   ],
+   [
+        "Goose ______ under sauce:",
+        "Wash ______ giblets",
+        "place them in a pan and pour with ______",
+        "Bring water to a ______ a few times" ,
+        "______ off the foam",
+        "Transfer the giblets on a plate and ______" , 
+        "Filter the ______ and add chopped carrot", 
+        "______ the prunes separately.",
+        "Combine the emerged ______ with the meat broth.",
+        "Next add ______ vinegar",
+        "______ your meal!"
+    ],
+    [
+        "Five little ______ jumping on the bed,",
+        "One fell down and bumped his ______,",
+        "Mama called the ______ and the ______ said,",
+        "No more ______ jumping on the bed!" ,
+        "Four little ______ jumping on the bed,",
+        "One fell down and ______ his head," , 
+        "Mama called the ______ and the ______ said,", 
+        "No more ______ jumping on the bed!"
+    ],
+    [
+        "We're goin' on a ______ hunt,",
+        "We're going to catch a ______ one,",
+        "I'm not ______",
+        "What a beautiful ______!" ,
+        "Oh look! It's some long, wavy ______!",
+        "Can't go ______ it," , 
+        "Can't go ______ it,", 
+        "Can't go ______ it,",
+        "Got to go ______ it!",
+        "We're goin' on a ______ hunt,",
+        "We're going to ______ a big one,",
+        "I'm not ______",
+        "What a ______ day!"
+    ],
+
+
 ]
