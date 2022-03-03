@@ -271,9 +271,10 @@ jQuery(function($){
                 }
 
                 //TEST for num players in room for leaving purposes
-                for(let n=0; n <= App.Host.players.length; n++){
-                    console.log('num players present: ' + App.Host.numPlayersInRoom + 'names: ' + App.Host.players[n].playerName);
-                }
+                //ok not showing up now
+                // for(let n=0; n <= App.Host.players.length; n++){
+                //     console.log('num players present: ' + App.Host.numPlayersInRoom + 'names: ' + App.Host.players[n].playerName);
+                // }
             },
 
             /**
