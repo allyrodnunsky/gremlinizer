@@ -13,170 +13,7 @@ html {
 ul {
   list-style-type: none;
 }
-strong {
-  font-family: "Gugi", cursive;
-  background: #7cc041;
-  border-radius: 25px;
-  border: none;
-  color: #f7f3e3;
-  min-width: 400px;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 20px;
-  justify-content: space-evenly;
-  align-items: center;
-}
-.flexContainer {
-  padding-top: 5%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  align-content: space-evenly;
-}
-.setUp {
-  font-size: 45px;
-  font-family: "Gugi", cursive;
-  color: #f7f3e3;
-}
 
-.title {
-  padding-top: 5%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  align-content: space-evenly;
-}
-.buttons {
-  position: relative;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  align-content: space-evenly;
-}
-.btn {
-  font-family: "Gugi", cursive;
-  background: #7cc041;
-  border-radius: 25px;
-  border: none;
-  color: #f7f3e3;
-  min-width: 400px;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 20px;
-  justify-content: center;
-  align-items: center;
-}
-.prompt {
-  background-color: #f7f3e3;
-  opacity: 0.8;
-  color: #1b3022;
-  border-radius: 54px;
-  padding: 15% 10%;
-}
-.info {
-  padding-top: 5%;
-  font-family: "Gugi", cursive;
-  font-size: 25px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  align-content: space-evenly;
-}
-.infoBig {
-  font-family: "Gugi", cursive;
-  font-size: 45px;
-  text-align: center;
-}
-.gameID {
-  font-family: "Gugi", cursive;
-  font-size: 80px;
-  text-align: center;
-}
-
-.inputLabels {
-  font-family: "Gugi", cursive;
-  font-size: 20px;
-}
-.inputField {
-  border-radius: 25px;
-  border: none;
-  min-width: 220px;
-  padding: 15px 32px;
-  align-items: flex-end;
-}
-.row {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.5em;
-}
-.row > label {
-  padding: 0.5em 1em 0.5em 0;
-  flex: 1;
-}
-.row > input {
-  flex: 2;
-}
-
-.answerField {
-  border-radius: 25px;
-  border: none;
-  min-width: 400px;
-  padding: 15px 32px;
-}
-.gremlinizedScreen {
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-}
-.gremMSG {
-  font-size: 35px;
-  /* position: absolute; */
-  font-family: "Gugi", cursive;
-  color: #f7f3e3;
-  text-align: center;
-  text-decoration: none;
-  padding: 15px 32px;
-  justify-content: center;
-  align-items: center;
-}
-.gremLetter {
-  display: inline-block;
-  font-size: 35px;
-  font-family: "Gugi", cursive;
-  color: #f7f3e3;
-  background: #8f56a3;
-  border-radius: 18px;
-  text-align: center;
-  text-decoration: none;
-  padding: 15px 32px;
-  justify-content: center;
-  align-items: center;
-}
-.gremlinizedImg {
-  display: inline-block;
-  width: 15%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.letterGrid {
-  width: 100%;
-  text-align: center;
-  padding-bottom: 100px;
-}
 /***********************************************
 
 ****************large screen*******************
@@ -185,6 +22,273 @@ strong {
  */
 
 @media screen and (min-width: 901px) {
+  strong {
+    font-family: "Gugi", cursive;
+    color: #7cc041;
+    margin: 32px 32px;
+    padding: 10px 50px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 40px;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #f7f3e3;
+    opacity: 0.8;
+    border-radius: 23px;
+  }
+  .flexContainer {
+    padding-top: 5%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+  }
+  .setUp {
+    font-size: 45px;
+    font-family: "Bungee", cursive;
+    color: #f7f3e3;
+  }
+
+  .titleMain {
+    padding-top: 5%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+    font-size: 100px;
+    font-family: "Bungee", cursive;
+    color: #f7f3e3;
+  }
+  .buttons {
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+  }
+  .btn {
+    font-family: "Gugi", cursive;
+    background: #7cc041;
+    border-radius: 25px;
+    border: none;
+    color: #f7f3e3;
+    min-width: 400px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+  }
+
+  .btn:hover {
+    background: #629733;
+    cursor: pointer;
+  }
+
+  .btnVote {
+    font-family: "Gugi", cursive;
+    background: #239bcf;
+    border-radius: 25px;
+    border: none;
+    color: #f7f3e3;
+    min-width: 400px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+  }
+
+  .btnVote:hover {
+    background: #1c7ba4;
+    cursor: pointer;
+  }
+  .prompt {
+    background-color: #f7f3e3;
+    opacity: 0.8;
+    color: #1b3022;
+    border-radius: 54px;
+    padding: 250px 50px;
+    margin: 0px 50px 50px 50px;
+  }
+
+  .promptText {
+    font-family: "Bungee", cursive;
+    text-transform: capitalize;
+    font-size: 96px;
+    color: #1b3022;
+    padding: 50px 10px;
+  }
+  .infoHost {
+    color: #f7f3e3;
+    padding-top: 5%;
+    font-family: "Bungee", cursive;
+    font-size: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+  }
+  .infoBigHost {
+    color: #f7f3e3;
+    font-family: "Bungee", cursive;
+    font-size: 45px;
+    text-align: center;
+  }
+
+  .infoBigJoin {
+    color: #f7f3e3;
+    font-family: "Bungee", cursive;
+    font-size: 45px;
+    text-align: center;
+  }
+
+  .infoWaiting {
+    color: #f7f3e3;
+    padding-top: 5%;
+    font-family: "Bungee", cursive;
+    font-size: 45px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+  }
+
+  .gameID {
+    font-family: "Bungee", cursive;
+    font-size: 80px;
+    text-align: center;
+    color: #f7f3e3;
+  }
+
+  .inputLabels {
+    font-family: "Gugi", cursive;
+    font-size: 30px;
+    color: #f7f3e3;
+  }
+  .inputField {
+    border-radius: 17px;
+    border: none;
+    min-width: 500px;
+    padding: 15px 32px;
+    align-items: flex-end;
+    background: #f7f3e3;
+    box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
+    font-size: large;
+  }
+  .row {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5em;
+  }
+  .row > label {
+    padding: 0.5em 1em 0.5em 0;
+    flex: 1;
+  }
+  .row > input {
+    flex: 2;
+  }
+
+  .answerField {
+    border-radius: 17px;
+    border: none;
+    min-width: 500px;
+    padding: 15px 32px;
+    align-items: flex-end;
+    background: #f7f3e3;
+    box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
+    font-size: large;
+  }
+  .gremlinizedScreen {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  .gremMSG {
+    font-size: 25px;
+    /* position: absolute; */
+    font-family: "Bungee", cursive;
+    color: #f7f3e3;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 32px;
+    justify-content: center;
+    align-items: center;
+  }
+  .gremLetter {
+    display: inline-block;
+    font-size: 35px;
+    font-family: "Bungee", cursive;
+    color: #f7f3e3;
+    background: #8f56a3;
+    border-radius: 18px;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 32px;
+    justify-content: center;
+    align-items: center;
+  }
+  .gremlinizedImg {
+    display: inline-block;
+    width: 15%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .letterGrid {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+
+  .gameEndWrapper {
+    color: #f7f3e3;
+    font-family: "Bungee", cursive;
+    font-size: 25px;
+    text-align: center;
+  }
+
+  .storyOutput {
+    font-family: "Bungee", cursive;
+    text-transform: uppercase;
+    text-align: left;
+    font-size: 30px;
+    background-color: #f7f3e3;
+    opacity: 0.8;
+    color: #1b3022;
+    border-radius: 54px;
+    padding: 20px 100px;
+    line-height: 60px;
+  }
+  .gameLeaderBoard {
+    padding-bottom: 100px;
+  }
+  .scores {
+    color: #f7f3e3;
+    font-family: "Bungee", cursive;
+    font-size: 25px;
+    text-align: left;
+    line-height: 55px;
+    padding: 0px 350px;
+  }
 }
 
 /***********************************************
@@ -194,11 +298,8 @@ strong {
 ***********************************************
  */
 
-@media screen and (min-width: 601px) {
+@media screen and (min-width: 501px) {
   @media screen and (max-width: 900px) {
-    h1 {
-      font-size: large;
-    }
   }
 }
 
@@ -209,8 +310,273 @@ strong {
 ***********************************************
  */
 
-@media screen and (max-width: 600px) {
-  h1 {
-    font-size: 10px;
+@media screen and (max-width: 500px) {
+  strong {
+    font-family: "Gugi", cursive;
+    color: #7cc041;
+    margin: 10px 10px;
+    padding: 10px 50px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #f7f3e3;
+    opacity: 0.8;
+    border-radius: 12px;
+  }
+  .flexContainer {
+    padding: 25% 3% 0 3%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+  }
+
+  .setUp {
+    font-size: 45px;
+    font-family: "Bungee", cursive;
+    color: #f7f3e3;
+  }
+
+  .titleMain {
+    padding-top: 25%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+    font-size: 45px;
+    font-family: "Bungee", cursive;
+    color: #f7f3e3;
+  }
+  .buttons {
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+  }
+  .btn {
+    font-family: "Gugi", cursive;
+    background: #7cc041;
+    border-radius: 25px;
+    border: none;
+    color: #f7f3e3;
+    min-width: 280px;
+    padding: 20px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 25px;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    margin-bottom: 17px;
+  }
+
+  .btn:hover {
+    background: #629733;
+    cursor: pointer;
+  }
+
+  .btnVote {
+    font-family: "Gugi", cursive;
+    background: #239bcf;
+    border-radius: 25px;
+    border: none;
+    color: #f7f3e3;
+    min-width: 200px;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+  }
+
+  .btnVote:hover {
+    background: #1c7ba4;
+    cursor: pointer;
+  }
+  .prompt {
+    background-color: #f7f3e3;
+    opacity: 0.8;
+    color: #1b3022;
+    border-radius: 54px;
+    padding: 50px 10px;
+    margin: 0px 40px 40px 40px;
+  }
+
+  .promptText {
+    font-family: "Bungee", cursive;
+    text-transform: capitalize;
+    font-size: 48px;
+    color: #1b3022;
+    padding: 50px 10px;
+  }
+  .infoHost {
+    color: #f7f3e3;
+    padding-top: 25%;
+    font-family: "Bungee", cursive;
+    font-size: 18px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+  }
+  .infoBigHost {
+    color: #f7f3e3;
+    font-family: "Bungee", cursive;
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .infoBigJoin {
+    color: #f7f3e3;
+    font-family: "Bungee", cursive;
+    font-size: 35px;
+    text-align: center;
+  }
+
+  .infoWaiting {
+    color: #f7f3e3;
+    padding-top: 5%;
+    font-family: "Bungee", cursive;
+    font-size: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+  }
+
+  .gameID {
+    font-family: "Bungee", cursive;
+    font-size: 45px;
+    text-align: center;
+    color: #f7f3e3;
+  }
+
+  .inputLabels {
+    font-family: "Gugi", cursive;
+    font-size: 24px;
+    color: #f7f3e3;
+  }
+  .inputField {
+    border-radius: 17px;
+    border: none;
+    min-width: 300px;
+    padding: 20px 16px;
+    align-items: flex-end;
+    background: #f7f3e3;
+    box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
+  }
+  /* .row {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.2em;
+  }
+  .row > label {
+    padding: 0.2em 0.5em 0.2em 0;
+    flex: 1;
+  }
+  .row > input {
+    flex: 2;
+  } */
+
+  .answerField {
+    border-radius: 17px;
+    border: none;
+    min-width: 500px;
+    padding: 15px 32px;
+    align-items: flex-end;
+    background: #f7f3e3;
+    box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
+    font-size: large;
+  }
+  .gremlinizedScreen {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  .gremMSG {
+    font-size: 25px;
+    /* position: absolute; */
+    font-family: "Bungee", cursive;
+    color: #f7f3e3;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 32px;
+    justify-content: center;
+    align-items: center;
+  }
+  .gremLetter {
+    display: inline-block;
+    font-size: 35px;
+    font-family: "Bungee", cursive;
+    color: #f7f3e3;
+    background: #8f56a3;
+    border-radius: 18px;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 32px;
+    justify-content: center;
+    align-items: center;
+  }
+  .gremlinizedImg {
+    display: inline-block;
+    width: 15%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .letterGrid {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+
+  .gameEndWrapper {
+    color: #f7f3e3;
+    font-family: "Bungee", cursive;
+    font-size: 25px;
+    text-align: center;
+  }
+
+  .storyOutput {
+    font-family: "Bungee", cursive;
+    text-transform: uppercase;
+    text-align: left;
+    font-size: 30px;
+    background-color: #f7f3e3;
+    opacity: 0.8;
+    color: #1b3022;
+    border-radius: 54px;
+    padding: 20px 100px;
+    line-height: 60px;
+  }
+  .gameLeaderBoard {
+    padding-bottom: 100px;
+  }
+  .scores {
+    color: #f7f3e3;
+    font-family: "Bungee", cursive;
+    font-size: 25px;
+    text-align: left;
+    line-height: 55px;
+    padding: 0px 350px;
   }
 }

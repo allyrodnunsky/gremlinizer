@@ -2,11 +2,10 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="main.css" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Gugi&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bungee&family=Gugi&display=swap"
       rel="stylesheet"
     />
     <meta charset="UTF-8" />
@@ -23,8 +22,8 @@
     </div>
 
     <script id="title-screen-template" type="text/template">
-      <div class="setUp flexContainer">
-        <h1 class="title"> Gremlinizer </h1>
+      <div class="flexContainer">
+        <h1 class="titleMain"> Gremlinizer </h1>
         <div class ="buttons">
          <button id="btnCreateGame" class="btn"> CREATE GAME </button>
          <button id="btnJoinGame" class="btn"> JOIN GAME </button>
@@ -35,12 +34,12 @@
 
     <!-- host screen -->
     <script id="create-game-template" type="text/template">
-        <div class="setUp flexContainer">
+        <div class="flexContainer">
 
-          <div class="info">Open this site on your mobile device:</div>
-          <div id="gameURL" class="infoBig">Error!</div>
+          <div class="infoHost">Open this site on your mobile device:</div>
+          <div id="gameURL" class="infoBigHost">Error!</div>
 
-          <div class="info">Then click <strong>JOIN GAME</strong> and enter the following Game ID:</div>
+          <div class="infoHost">Then click <strong>JOIN GAME</strong> and enter the following Game ID:</div>
           <div id="spanNewGameCode" class="gameID">Error!</div>
 
           <!-- <div class="start buttons">
@@ -56,8 +55,8 @@
 
     <!-- player screen -->
     <script id="join-game-template" type="text/template">
-      <div class="setUp flexContainer">
-        <p class="info"> Complete information to begin game: </p>
+      <div class="flexContainer">
+        <p class="infoBigJoin"> Complete information to begin game: </p>
        <ul>
         <li class="row">
               <label for="inputPlayerName" class="inputLabels">Name:</label>
@@ -68,8 +67,7 @@
               <input id="inputGameId" class="inputField" type="text"/>
           </li>
         </ul>
-          <br>
-          <div class="info">
+          <div>
               <button id="btnJoinWaitingRoom" class="btn">Join Room</button>
           </div>
       </div>
@@ -77,9 +75,8 @@
 
     <!-- player screen -->
     <script id="waiting-room-template" type="text/template">
-      <div class="flexContainer setUp">
-          <div class="infoBig"> Waiting For Players to Join... </div>
-          <div id="playerWaitingMessage" class="info"></div>
+      <div class="flexContainer">
+          <div id="playerWaitingMessage" class="infoWaiting"></div>
 
           <!-- <div class="start buttons">
             <button id="btnPlayerStartsGame" class="btn">Start Game</button> -->
@@ -88,9 +85,9 @@
 
     <!-- Round x screen (host)-->
     <script id="round-x-template" type="text/template">
-      <div class="flexContainer setUp">
-        <div class="displayed-text">
-          <h1 id="roundPrompt" class="prompt">
+      <div class="flexContainer">
+        <div class="prompt">
+          <h1 id="roundPrompt" class="promptText">
             Prompt will go here when _________.
           </h1>
         </div>
@@ -100,7 +97,7 @@
     <!-- player response screen (player)-->
 
     <script id="round-response-template" type="text/template">
-        <div class="flexContainer setUp">
+        <div class="flexContainer">
           <div id="gremBox" class="gremlinizedScreen">
             <div id="gremlinizedMSG" class="gremMSG"></div>
             <img src="../img/gremlin1.png" alt="gremlinized" class="gremlinizedImg" id ="gremlinizedImg" style="display:none"/>
@@ -109,7 +106,7 @@
               <div id="gremlinizedLTRB"  class="gremLetter" style="display:none"></div>
             </div>
           </div>
-          <div class="response info">
+          <div class="response">
             <div id="roundPrompt"></div>
              <input id="inputPlayerResponse" class="answerField" type="text" />
           </div>
@@ -117,24 +114,24 @@
             <button id="btnSubmit" class="btn">Submit</button>
           </div>
           <br>
-         <div id="playerWaitingMessage" class="flexContainer info"></div>
+         <div id="playerWaitingMessage" class="flexContainer"></div>
           </div>
         </div>
       </div>
     </script>
 
     <script id="game-end-template" type="text/template">
-      <div class="setUpNoTranslate">
+      <div class="flexContainer">
         <div class="gameEndWrapper">
           <div class="finalStory">
-            <h1 class="displayed-text infoBig">Here is your final Story:</h1>
+            <h1>Here is your final Story:</h1>
 
-            <div id="storyOutput" class="info"></div>
+            <div id="storyOutput" class="storyOutput"></div>
           </div>
           <div class="gameLeaderBoard">
-            <h1 class="displayed-text infoBig">Winners</h1>
+            <h1 class="">Winners</h1>
 
-            <div id="finalLeaderBoard" class="info"></div>
+            <div id="finalLeaderBoard" class="scores"></div>
           </div>
         </div>
       </div>
