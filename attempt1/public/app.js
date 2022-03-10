@@ -630,6 +630,7 @@ jQuery(function($){
                         .append($('<div/>')
                         .text('Thanks For Voting!')
                         .addClass('flexContainer')
+                        .addClass('infoWaiting')
                         );
 
 
