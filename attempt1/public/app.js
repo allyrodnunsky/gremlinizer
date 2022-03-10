@@ -4,7 +4,7 @@
 ; 
 jQuery(function($){    
     'use strict';
-    var playerses = 2;
+    var playerses = 4;
     var IO = {
 
         /**
@@ -224,6 +224,26 @@ jQuery(function($){
                 }
             },
 
+
+            onPlayerStartGameClick : function() {
+                //console.log('host screen template game pls');
+                App.$gameArea.html(App.$templateHostScreen);
+            },
+
+
+            newRound : function (data) {
+                App.$gameArea.html(App.$templateHostScreen);
+                $('#roundPrompt').html(data.phrase);
+
+                //countdown until new round
+                var $secondsLeft = $('#hostWord');
+                App.countDown( $secondsLeft, 60, function(){
+                    IO.socket.emit('allAnswered', data); //move to vote screen
+                });
+                
+            },
+
+
             storeAnswer : function(data) {
                 //console.log('Datums');
                 console.log('score should be 0 ' + data.score);
@@ -261,6 +281,8 @@ jQuery(function($){
                         console.log('answerCheck: '+numAnswers+ '  i:' +i + ' numPlayersInRoom: ' + App.Host.numPlayersInRoom + ' players length:' + App.Host.players.length);
                     }
                 }
+                //triggering vote screen
+                //if all players answered
                 if (numAnswers == App.Host.numPlayersInRoom) {
                     console.log('allAnswered');
                     numAnswers = 0;
@@ -268,6 +290,10 @@ jQuery(function($){
                         gameID: App.gameID,
                         roundAnswers: roundAnswers
                     }
+                    IO.socket.emit('allAnswered', data);
+                }
+                //TODO: else, if time runs out (numAnswers != numPlayersInRoom)
+                else {
                     IO.socket.emit('allAnswered', data);
                 }
 
@@ -358,24 +384,6 @@ jQuery(function($){
                 }
             },
 
-
-            onPlayerStartGameClick : function() {
-                //console.log('host screen template game pls');
-                App.$gameArea.html(App.$templateHostScreen);
-            },
-
-
-            newRound : function (data) {
-                App.$gameArea.html(App.$templateHostScreen);
-                $('#roundPrompt').html(data.phrase);
-
-                //countdown until new round
-                var $secondsLeft = $('#hostWord');
-                App.countDown( $secondsLeft, 60, function(){
-                    IO.socket.emit('allAnswered', data); //move to vote screen
-                });
-                
-            },
 
             endGame : function (data) {
                 var topAnswers = [];
@@ -477,19 +485,26 @@ jQuery(function($){
                     gremLett: []
                 };
 
-
                 console.log('hi');
+                // data.gameID is the player input ID
+                console.log('data.gameID: ' + data.gameID);
+                
+                //HELP ::: this returns 0. We need it to return the gameID
+                console.log('App gameID (roomID): ' + App.gameID);
 
                 //TODO: IMPLEMENT IF STATEMENT TO MAKE SURE JOIN ROOM IS NOT BLANK OR NOT A ROOM
-               
-                console.log('waiting room click: pN' +data.playerName);
+               if(data.gameID != ''){ //replace ' with the App's gameID
+                    console.log('waiting room click: pN: ' +data.playerName);
                 
-                //console.log('playername html input: ', data.playerName);
-                //emit waiting room in this function
-                IO.socket.emit('playerJoinGame', data);
+                    //console.log('playername html input: ', data.playerName);
+                    //emit waiting room in this function
+                    IO.socket.emit('playerJoinGame', data);
 
-                App.myRole = 'Player';
-                App.Player.myName = data.playerName;
+                    App.myRole = 'Player';
+                    App.Player.myName = data.playerName;
+               }
+               
+                
             
 
                 
@@ -650,7 +665,7 @@ jQuery(function($){
             
         },
 
-        countDown : function( $el, startTime, callback) {
+        countDown: function( $el, startTime, callback) {
 
             // Display the starting time on the screen.
             $el.text(startTime);
