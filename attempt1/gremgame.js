@@ -127,15 +127,15 @@ function playerJoinGame(data) {
     var room = data.gameID;
     console.log('player html input: ', data.playerName);
 
-    if(room != undefined) {
+    if(io.sockets.adapter.rooms[room]) {
         data.mySocketID = sock.id;
         sock.join(data.gameID);
         console.log("playerjoin game func");
-
         io.sockets.in(data.gameID).emit('playerJoinedRoom', data);
-
-    } else {
-        this.emit('error',{message: "This room does not exist."} ); //error message
+        
+        } else {
+            console.log("should throw error in client");
+            io.sockets.to(sock.id).emit('error',{message: "This room does not exist."} ); //error message
     }
 
 }

@@ -237,7 +237,7 @@ jQuery(function($){
 
                 //countdown until new round
                 var $secondsLeft = $('#hostWord');
-                App.countDown( $secondsLeft, 60, function(){
+                App.countDown( $secondsLeft, 40, function(){
                     IO.socket.emit('allAnswered', data); //move to vote screen
                 });
                 
@@ -265,7 +265,6 @@ jQuery(function($){
                 App.Host.rounds.push(data);
                 console.log(this.rounds[0].score);
                 App.Host.answerCheck();
-                
                 
                 //console.log(App.Host.gameID);
             },
@@ -435,6 +434,7 @@ jQuery(function($){
                 // Prepare the game screen with new HTML
                 App.$gameArea.html(App.$templateHostScreen);
                 IO.socket.emit('hostStartGame', App.gameID);
+                console.log('gameCntdown ID:' + App.gameID);
                     
                 // // Display the players' names on screen
                 // $('#player1Score')
@@ -457,6 +457,7 @@ jQuery(function($){
             hostSocketID: '',
             myName: '',
             playerAnswer: '',
+            gameID: '',
             
 
             //click handler for on JoinClick
@@ -484,29 +485,12 @@ jQuery(function($){
                     playerID: App.mySocketID,
                     gremLett: []
                 };
-
-                console.log('hi');
-                // data.gameID is the player input ID
-                console.log('data.gameID: ' + data.gameID);
                 
-                //HELP ::: this returns 0. We need it to return the gameID
-                console.log('App gameID (roomID): ' + App.gameID);
+                //emit waiting room in this function
+                IO.socket.emit('playerJoinGame', data);
 
-                //TODO: IMPLEMENT IF STATEMENT TO MAKE SURE JOIN ROOM IS NOT BLANK OR NOT A ROOM
-               if(data.gameID != ''){ //replace ' with the App's gameID
-                    console.log('waiting room click: pN: ' +data.playerName);
-                
-                    //console.log('playername html input: ', data.playerName);
-                    //emit waiting room in this function
-                    IO.socket.emit('playerJoinGame', data);
-
-                    App.myRole = 'Player';
-                    App.Player.myName = data.playerName;
-               }
-               
-                
-            
-
+                App.myRole = 'Player';
+                App.Player.myName = data.playerName;
                 
             },
 
@@ -530,7 +514,8 @@ jQuery(function($){
                 }
             },
 
-            gameCountdown : function() {
+            gameCountdown : function(hostData) {
+                App.Player.hostSocketID = hostData.mySocketID;
 
                 // Prepare the game screen with new HTML
                 //eliminate all the errors :)
@@ -666,7 +651,6 @@ jQuery(function($){
         },
 
         countDown: function( $el, startTime, callback) {
-
             // Display the starting time on the screen.
             $el.text(startTime);
 
