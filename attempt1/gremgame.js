@@ -36,15 +36,17 @@ exports.initGame = function(sio, socket){
 
 //** create game button is clicked, create game room and join*/
 function hostCreateNewGame() {
-    console.log("thisGameID" + this.id);
+    
     //create unique game room ID
     var thisGameID = (Math.random() * 100000) | 0;
     
     //return game room ID and socket ID to browser client
-    this.emit('newGameCreated', {gameID: thisGameID, mySocketID: gameSocket.id});
+    this.emit('newGameCreated', {gameID: thisGameID, mySocketID: this.id});
 
     //join the room, wait for players
-    gameSocket.join(thisGameID.toString());
+    this.join(thisGameID.toString());
+    console.log("thisGameID" + this.id);
+    console.log(this.rooms);
 }
 
 function hostStartGame(gameID) {
@@ -121,7 +123,7 @@ function votingMachine(data) {
 }
 
 function playerJoinGame(data) {
-    var sock = gameSocket;
+    var sock = this;
     console.log(data);
     // var room = gameSocket.rooms["/" + data.gameID];
     var room = data.gameID;
@@ -131,11 +133,12 @@ function playerJoinGame(data) {
         data.mySocketID = sock.id;
         sock.join(data.gameID);
         console.log("playerjoin game func");
-
+        console.log("thisGameID" + this.id);
+        console.log(this.rooms);
         io.in(data.gameID).emit('playerJoinedRoom', data);
 
     } else {
-        gameSocket.emit('error',{message: "This room does not exist."} ); //error message
+        this.emit('error',{message: "This room does not exist."} ); //error message
     }
 
 }
