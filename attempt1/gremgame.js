@@ -36,7 +36,7 @@ exports.initGame = function(sio, socket){
 
 //** create game button is clicked, create game room and join*/
 function hostCreateNewGame() {
-    // console.log("thisGameID");
+    
     //create unique game room ID
     var thisGameID = (Math.random() * 100000) | 0;
     
@@ -44,7 +44,8 @@ function hostCreateNewGame() {
     this.emit('newGameCreated', {gameID: thisGameID, mySocketID: this.id});
 
     //join the room, wait for players
-    this.join(thisGameID.toString());
+    this.join(thisGameID);
+    console.log("thus many players are in the room after host joins"+io.sockets.adapter.rooms.get(thisGameID).size);
 }
 
 function hostStartGame(gameID) {
@@ -98,7 +99,7 @@ function playerAnswer(data) {
     data.timeSub = answerTimer - roundTimer;//tracks the time it took for that player to submit
     console.log('submission time: '+ data.timeSub);
 
-    io.sockets.to(data.gameID).emit('storePlayerAnswer', data);
+    io.sockets.in(data.gameID).emit('storePlayerAnswer', data);
 }
 
 //host prepare game emits the beginNewGame function in app.js, which begins the countdown. 
@@ -122,7 +123,7 @@ function votingMachine(data) {
 
 function playerJoinGame(data) {
     var sock = this;
-    //console.log(data);
+    console.log(data);
     // var room = gameSocket.rooms["/" + data.gameID];
     var room = data.gameID;
     console.log('player html input: ', data.playerName);
@@ -131,6 +132,8 @@ function playerJoinGame(data) {
         data.mySocketID = sock.id;
         sock.join(data.gameID);
         console.log("playerjoin game func");
+        console.log("thus many players are in the room after player joins"+io.sockets.adapter.rooms.get(room).size);
+
         io.sockets.in(data.gameID).emit('playerJoinedRoom', data);
         
         } else {
@@ -250,6 +253,39 @@ var songs = [
         "Make 'em go ______",
         "As you shoot ______",
         "Baby, you're a ______"
+    ],
+    [
+        "Use of ______ notes or study aids;",
+        "Allowing another party to do one's work/exam and ______ in that work/exam as one's own;",
+        "Copying coursework from another student or from a ______ source;",
+        "______ on course work when prohibited;" ,
+        "Failing to ______ by the specific written course instructions, including, but not limited to, exams, homework assignments, and syllabi;",
+        "Use of electronic devices when not ______ permitted;" , 
+        "Clicker Fraud. Using, or ______ someone else use, clicker technology improperly in an effort to receive academic credit.", 
+    ],
+
+    [
+        "Tonight's the night, let's ______ it up",
+        "I got my money, let's ______ it up (I feel-)",
+        "Go out and ______ it like oh my God",
+        "Jump off that sofa, let's ______ it off (I feel-)",
+        "I know that we'll have a ______" , 
+        "If we get down and go out and just ______ it all", 
+        "I feel ______ out, I wanna let it go",
+        "Let's go way out, ______ out, and losin' all control",
+    ],
+
+    [
+        "If love and peace is so ______",
+        "Why are there ______ of love that don't belong?",
+        "Nations ______' bombs",
+        "Chemical gases ______ lungs of little ones" ,
+        "With ongoing sufferin' as the youth ______ young" , 
+        "With this world that we livin' in? People keep on ______' in", 
+        "So I can ______ myself, really, what is going wrong",
+        "Makin' wrong ______, only visions of them dividends",
+        "Not respectin' each other, ______ thy brother",
+        "A war is goin' on, but the reason's ______",
     ],
 
 

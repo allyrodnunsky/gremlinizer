@@ -4,7 +4,7 @@
 ; 
 jQuery(function($){    
     'use strict';
-    var playerses = 4;
+    var playerses = 2;
     var IO = {
 
         /**
@@ -55,7 +55,8 @@ jQuery(function($){
 
 
         playerJoinedRoom : function(data) {
-            //console.log('player joined room called');
+            console.log('player joined room called');
+            console.log('my role: ' + App.myRole);
             App[App.myRole].updateWaitingScreen(data);
         },
 
@@ -204,7 +205,7 @@ jQuery(function($){
                     App.Host.displayNewGameScreen();
                 }
 
-                //console.log('host update waiting screen called');
+                console.log('host update waiting screen called');
 
                 $('#playersWaiting')
                     .append('<p/>')
@@ -212,7 +213,7 @@ jQuery(function($){
 
                 //populate players[] with data
                 App.Host.players.push(data);
-                console.log('my name is: ' + data.playerName);
+                console.log('my name is: ' + data.playerName +'in gameID ' + data.gameID);
                 App.Host.numPlayersInRoom += 1;
                 //console.log('times check');
                 
@@ -272,10 +273,12 @@ jQuery(function($){
             answerCheck : function () {
                 var numAnswers = 0;
                 var roundAnswers = [];
+                var roundPID = [];
                 console.log('answerCheck running: current round:' +App.currentRound);
                 for (let i = 0; i < App.Host.rounds.length; i++) {
                     if (App.Host.rounds[i].round == App.currentRound) {
                         roundAnswers.push(App.Host.rounds[i].answer);
+                        roundPID.push(App.Host.rounds[i].playerID);
                         numAnswers ++;
                         console.log('answerCheck: '+numAnswers+ '  i:' +i + ' numPlayersInRoom: ' + App.Host.numPlayersInRoom + ' players length:' + App.Host.players.length);
                     }
@@ -287,7 +290,8 @@ jQuery(function($){
                     numAnswers = 0;
                     var data = {
                         gameID: App.gameID,
-                        roundAnswers: roundAnswers
+                        roundAnswers: roundAnswers,
+                        roundPID: roundPID
                     }
                     IO.socket.emit('allAnswered', data);
                 }
@@ -419,7 +423,6 @@ jQuery(function($){
                 $('#storyOutput').html($fs);
                 $('#finalLeaderBoard').html($plrs);
 
-
             },
 
             //host countdown pg
@@ -431,6 +434,8 @@ jQuery(function($){
                 console.log('gameCntdown ID:' + App.gameID);
                     
                 //unnecessary TODO: display names on screen
+                //App.doTextFit('#hostWord');
+
             },
 
 
@@ -480,7 +485,7 @@ jQuery(function($){
             //update player waiting screen
             updateWaitingScreen : function(data) {
                 // console.log('io.socket.id is: ' + IO.socket.id);
-                // console.log('data.mySocketID: ' + data.mySocketID);
+                console.log('data.mySocketID: ' + data.mySocketID + 'ing Gmnae' +  data.gameID);
 
                 if(IO.socket.id === data.mySocketID){
                     //console.log('player update Waiting Screen called');
@@ -581,10 +586,12 @@ jQuery(function($){
             triggerVote (data) {
                 var $list = $('<ul/>').attr('id','ulRoundWords').addClass('setUp');
                 var roundWords = data.roundAnswers;
+                var roundPID = data.roundPID;
                 // Insert a list item for each word in the word list
                 // received from the server.
-                $.each(roundWords, function(){
-                    $list                                //  <ul> </ul>
+                $.each(roundWords, function(i, item){
+                    if (roundPID[i] != App.mySocketID) {
+                        $list                                //  <ul> </ul>
                         .append( $('<li/>')              //  <ul> <li> </li> </ul>
 
                             .append( $('<button/>')      //  <ul> <li> <button> </button> </li> </ul>
@@ -596,8 +603,9 @@ jQuery(function($){
                                 
                             )
                         )
-
                         .append('<br>')
+                    }
+                    
                 });
                 //console.log($list);
                 
