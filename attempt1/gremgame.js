@@ -86,6 +86,7 @@ function endGame(data) {
 
 function allAnswered (data) {
     console.log('round answers: '+ data);
+    io.sockets.in(data.gameID).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(data.gameID).size} );
     io.sockets.in(data.gameID).emit('loadVote', data);
 }
 
@@ -100,6 +101,7 @@ function playerAnswer(data) {
     data.timeSub = answerTimer - roundTimer;//tracks the time it took for that player to submit
     console.log('submission time: '+ data.timeSub);
 
+    io.sockets.in(data.gameID).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(data.gameID).size} );
     io.sockets.in(data.gameID).emit('storePlayerAnswer', data);
 }
 
@@ -120,6 +122,7 @@ function hostPrepareGame(gameID) {
 
 function votingMachine(data) {
     console.log("storing Votes With a machine");
+    io.sockets.in(data.gameID).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(data.gameID).size} );
     io.sockets.in(data.gameID).emit('storeVote', data);
 }
 
@@ -137,7 +140,9 @@ function playerJoinGame(data) {
         console.log("playerjoin game func");
         console.log("thus many players are in the room after player joins"+io.sockets.adapter.rooms.get(room).size);
 
+        io.sockets.in(data.gameID).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(data.gameID).size} );
         io.sockets.in(data.gameID).emit('playerJoinedRoom', data);
+        
         
         } else {
             console.log("should throw error in client");
@@ -158,6 +163,7 @@ function sendWord (gremlinData) {
         phrase: newPhrase
     }
     console.log(gremlinData.gremlins +': should be gremlinized')
+    io.sockets.in(gremlinData.gameID).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(gremlinData.gameID).size} );
     io.sockets.in(gremlinData.gameID).emit('nextRoundInit', data);
 }
 

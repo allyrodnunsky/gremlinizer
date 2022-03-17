@@ -4,7 +4,8 @@
 ; 
 jQuery(function($){    
     'use strict';
-    var playerses = 2;
+    //var playerses = 99;
+    var startGame = false;
     var IO = {
 
         /**
@@ -29,6 +30,8 @@ jQuery(function($){
             IO.socket.on('loadVote', IO.loadVote );
             IO.socket.on('storeVote', IO.storePlayerVote );
             IO.socket.on('nextRoundInit', IO.nextRound );
+            IO.socket.on('numPlayerUpdate', IO.numPlayerUpdate );
+            
 
             //IO.socket.on('beginNewGame', IO.beginNewGame );
             //IO.socket.on('newPhraseData', IO.onNewPhraseData);
@@ -59,6 +62,16 @@ jQuery(function($){
             console.log('my role: ' + App.myRole);
             App[App.myRole].updateWaitingScreen(data);
         },
+
+        numPlayerUpdate : function(data) {
+            
+            //console.log('my role: ' + App.myRole);
+            App.Host.numPlayersInRoom = data.numPlayer -1;
+            console.log('player playersUpdated' + App.Host.numPlayersInRoom);
+            //playerses = data.numPlayer;
+        },
+
+
 
         beginNewGame : function(data) {
 
@@ -137,9 +150,11 @@ jQuery(function($){
         bindEvents: function () {
             //HOST
             App.$doc.on('click', '#btnCreateGame', App.Host.onCreateClick);
+            App.$doc.on('click', '#btnStartGame', App.Host.onStartClick);
 
             //PLAYER
             App.$doc.on('click', '#btnJoinGame', App.Player.onJoinClick);
+            
             App.$doc.on('click', '#btnVote', App.Player.iVoted);
             App.$doc.on('click', '#btnSubmit',App.Player.onPlayerSubmitClick);
             App.$doc.on('click', '#btnJoinWaitingRoom', App.Player.onJoinWaitingRoomClick);
@@ -171,6 +186,20 @@ jQuery(function($){
                 IO.socket.emit('hostCreateNewGame');
                
             },
+            onStartClick: function () {
+                console.log('clicked start a game' + startGame);
+                //console.log(IO);
+
+                startGame = true;
+                if(startGame){
+                    //call host room start in gremgame
+                    //console.log('early Num players in room' +App.Host.numPlayersInRoom)
+                    IO.socket.emit('hostRoomStart', App.gameID); 
+                 }
+
+                console.log('clicked start a game' + startGame);
+            },
+
 
             //host screen is displayed
             gameInit: function (data) {
@@ -178,7 +207,7 @@ jQuery(function($){
                 App.gameID = data.gameID;
                 App.mySocketID = data.mySocketID;
                 App.myRole = 'Host';
-                App.Host.numPlayersInRoom = 0;
+                //App.Host.numPlayersInRoom = 0;
                 
                 App.Host.displayNewGameScreen();
                 console.log("game create with id: " + App.gameID);
@@ -214,15 +243,17 @@ jQuery(function($){
                 //populate players[] with data
                 App.Host.players.push(data);
                 console.log('my name is: ' + data.playerName +'in gameID ' + data.gameID);
-                App.Host.numPlayersInRoom += 1;
+                console.log("host num p room" + App.Host.numPlayersInRoom);
+                //App.Host.numPlayersInRoom += 1;
                 //console.log('times check');
+                if (App.Host.numPlayersInRoom >= 2) {
+                    console.log("App.Host.numPlayersInRoom is greater 2");
+                    $('#btnStartGame')
+                        .removeAttr('hidden');
+                }
                 
                 //show start button once correct num of players entered room
-                if(App.Host.numPlayersInRoom == playerses){
-                   //call host room start in gremgame
-                   //console.log('early Num players in room' +App.Host.numPlayersInRoom)
-                   IO.socket.emit('hostRoomStart', App.gameID); 
-                }
+  
             },
 
 
@@ -472,7 +503,7 @@ jQuery(function($){
                     gremRound: 0,
                     gremStatus: false,
                     playerID: App.mySocketID,
-                    gremLett: []
+                    gremLett: [],
                 };
                 
                 //emit waiting room in this function
@@ -604,6 +635,7 @@ jQuery(function($){
 
             triggerVote (data) {
                 var $list = $('<ul/>').attr('id','ulRoundWords').addClass('flexContainer setUp');
+                //vote h1, prompt /p same class as btnVote
                 var roundWords = data.roundAnswers;
                 var roundPID = data.roundPID;
                 // Insert a list item for each word in the word list
