@@ -67,6 +67,18 @@ ul{
     align-items: center;
   }
 
+  .backBtn {
+    text-decoration: none;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 10px;
+    background: #7cc041;
+    color: #f7f3e3;
+    font-size: 25px;
+    justify-content: left;
+    margin: 100px 200px;
+  }
+
   .info {
     font-family: "Gugi", cursive;
     font-size: 25px;
@@ -155,6 +167,18 @@ ul{
       font-size: 15.5px;
       justify-content: center;
       align-items: center;
+    }
+
+    .backBtn {
+      text-decoration: none;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 10px;
+      background: #7cc041;
+      color: #f7f3e3;
+      font-size: 25px;
+      justify-content: left;
+      margin: 50px 70px;
     }
 
     .info {
@@ -252,7 +276,18 @@ ul{
     justify-content: center;
     align-items: center;
   }
-
+  .backBtn {
+    text-decoration: none;
+    border: none;
+    border-radius: 60px;
+    padding: 10px 10px;
+    background: #7cc041;
+    color: #f7f3e3;
+    font-size: 17px;
+    justify-content: left;
+    margin: 20px 30px;
+  }
+  
   .info {
     font-family: "Gugi", cursive;
     font-size: 25px;
