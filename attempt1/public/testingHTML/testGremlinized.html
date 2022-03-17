@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gugi&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Gremlinizer</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link href="../main.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div id="gameArea">
+      <!-- this area is where the templates below will be used -->
+    </div>
+
+    <!-- <script id="round-response-template" type="text/template"> -->
+
+    <div id="gremBox" class="gremlinizedScreen">
+      <div id="gremlinizedMSG" class="gremMSG"></div>
+      <img src="../img/gremlin1.png" alt="gremlinized" class="gremlinizedImg" />
+      <div class="letterGrid">
+        <div
+          id="gremlinizedLTRA"
+          class="gremLetter"
+          style="display: inline-block"
+        >
+          A
+        </div>
+        <div
+          id="gremlinizedLTRB"
+          class="gremLetter"
+          style="display: inline-block"
+        >
+          B
+        </div>
+      </div>
+    </div>
+
+    <!-- </script> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script> -->
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
