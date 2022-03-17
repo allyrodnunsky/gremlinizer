@@ -295,12 +295,6 @@ jQuery(function($){
                 else {
                     IO.socket.emit('allAnswered', data);
                 }
-
-                //TEST for num players in room for leaving purposes
-                //ok not showing up now
-                // for(let n=0; n <= App.Host.players.length; n++){
-                //     console.log('num players present: ' + App.Host.numPlayersInRoom + 'names: ' + App.Host.players[n].playerName);
-                // }
             },
 
             /**
@@ -436,18 +430,7 @@ jQuery(function($){
                 IO.socket.emit('hostStartGame', App.gameID);
                 console.log('gameCntdown ID:' + App.gameID);
                     
-                // // Display the players' names on screen
-                // $('#player1Score')
-                //     .find('.playerName')
-                //     .html(App.Host.players[0].playerName);
-
-                // $('#player2Score')
-                //     .find('.playerName')
-                //     .html(App.Host.players[1].playerName);
-
-                // // Set the Score section on screen to 0 for each player.
-                // $('#player1Score').find('.score').attr('id',App.Host.players[0].mySocketId);
-                // $('#player2Score').find('.score').attr('id',App.Host.players[1].mySocketId);
+                //unnecessary TODO: display names on screen
             },
 
 
