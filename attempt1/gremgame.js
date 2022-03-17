@@ -4,7 +4,7 @@
 var io;
 var gameSocket;
 var roundTimer;
-var songChoice = 3;
+var songChoice = 0;
 
 exports.initGame = function(sio, socket){
     io = sio;
@@ -36,7 +36,7 @@ exports.initGame = function(sio, socket){
 
 //** create game button is clicked, create game room and join*/
 function hostCreateNewGame() {
-    // console.log("thisGameID");
+    
     //create unique game room ID
     var thisGameID = (Math.random() * 100000) | 0;
     
@@ -44,7 +44,8 @@ function hostCreateNewGame() {
     this.emit('newGameCreated', {gameID: thisGameID, mySocketID: this.id});
 
     //join the room, wait for players
-    this.join(thisGameID.toString());
+    this.join(thisGameID);
+    console.log("thus many players are in the room after host joins"+io.sockets.adapter.rooms.get(thisGameID).size);
 }
 
 function hostStartGame(gameID) {
@@ -84,7 +85,7 @@ function endGame(data) {
 }
 
 function allAnswered (data) {
-    console.log(data.roundAnswers);
+    console.log('round answers: '+ data.roundAnswers);
     io.sockets.in(data.gameID).emit('loadVote', data);
 }
 
@@ -98,7 +99,7 @@ function playerAnswer(data) {
     data.timeSub = answerTimer - roundTimer;//tracks the time it took for that player to submit
     console.log('submission time: '+ data.timeSub);
 
-    io.sockets.to(data.gameID).emit('storePlayerAnswer', data);
+    io.sockets.in(data.gameID).emit('storePlayerAnswer', data);
 }
 
 //host prepare game emits the beginNewGame function in app.js, which begins the countdown. 
@@ -122,20 +123,22 @@ function votingMachine(data) {
 
 function playerJoinGame(data) {
     var sock = this;
-    //console.log(data);
+    console.log(data);
     // var room = gameSocket.rooms["/" + data.gameID];
     var room = data.gameID;
     console.log('player html input: ', data.playerName);
 
-    if(room != undefined) {
+    if(io.sockets.adapter.rooms[room]) {
         data.mySocketID = sock.id;
         sock.join(data.gameID);
         console.log("playerjoin game func");
+        console.log("thus many players are in the room after player joins"+io.sockets.adapter.rooms.get(room).size);
 
         io.sockets.in(data.gameID).emit('playerJoinedRoom', data);
-
-    } else {
-        this.emit('error',{message: "This room does not exist."} ); //error message
+        
+        } else {
+            console.log("should throw error in client");
+            io.sockets.to(sock.id).emit('error',{message: "This room does not exist."} ); //error message
     }
 
 }
@@ -143,6 +146,7 @@ function playerJoinGame(data) {
 function sendWord (gremlinData) {
     //add a game counter to iterate through songs array
     //also mayve have buttons for a thing
+    songChoice++;
     var newPhrase = songs[songChoice][gremlinData.round];
     var data = {
         gameID: gremlinData.gameID,
@@ -229,6 +233,59 @@ var songs = [
         "We're going to ______ a big one,",
         "I'm not ______",
         "What a ______ day!"
+    ],
+    [
+        "Today is a great day for ______",
+        "I woke up and ______ my friends",
+        "Maybe we'll go to the ______",
+        "But first, gotta go to the ______",
+        "Cause what would we do without ______",
+        "And some ______",
+        "For this ______ day"
+    ],
+    [
+        "You just gotta ______ the night",
+        "And let it ______",
+        "Just close your ______",
+        "Like it's the ______",
+        "Cause baby you're a ______",
+        "Come on show 'em ______",
+        "Make 'em go ______",
+        "As you shoot ______",
+        "Baby, you're a ______"
+    ],
+    [
+        "Use of ______ notes or study aids;",
+        "Allowing another party to do one's work/exam and ______ in that work/exam as one's own;",
+        "Copying coursework from another student or from a ______ source;",
+        "______ on course work when prohibited;" ,
+        "Failing to ______ by the specific written course instructions, including, but not limited to, exams, homework assignments, and syllabi;",
+        "Use of electronic devices when not ______ permitted;" , 
+        "Clicker Fraud. Using, or ______ someone else use, clicker technology improperly in an effort to receive academic credit.", 
+    ],
+
+    [
+        "Tonight's the night, let's ______ it up",
+        "I got my money, let's ______ it up (I feel-)",
+        "Go out and ______ it like oh my God",
+        "Jump off that sofa, let's ______ it off (I feel-)",
+        "I know that we'll have a ______" , 
+        "If we get down and go out and just ______ it all", 
+        "I feel ______ out, I wanna let it go",
+        "Let's go way out, ______ out, and losin' all control",
+    ],
+
+    [
+        "If love and peace is so ______",
+        "Why are there ______ of love that don't belong?",
+        "Nations ______' bombs",
+        "Chemical gases ______ lungs of little ones" ,
+        "With ongoing sufferin' as the youth ______ young" , 
+        "With this world that we livin' in? People keep on ______' in", 
+        "So I can ______ myself, really, what is going wrong",
+        "Makin' wrong ______, only visions of them dividends",
+        "Not respectin' each other, ______ thy brother",
+        "A war is goin' on, but the reason's ______",
     ],
 
 

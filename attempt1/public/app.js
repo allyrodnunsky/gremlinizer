@@ -4,7 +4,7 @@
 ; 
 jQuery(function($){    
     'use strict';
-    var playerses = 3;
+    var playerses = 2;
     var IO = {
 
         /**
@@ -14,6 +14,7 @@ jQuery(function($){
         init: function() {
             IO.socket = io.connect();
             IO.bindEvents();
+            var startTime = performance.now();
         }, 
 
         /**
@@ -54,7 +55,8 @@ jQuery(function($){
 
 
         playerJoinedRoom : function(data) {
-            //console.log('player joined room called');
+            console.log('player joined room called');
+            console.log('my role: ' + App.myRole);
             App[App.myRole].updateWaitingScreen(data);
         },
 
@@ -203,7 +205,7 @@ jQuery(function($){
                     App.Host.displayNewGameScreen();
                 }
 
-                //console.log('host update waiting screen called');
+                console.log('host update waiting screen called');
 
                 $('#playersWaiting')
                     .append('<p/>')
@@ -211,7 +213,7 @@ jQuery(function($){
 
                 //populate players[] with data
                 App.Host.players.push(data);
-                console.log('my name is: ' + data.playerName);
+                console.log('my name is: ' + data.playerName +'in gameID ' + data.gameID);
                 App.Host.numPlayersInRoom += 1;
                 //console.log('times check');
                 
@@ -222,6 +224,26 @@ jQuery(function($){
                    IO.socket.emit('hostRoomStart', App.gameID); 
                 }
             },
+
+
+            onPlayerStartGameClick : function() {
+                //console.log('host screen template game pls');
+                App.$gameArea.html(App.$templateHostScreen);
+            },
+
+
+            newRound : function (data) {
+                App.$gameArea.html(App.$templateHostScreen);
+                $('#roundPrompt').html(data.phrase);
+
+                //countdown until new round
+                var $secondsLeft = $('#hostWord');
+                App.countDown( $secondsLeft, 40, function(){
+                    IO.socket.emit('allAnswered', data); //move to vote screen
+                });
+                
+            },
+
 
             storeAnswer : function(data) {
                 //console.log('Datums');
@@ -245,28 +267,36 @@ jQuery(function($){
                 console.log(this.rounds[0].score);
                 App.Host.answerCheck();
                 
-                
                 //console.log(App.Host.gameID);
             },
 
             answerCheck : function () {
                 var numAnswers = 0;
                 var roundAnswers = [];
+                var roundPID = [];
                 console.log('answerCheck running: current round:' +App.currentRound);
                 for (let i = 0; i < App.Host.rounds.length; i++) {
                     if (App.Host.rounds[i].round == App.currentRound) {
                         roundAnswers.push(App.Host.rounds[i].answer);
+                        roundPID.push(App.Host.rounds[i].playerID);
                         numAnswers ++;
                         console.log('answerCheck: '+numAnswers+ '  i:' +i + ' numPlayersInRoom: ' + App.Host.numPlayersInRoom + ' players length:' + App.Host.players.length);
                     }
                 }
+                //triggering vote screen
+                //if all players answered
                 if (numAnswers == App.Host.numPlayersInRoom) {
                     console.log('allAnswered');
                     numAnswers = 0;
                     var data = {
                         gameID: App.gameID,
-                        roundAnswers: roundAnswers
+                        roundAnswers: roundAnswers,
+                        roundPID: roundPID
                     }
+                    IO.socket.emit('allAnswered', data);
+                }
+                //TODO: else, if time runs out (numAnswers != numPlayersInRoom)
+                else {
                     IO.socket.emit('allAnswered', data);
                 }
             },
@@ -352,17 +382,6 @@ jQuery(function($){
             },
 
 
-            onPlayerStartGameClick : function() {
-                //console.log('host screen template game pls');
-                App.$gameArea.html(App.$templateHostScreen);
-            },
-
-
-            newRound : function (data) {
-                App.$gameArea.html(App.$templateHostScreen);
-                $('#roundPrompt').html(data.phrase);
-            },
-
             endGame : function (data) {
                 var topAnswers = [];
                 var temp = [];
@@ -404,7 +423,6 @@ jQuery(function($){
                 $('#storyOutput').html($fs);
                 $('#finalLeaderBoard').html($plrs);
 
-
             },
 
             //host countdown pg
@@ -413,26 +431,11 @@ jQuery(function($){
                 // Prepare the game screen with new HTML
                 App.$gameArea.html(App.$templateHostScreen);
                 IO.socket.emit('hostStartGame', App.gameID);
+                console.log('gameCntdown ID:' + App.gameID);
+                    
+                //unnecessary TODO: display names on screen
                 //App.doTextFit('#hostWord');
 
-                // // Begin the on-screen countdown timer
-                // var $secondsLeft = $('#hostWord');
-                // App.countDown( $secondsLeft, 5, function(){
-                //     IO.socket.emit('hostCountdownFinished', App.gameID);
-                // });
-
-                // // Display the players' names on screen
-                // $('#player1Score')
-                //     .find('.playerName')
-                //     .html(App.Host.players[0].playerName);
-
-                // $('#player2Score')
-                //     .find('.playerName')
-                //     .html(App.Host.players[1].playerName);
-
-                // // Set the Score section on screen to 0 for each player.
-                // $('#player1Score').find('.score').attr('id',App.Host.players[0].mySocketId);
-                // $('#player2Score').find('.score').attr('id',App.Host.players[1].mySocketId);
             },
 
 
@@ -442,6 +445,7 @@ jQuery(function($){
             hostSocketID: '',
             myName: '',
             playerAnswer: '',
+            gameID: '',
             
 
             //click handler for on JoinClick
@@ -469,21 +473,19 @@ jQuery(function($){
                     playerID: App.mySocketID,
                     gremLett: []
                 };
-
-                console.log('waiting room click: pN' +data.playerName);
                 
-                ///console.log('playername html input: ', data.playerName);
                 //emit waiting room in this function
                 IO.socket.emit('playerJoinGame', data);
 
                 App.myRole = 'Player';
                 App.Player.myName = data.playerName;
+                
             },
 
             //update player waiting screen
             updateWaitingScreen : function(data) {
                 // console.log('io.socket.id is: ' + IO.socket.id);
-                // console.log('data.mySocketID: ' + data.mySocketID);
+                console.log('data.mySocketID: ' + data.mySocketID + 'ing Gmnae' +  data.gameID);
 
                 if(IO.socket.id === data.mySocketID){
                     //console.log('player update Waiting Screen called');
@@ -500,7 +502,8 @@ jQuery(function($){
                 }
             },
 
-            gameCountdown : function() {
+            gameCountdown : function(hostData) {
+                App.Player.hostSocketID = hostData.mySocketID;
 
                 // Prepare the game screen with new HTML
                 //eliminate all the errors :)
@@ -533,8 +536,6 @@ jQuery(function($){
                 var $ltr1 = $("#gremlinizedLTRA");
                 var $ltr2 = $("#gremlinizedLTRB");
                 
-                
-
                 //console.log($sub);
                 var answer = $sub.val(); // The tapped word
                 var l1 = $ltr1.html();
@@ -585,10 +586,12 @@ jQuery(function($){
             triggerVote (data) {
                 var $list = $('<ul/>').attr('id','ulRoundWords').addClass('setUp');
                 var roundWords = data.roundAnswers;
+                var roundPID = data.roundPID;
                 // Insert a list item for each word in the word list
                 // received from the server.
-                $.each(roundWords, function(){
-                    $list                                //  <ul> </ul>
+                $.each(roundWords, function(i, item){
+                    if (roundPID[i] != App.mySocketID) {
+                        $list                                //  <ul> </ul>
                         .append( $('<li/>')              //  <ul> <li> </li> </ul>
 
                             .append( $('<button/>')      //  <ul> <li> <button> </button> </li> </ul>
@@ -600,8 +603,9 @@ jQuery(function($){
                                 
                             )
                         )
-
                         .append('<br>')
+                    }
+                    
                 });
                 //console.log($list);
                 
@@ -637,6 +641,31 @@ jQuery(function($){
             
         },
 
+        countDown: function( $el, startTime, callback) {
+            // Display the starting time on the screen.
+            $el.text(startTime);
+
+            console.log('Starting Countdown...');
+
+            // Start a 1 second timer
+            var timer = setInterval(countItDown,1000);
+
+            // Decrement the displayed timer value on each 'tick'
+            function countItDown(){
+                startTime -= 1
+                $el.text(startTime);
+
+                if( startTime <= 0 ){
+                    // console.log('Countdown Finished.');
+
+                    // Stop the timer and do the callback.
+                    clearInterval(timer);
+                    callback();
+                    return;
+                }
+            }
+
+        }
 
     };
 
