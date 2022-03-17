@@ -63,6 +63,21 @@ ul {
     font-family: "Bungee", cursive;
     color: #f7f3e3;
   }
+
+  #leftGremlin {
+    position:absolute;
+    top: 8px;
+    left: 16px;
+    width: 350px;
+  }
+
+  #purpleGremlin {
+    position:absolute;
+    left: 0;
+    top:500px;
+    width: 310px;
+  }
+
   .buttons {
     position: relative;
     margin: auto;

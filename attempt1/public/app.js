@@ -57,6 +57,12 @@ jQuery(function($){
         playerJoinedRoom : function(data) {
             console.log('player joined room called');
             console.log('my role: ' + App.myRole);
+            //audio test
+            $('#joined').on('click', function(){
+                console.log('audio joined click');
+                $('#success').get(0).play();
+            })
+
             App[App.myRole].updateWaitingScreen(data);
         },
 

@@ -21,6 +21,7 @@
       <!-- this area is where the templates below will be used -->
     </div>
 
+    <!-- title screen -->
     <script id="title-screen-template" type="text/template">
       <div class="flexContainer">
         <h1 class="titleMain"> Gremlinizer </h1>
@@ -30,6 +31,16 @@
          <button id="btnInstructions" class="btn"> HOW TO PLAY </button>
          <div style="clear:both"></div>
        </div>
+
+       <!-- gremlins -->
+       <img src="img/gremgif4.gif" alt="blue gremlin"  id="leftGremlin"/>
+       <img src="img/gremGIF3.gif" alt="gremlin grrr"  id="purpleGremlin"/>
+  
+       <!-- audio -->
+       <!-- <audio id="audio" autoplay loop>
+        <source src="audio/gremlaugh.mp3" type="audio/mp3">
+       </audio>
+         -->
        </div>
     </script>
 
@@ -77,7 +88,11 @@
           </li>
         </ul>
           <div>
-              <button id="btnJoinWaitingRoom" class="btn">Join Room</button>
+            <!-- Audio test -->
+            <audio id="success">
+              <source src="audio/misc_menu_2.wav" type="audio/mpeg">
+            </audio>
+              <button id="btnJoinWaitingRoom" class="btn" id="joined">Join Room</button>
               <div id="joinErrorMSG"> </div>
           </div>
       </div>
