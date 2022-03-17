@@ -4,7 +4,7 @@
 var io;
 var gameSocket;
 var roundTimer;
-var songChoice = 3;
+var songChoice = 0;
 
 exports.initGame = function(sio, socket){
     io = sio;
@@ -84,7 +84,7 @@ function endGame(data) {
 }
 
 function allAnswered (data) {
-    console.log(data.roundAnswers);
+    console.log('round answers: '+ data.roundAnswers);
     io.sockets.in(data.gameID).emit('loadVote', data);
 }
 
@@ -127,15 +127,15 @@ function playerJoinGame(data) {
     var room = data.gameID;
     console.log('player html input: ', data.playerName);
 
-    if(room != undefined) {
+    if(io.sockets.adapter.rooms[room]) {
         data.mySocketID = sock.id;
         sock.join(data.gameID);
         console.log("playerjoin game func");
-
         io.sockets.in(data.gameID).emit('playerJoinedRoom', data);
-
-    } else {
-        this.emit('error',{message: "This room does not exist."} ); //error message
+        
+        } else {
+            console.log("should throw error in client");
+            io.sockets.to(sock.id).emit('error',{message: "This room does not exist."} ); //error message
     }
 
 }
@@ -143,6 +143,7 @@ function playerJoinGame(data) {
 function sendWord (gremlinData) {
     //add a game counter to iterate through songs array
     //also mayve have buttons for a thing
+    songChoice++;
     var newPhrase = songs[songChoice][gremlinData.round];
     var data = {
         gameID: gremlinData.gameID,
@@ -229,6 +230,26 @@ var songs = [
         "We're going to ______ a big one,",
         "I'm not ______",
         "What a ______ day!"
+    ],
+    [
+        "Today is a great day for ______",
+        "I woke up and ______ my friends",
+        "Maybe we'll go to the ______",
+        "But first, gotta go to the ______",
+        "Cause what would we do without ______",
+        "And some ______",
+        "For this ______ day"
+    ],
+    [
+        "You just gotta ______ the night",
+        "And let it ______",
+        "Just close your ______",
+        "Like it's the ______",
+        "Cause baby you're a ______",
+        "Come on show 'em ______",
+        "Make 'em go ______",
+        "As you shoot ______",
+        "Baby, you're a ______"
     ],
 
 
