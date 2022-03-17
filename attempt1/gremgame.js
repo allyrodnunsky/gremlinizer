@@ -126,9 +126,10 @@ function playerJoinGame(data) {
     console.log(data);
     // var room = gameSocket.rooms["/" + data.gameID];
     var room = data.gameID;
-    console.log('player html input: ', data.playerName);
+    console.log('player html input: ', data.gameID);
+    console.log('io.sockets.adapter.rooms[room]: ', io.sockets.adapter.rooms[room]);
 
-    if(io.sockets.adapter.rooms[room]) {
+    if(io.sockets.adapter.rooms.get(room)) {
         data.mySocketID = sock.id;
         sock.join(data.gameID);
         console.log("playerjoin game func");
@@ -138,7 +139,7 @@ function playerJoinGame(data) {
         
         } else {
             console.log("should throw error in client");
-            io.sockets.to(sock.id).emit('error',{message: "This room does not exist."} ); //error message
+            this.emit('error',{message: "This room does not exist."} ); //error message
     }
 
 }
