@@ -32,10 +32,8 @@ const { Server } = require("socket.io");
 const io = new Server(server, { /* options */ });
 
 
-
-
 // Listen for Socket.IO Connections. Once connected, start the game logic.
-io.on('connection', function (socket) {
+io.on('connection',  (socket) => {
     //console.log('client connected');
     grem.initGame(io, socket);
 });

@@ -28,6 +28,7 @@
        <div class ="buttons">
          <button id="btnCreateGame" class="btn"> CREATE GAME </button>
          <button id="btnJoinGame" class="btn"> JOIN GAME </button>
+         <button id="btnInstructions" class="btn"> HOW TO PLAY </button>
          <div style="clear:both"></div>
        </div>
        </div>
@@ -55,6 +56,7 @@
       
     </script>
 
+
     <!-- player screen -->
     <script id="join-game-template" type="text/template">
       <div class="setUp">
@@ -70,6 +72,7 @@
           <br>
           <div class="info">
               <button id="btnJoinWaitingRoom" class="btn">Join Room</button>
+              <div id="joinErrorMSG"> </div>
           </div>
       </div>
     </script>
@@ -85,12 +88,29 @@
       </div>
     </script>
 
+    <!-- instruction screen, player and host -->
+    <script id="instruction-screen-template" type="text/template">
+      <div class="setUp">
+        <div class="info"> Instructions ! </div>
+        <div class="info"> these are our instructions, pls dont kill the gremlin </div>
+
+        <div class="buttons"> 
+          <button id="btnTitleScreen" class="btn"> Baak to Herm Skreen</button>
+        </div>
+
+      </div>
+    </script>
+
     <!-- Round x screen (host)-->
     <script id="round-x-template" type="text/template">
       <div class="setUp">
         <div class="displayed-text">
           <h1 id="roundPrompt">Prompt will go here when _________.</h1>
         </div>
+
+        <!-- timer stuff -->
+          <div id="hostWord">60</div>
+
       </div>
     </script>
 
@@ -126,6 +146,9 @@
 
             <div id="finalLeaderBoard" class="info"></div>
           </div>
+
+          <!-- button back to home screen to play again -->
+
         </div>
       </div>
       

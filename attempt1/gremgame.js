@@ -4,7 +4,7 @@
 var io;
 var gameSocket;
 var roundTimer;
-var songChoice = 2;
+var songChoice = 0;
 
 exports.initGame = function(sio, socket){
     io = sio;
@@ -44,9 +44,8 @@ function hostCreateNewGame() {
     this.emit('newGameCreated', {gameID: thisGameID, mySocketID: this.id});
 
     //join the room, wait for players
-    this.join(thisGameID.toString());
-    console.log("thisGameID" + this.id);
-    console.log(this.rooms);
+    this.join(thisGameID);
+    console.log("thus many players are in the room after host joins"+io.sockets.adapter.rooms.get(thisGameID).size);
 }
 
 function hostStartGame(gameID) {
@@ -82,12 +81,12 @@ function endGame(data) {
         gremlins: data.gremlins,
         phrases: songs[songChoice]
     }
-    io.in(data.gameID).emit('gameOver',endData);
+    io.sockets.in(data.gameID).emit('gameOver',endData);
 }
 
 function allAnswered (data) {
-    console.log(data.roundAnswers);
-    io.in(data.gameID).emit('loadVote', data);
+    console.log('round answers: '+ data.roundAnswers);
+    io.sockets.in(data.gameID).emit('loadVote', data);
 }
 
 function playerAnswer(data) {
@@ -100,7 +99,7 @@ function playerAnswer(data) {
     data.timeSub = answerTimer - roundTimer;//tracks the time it took for that player to submit
     console.log('submission time: '+ data.timeSub);
 
-    io.in(data.gameID).emit('storePlayerAnswer', data);
+    io.sockets.in(data.gameID).emit('storePlayerAnswer', data);
 }
 
 //host prepare game emits the beginNewGame function in app.js, which begins the countdown. 
@@ -114,12 +113,12 @@ function hostPrepareGame(gameID) {
     //console.log('host prepare game called');
     
     //game starting
-    io.in(data.gameID).emit('beginNewGame', data);
+    io.sockets.in(data.gameID).emit('beginNewGame', data);
 }
 
 
 function votingMachine(data) {
-    io.in(data.gameID).emit('storeVote', data);
+    io.sockets.in(data.gameID).emit('storeVote', data);
 }
 
 function playerJoinGame(data) {
@@ -129,16 +128,17 @@ function playerJoinGame(data) {
     var room = data.gameID;
     console.log('player html input: ', data.playerName);
 
-    if(room != undefined) {
+    if(io.sockets.adapter.rooms[room]) {
         data.mySocketID = sock.id;
         sock.join(data.gameID);
         console.log("playerjoin game func");
-        console.log("thisGameID" + this.id);
-        console.log(this.rooms);
-        io.in(data.gameID).emit('playerJoinedRoom', data);
+        console.log("thus many players are in the room after player joins"+io.sockets.adapter.rooms.get(room).size);
 
-    } else {
-        this.emit('error',{message: "This room does not exist."} ); //error message
+        io.sockets.in(data.gameID).emit('playerJoinedRoom', data);
+        
+        } else {
+            console.log("should throw error in client");
+            io.sockets.to(sock.id).emit('error',{message: "This room does not exist."} ); //error message
     }
 
 }
@@ -146,6 +146,7 @@ function playerJoinGame(data) {
 function sendWord (gremlinData) {
     //add a game counter to iterate through songs array
     //also mayve have buttons for a thing
+    songChoice++;
     var newPhrase = songs[songChoice][gremlinData.round];
     var data = {
         gameID: gremlinData.gameID,
@@ -154,7 +155,7 @@ function sendWord (gremlinData) {
         phrase: newPhrase
     }
     console.log(gremlinData.gremlins +': should be gremlinized')
-    io.in(gremlinData.gameID).emit('nextRoundInit', data);
+    io.sockets.in(gremlinData.gameID).emit('nextRoundInit', data);
 }
 
 var songs = [
@@ -232,6 +233,26 @@ var songs = [
         "We're going to ______ a big one,",
         "I'm not ______",
         "What a ______ day!"
+    ],
+    [
+        "Today is a great day for ______",
+        "I woke up and ______ my friends",
+        "Maybe we'll go to the ______",
+        "But first, gotta go to the ______",
+        "Cause what would we do without ______",
+        "And some ______",
+        "For this ______ day"
+    ],
+    [
+        "You just gotta ______ the night",
+        "And let it ______",
+        "Just close your ______",
+        "Like it's the ______",
+        "Cause baby you're a ______",
+        "Come on show 'em ______",
+        "Make 'em go ______",
+        "As you shoot ______",
+        "Baby, you're a ______"
     ],
     [
         "Use of ______ notes or study aids;",
