@@ -85,11 +85,12 @@ function endGame(data) {
 }
 
 function allAnswered (data) {
-    console.log('round answers: '+ data.roundAnswers);
+    console.log('round answers: '+ data);
     io.sockets.in(data.gameID).emit('loadVote', data);
 }
 
 function playerAnswer(data) {
+    console.log('pleyers answers: '+ JSON.stringify(data));
     console.log('Player ID: ' + data.playerID + ' answered a question with: ' + data.answer);
 
     // The player's answer is attached to the data object.  \
@@ -118,6 +119,7 @@ function hostPrepareGame(gameID) {
 
 
 function votingMachine(data) {
+    console.log("storing Votes With a machine");
     io.sockets.in(data.gameID).emit('storeVote', data);
 }
 
@@ -147,7 +149,7 @@ function playerJoinGame(data) {
 function sendWord (gremlinData) {
     //add a game counter to iterate through songs array
     //also mayve have buttons for a thing
-    songChoice++;
+    //songChoice++;
     var newPhrase = songs[songChoice][gremlinData.round];
     var data = {
         gameID: gremlinData.gameID,

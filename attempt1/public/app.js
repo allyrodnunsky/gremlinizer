@@ -237,10 +237,10 @@ jQuery(function($){
                 $('#roundPrompt').html(data.phrase);
 
                 //countdown until new round
-                var $secondsLeft = $('#hostWord');
-                App.countDown( $secondsLeft, 40, function(){
-                    IO.socket.emit('allAnswered', data); //move to vote screen
-                });
+                //var $secondsLeft = $('#hostWord');
+                // App.countDown( $secondsLeft, 40, function(){
+                //     IO.socket.emit('allAnswered', data); //move to vote screen
+                // });
                 
             },
 
@@ -286,7 +286,7 @@ jQuery(function($){
                 //triggering vote screen
                 //if all players answered
                 if (numAnswers == App.Host.numPlayersInRoom) {
-                    console.log('allAnswered');
+                    console.log('allAnswered from answer check');
                     numAnswers = 0;
                     var data = {
                         gameID: App.gameID,
@@ -296,9 +296,9 @@ jQuery(function($){
                     IO.socket.emit('allAnswered', data);
                 }
                 //TODO: else, if time runs out (numAnswers != numPlayersInRoom)
-                else {
-                    IO.socket.emit('allAnswered', data);
-                }
+                // else {
+                //     IO.socket.emit('allAnswered', data);
+                // }
             },
 
             /**
@@ -307,6 +307,7 @@ jQuery(function($){
              */
 
             storeVote : function (data) {
+                console.log("storing Votes With a Host");
                 for (let i = 0; i < App.Host.rounds.length; i++) {
                     if (App.Host.rounds[i].answer == data.vote && data.round == App.currentRound && App.Host.rounds[i].round == App.currentRound) {
                         App.Host.rounds[i].votes +=1;//stores the vote from player
