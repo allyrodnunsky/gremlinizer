@@ -404,10 +404,6 @@ jQuery(function($){
                 $('#storyOutput').html($fs);
                 $('#finalLeaderBoard').html($plrs);
 
-                
-
-
-
             },
 
 
