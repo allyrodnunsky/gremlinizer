@@ -2,18 +2,17 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="main.css" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Gugi&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bungee&family=Gugi&display=swap"
       rel="stylesheet"
     />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Gremlinizer</title>
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
     <!-- <link href="styles.css" rel="stylesheet" /> -->
   </head>
 
@@ -23,9 +22,9 @@
     </div>
 
     <script id="title-screen-template" type="text/template">
-      <div class="setUp">
-       <h1> Gremlinizer </h1>
-       <div class ="buttons">
+      <div class="flexContainer">
+        <h1 class="titleMain"> Gremlinizer </h1>
+        <div class ="buttons">
          <button id="btnCreateGame" class="btn"> CREATE GAME </button>
          <button id="btnJoinGame" class="btn"> JOIN GAME </button>
          <button id="btnInstructions" class="btn"> HOW TO PLAY </button>
@@ -40,11 +39,12 @@
         &larr;
       </button>
         <div class="setUp">
+        <div class="flexContainer">
 
-          <div class="info">Open this site on your mobile device:</div>
-          <div id="gameURL" class="infoBig">Error!</div>
+          <div class="infoHost">Open this site on your mobile device:</div>
+          <div id="gameURL" class="infoBigHost">Error!</div>
 
-          <div class="info">Then click <strong>JOIN</strong> and enter the following Game ID:</div>
+          <div class="infoHost">Then click <strong>JOIN GAME</strong> and enter the following Game ID:</div>
           <div id="spanNewGameCode" class="gameID">Error!</div>
 
           <!-- <div class="start buttons">
@@ -56,7 +56,6 @@
 
           <!-- <div id="playersWaiting"></div> -->
       </div>
-      
     </script>
 
 
@@ -65,18 +64,19 @@
       <button id="btnTitleScreen" class="backBtn" >
         &larr;
       </button>
-      <div class="setUp">
-        <p class="info"> Complete information to begin game: </p>
-          <div class="info row">
-              <label for="inputPlayerName" class="inputLabels col-30">Name:</label>
-              <input id="inputPlayerName" class="inputField col-30" type="text" />
-          </div>
-          <div class="info row">
-              <label for="inputGameId" class="inputLabels col-30">Game ID:</label>
-              <input id="inputGameId" class="inputField col-30" type="text"/>
-          </div>
-          <br>
-          <div class="info">
+      <div class="flexContainer">
+        <p class="infoBigJoin"> Complete information to begin game: </p>
+       <ul>
+        <li class="row">
+              <label for="inputPlayerName" class="inputLabels">Name:</label>
+              <input id="inputPlayerName" class="inputField" type="text" />
+        </li>
+          <li class="row">
+              <label for="inputGameId" class="inputLabels">Game ID:</label>
+              <input id="inputGameId" class="inputField" type="text"/>
+          </li>
+        </ul>
+          <div>
               <button id="btnJoinWaitingRoom" class="btn">Join Room</button>
               <div id="joinErrorMSG"> </div>
           </div>
@@ -85,9 +85,8 @@
 
     <!-- player screen -->
     <script id="waiting-room-template" type="text/template">
-      <div class="setUp">
-          <div class="info"> Waiting For Players to Join... </div>
-          <div id="playerWaitingMessage" class="info"></div>
+      <div class="flexContainer">
+          <div id="playerWaitingMessage" class="infoWaiting"></div>
 
           <!-- <div class="start buttons">
             <button id="btnPlayerStartsGame" class="btn">Start Game</button> -->
@@ -109,9 +108,11 @@
 
     <!-- Round x screen (host)-->
     <script id="round-x-template" type="text/template">
-      <div class="setUp">
-        <div class="displayed-text">
-          <h1 id="roundPrompt">Prompt will go here when _________.</h1>
+      <div class="flexContainer">
+        <div class="prompt">
+          <h1 id="roundPrompt" class="promptText">
+            Prompt will go here when _________.
+          </h1>
         </div>
 
         <!-- timer stuff -->
@@ -123,41 +124,47 @@
     <!-- player response screen (player)-->
 
     <script id="round-response-template" type="text/template">
-      <div class="setUp">
-        <div class="response info">
-          <div id="roundPrompt"></div>
-          <input id="inputPlayerResponse" class="answerField" type="text" />
-        </div>
-        <div class="submitResponse">
-          <button id="btnSubmit" class="btn">Submit</button>
-          <div id = "gremBox">
-            <div id="gremlinizedMSG"></div>
-            <div id="gremlinizedLTRA" style="display: inline-block"></div><div id="spaceLetters" style="display: inline-block">&nbsp;&nbsp;&nbsp;</div><div id="gremlinizedLTRB" style="display: inline-block"></div>  
+        <div class="flexContainer">
+          <div id="gremBox" class="gremlinizedScreen">
+            <div id="gremlinizedMSG" class="gremMSG"></div>
+            <img src="../img/gremlin1.png" alt="gremlinized" class="gremlinizedImg" id ="gremlinizedImg" style="display:none"/>
+            <div class="letterGrid">
+              <div id="gremlinizedLTRA" class="gremLetter" style="display:none"></div>
+              <div id="gremlinizedLTRB"  class="gremLetter" style="display:none"></div>
+            </div>
           </div>
-          <div id="playerWaitingMessage"></div>
+          <div class="response">
+            <div id="roundPrompt"></div>
+             <input id="inputPlayerResponse" class="answerField" type="text" />
+          </div>
+          <div class="submitResponse">
+            <button id="btnSubmit" class="btn">Submit</button>
+          </div>
+          <br>
+         <div id="playerWaitingMessage" class="flexContainer"></div>
+          </div>
         </div>
       </div>
     </script>
 
     <script id="game-end-template" type="text/template">
-      <div class="setUpNoTranslate">
+      <div class="flexContainer">
         <div class="gameEndWrapper">
           <div class="finalStory">
-            <h1 class="displayed-text infoBig">Here is your final Story:</h1>
+            <h1 class="infoBigHost">Here is your final Story:</h1>
 
-            <div id="storyOutput" class="info"></div>
+            <div id="storyOutput" class="storyOutput"></div>
           </div>
           <div class="gameLeaderBoard">
-            <h1 class="displayed-text infoBig">Winners</h1>
+            <h1 class="">Winners</h1>
 
-            <div id="finalLeaderBoard" class="info"></div>
+            <div id="finalLeaderBoard" class="scores"></div>
           </div>
 
           <!-- button back to home screen to play again -->
 
         </div>
       </div>
-      
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
