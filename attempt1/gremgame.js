@@ -44,9 +44,8 @@ function hostCreateNewGame() {
     this.emit('newGameCreated', {gameID: thisGameID, mySocketID: this.id});
 
     //join the room, wait for players
-    this.join(thisGameID.toString());
-    console.log("thisGameID" + this.id);
-    console.log(this.rooms);
+    this.join(thisGameID);
+    console.log("thus many players are in the room after host joins"+io.sockets.adapter.rooms.get(thisGameID).size);
 }
 
 function hostStartGame(gameID) {
@@ -82,12 +81,12 @@ function endGame(data) {
         gremlins: data.gremlins,
         phrases: songs[songChoice]
     }
-    io.in(data.gameID).emit('gameOver',endData);
+    io.sockets.in(data.gameID).emit('gameOver',endData);
 }
 
 function allAnswered (data) {
     console.log(data.roundAnswers);
-    io.in(data.gameID).emit('loadVote', data);
+    io.sockets.in(data.gameID).emit('loadVote', data);
 }
 
 function playerAnswer(data) {
@@ -100,7 +99,7 @@ function playerAnswer(data) {
     data.timeSub = answerTimer - roundTimer;//tracks the time it took for that player to submit
     console.log('submission time: '+ data.timeSub);
 
-    io.in(data.gameID).emit('storePlayerAnswer', data);
+    io.sockets.in(data.gameID).emit('storePlayerAnswer', data);
 }
 
 //host prepare game emits the beginNewGame function in app.js, which begins the countdown. 
@@ -114,12 +113,12 @@ function hostPrepareGame(gameID) {
     //console.log('host prepare game called');
     
     //game starting
-    io.in(data.gameID).emit('beginNewGame', data);
+    io.sockets.in(data.gameID).emit('beginNewGame', data);
 }
 
 
 function votingMachine(data) {
-    io.in(data.gameID).emit('storeVote', data);
+    io.sockets.in(data.gameID).emit('storeVote', data);
 }
 
 function playerJoinGame(data) {
@@ -133,9 +132,9 @@ function playerJoinGame(data) {
         data.mySocketID = sock.id;
         sock.join(data.gameID);
         console.log("playerjoin game func");
-        console.log("thisGameID" + this.id);
-        console.log(this.rooms);
-        io.in(data.gameID).emit('playerJoinedRoom', data);
+        console.log("thus many players are in the room after player joins"+io.sockets.adapter.rooms.get(room).size);
+
+        io.sockets.in(data.gameID).emit('playerJoinedRoom', data);
 
     } else {
         this.emit('error',{message: "This room does not exist."} ); //error message
@@ -154,7 +153,7 @@ function sendWord (gremlinData) {
         phrase: newPhrase
     }
     console.log(gremlinData.gremlins +': should be gremlinized')
-    io.in(gremlinData.gameID).emit('nextRoundInit', data);
+    io.sockets.in(gremlinData.gameID).emit('nextRoundInit', data);
 }
 
 var songs = [
