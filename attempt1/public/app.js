@@ -151,6 +151,9 @@ jQuery(function($){
             //HOST
             App.$doc.on('click', '#btnCreateGame', App.Host.onCreateClick);
             App.$doc.on('click', '#btnStartGame', App.Host.onStartClick);
+            App.$doc.on('click', '#btnStartSong', App.Host.onStartClick);
+            App.$doc.on('click', '#btnStartStory', App.Host.onStartClick);
+            App.$doc.on('click', '#btnStartRecipe', App.Host.onStartClick);
 
             //PLAYER
             App.$doc.on('click', '#btnJoinGame', App.Player.onJoinClick);
@@ -194,7 +197,7 @@ jQuery(function($){
                 if(startGame){
                     //call host room start in gremgame
                     //console.log('early Num players in room' +App.Host.numPlayersInRoom)
-                    IO.socket.emit('hostRoomStart', App.gameID); 
+                    IO.socket.emit('hostRoomStart', App.gameID);//,promptChoice 
                  }
 
                 console.log('clicked start a game' + startGame);

@@ -65,6 +65,9 @@ function hostStartGame(gameID) {
         round: 0,
         gremlins: gremlins
     }
+
+    //if(promptChoice == song) etc
+    //promptArr = songs;
     //console.log('Game Started.');
     roundTimer = performance.now();
     sendWord(gremlinData);
@@ -164,6 +167,7 @@ function sendWord (gremlinData) {
     //add a game counter to iterate through songs array
     //also mayve have buttons for a thing
     //songChoice++;
+    //promptArray[]
     var newPhrase = songs[songChoice][gremlinData.round];
     var data = {
         gameID: gremlinData.gameID,
