@@ -60,6 +60,12 @@ jQuery(function($){
         playerJoinedRoom : function(data) {
             console.log('player joined room called');
             console.log('my role: ' + App.myRole);
+            //audio test
+            $('#joined').on('click', function(){
+                console.log('audio joined click');
+                $('#success').get(0).play();
+            })
+
             App[App.myRole].updateWaitingScreen(data);
         },
 
@@ -485,7 +491,21 @@ jQuery(function($){
 
             //click handler for on JoinClick
             onJoinClick: function () {
+
+                
                 App.$gameArea.html(App.$templateJoinGame);
+
+                // $('#btnJoinGame').on('click', function(){
+                //     var audio = $('#success')[0];
+                //     audio.play();
+                // });
+
+                //works but doesnt stop
+                document.getElementById('success').autoplay = false; 
+                document.getElementById('success').play();
+                var myAudio = new Audio('audio/misc_menu.wav');
+                myAudio.play;
+                myAudio.pause;
             },
 
             onInstructionClick: function () {

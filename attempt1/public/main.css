@@ -63,6 +63,21 @@ ul {
     font-family: "Bungee", cursive;
     color: #f7f3e3;
   }
+
+  #leftGremlin {
+    position:absolute;
+    top: 8px;
+    left: 16px;
+    width: 350px;
+  }
+
+  #purpleGremlin {
+    position:absolute;
+    left: 0;
+    top:500px;
+    width: 310px;
+  }
+
   .buttons {
     position: relative;
     margin: auto;
@@ -87,6 +102,18 @@ ul {
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
+  }
+
+  .backBtn {
+    text-decoration: none;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 10px;
+    background: #7cc041;
+    color: #f7f3e3;
+    font-size: 25px;
+    justify-content: left;
+    margin: 100px 200px;
   }
 
   .btn:hover {
@@ -300,6 +327,97 @@ ul {
 
 @media screen and (min-width: 501px) {
   @media screen and (max-width: 900px) {
+    .setUp {
+      font-size: 35px;
+      font-family: "Gugi", cursive;
+      color: #f7f3e3;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      justify-content: center;
+      align-items: center;
+    }
+    .buttons {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+    }
+    .btn {
+      font-family: "Gugi", cursive;
+      background: #7cc041;
+      border-radius: 19.5px;
+      border: none;
+      color: #f7f3e3;
+      min-width: 312px;
+      padding: 12px 25px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 15.5px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .backBtn {
+      text-decoration: none;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 10px;
+      background: #7cc041;
+      color: #f7f3e3;
+      font-size: 25px;
+      justify-content: left;
+      margin: 50px 70px;
+    }
+
+    .info {
+      font-family: "Gugi", cursive;
+      font-size: 23px;
+      text-align: center;
+    }
+    .infoBig {
+      font-family: "Gugi", cursive;
+      font-size: 35px;
+      text-align: center;
+    }
+    .gameID {
+      font-family: "Gugi", cursive;
+      font-size: 62px;
+      text-align: center;
+    }
+
+    .inputLabels {
+      font-family: "Gugi", cursive;
+      font-size: 15px;
+    }
+    .inputField {
+      border-radius: 19.5px;
+      border: none;
+      min-width: 171px;
+      padding: 12px 25px;
+    }
+    .col-30 {
+      float: left;
+      width: 30%;
+      margin-top: 6px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    .answerField {
+      border-radius: 19.4px;
+      border: none;
+      min-width: 311px;
+      padding: 12px 25px;
+    }
   }
 }
 
@@ -386,6 +504,18 @@ ul {
     text-transform: uppercase;
     margin-bottom: 17px;
   }
+  .backBtn {
+    text-decoration: none;
+    border: none;
+    border-radius: 60px;
+    padding: 10px 10px;
+    background: #7cc041;
+    color: #f7f3e3;
+    font-size: 17px;
+    justify-content: left;
+    margin: 20px 30px;
+  }
+  
 
   .btn:hover {
     background: #629733;

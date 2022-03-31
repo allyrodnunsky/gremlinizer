@@ -21,6 +21,7 @@
       <!-- this area is where the templates below will be used -->
     </div>
 
+    <!-- title screen -->
     <script id="title-screen-template" type="text/template">
       <div class="flexContainer">
         <h1 class="titleMain"> Gremlinizer </h1>
@@ -30,11 +31,24 @@
          <button id="btnInstructions" class="btn"> HOW TO PLAY </button>
          <div style="clear:both"></div>
        </div>
+
+       <!-- gremlins -->
+       <img src="img/gremgif4.gif" alt="blue gremlin"  id="leftGremlin"/>
+       <img src="img/gremGIF3.gif" alt="gremlin grrr"  id="purpleGremlin"/>
+  
+       <!-- audio -->
+      <audio id="audio" autoplay loop>
+        <source src="audio/gremlaugh.mp3" type="audio/mp3">
+       </audio>
        </div>
     </script>
 
     <!-- host screen -->
     <script id="create-game-template" type="text/template">
+      <button id="btnTitleScreen" class="backBtn" >
+        &larr;
+      </button>
+        <div class="setUp">
         <div class="flexContainer">
 
           <div class="infoHost">Open this site on your mobile device:</div>
@@ -58,6 +72,9 @@
 
     <!-- player screen -->
     <script id="join-game-template" type="text/template">
+      <button id="btnTitleScreen" class="backBtn" >
+        &larr;
+      </button>
       <div class="flexContainer">
         <p class="infoBigJoin"> Complete information to begin game: </p>
        <ul>
@@ -71,7 +88,11 @@
           </li>
         </ul>
           <div>
-              <button id="btnJoinWaitingRoom" class="btn">Join Room</button>
+              <button id="btnJoinWaitingRoom" class="btn" id="joined">Join Room</button>
+              <!-- Audio test -->
+              <audio id="success" src="audio/gremlaugh.mp3">
+                <!-- <source src="" type="audio/mpeg"> -->
+              </audio>
               <div id="joinErrorMSG"> </div>
           </div>
       </div>
@@ -93,7 +114,7 @@
         <div class="info"> Instructions ! </div>
         <div class="info"> these are our instructions, pls dont kill the gremlin </div>
 
-        <div class="buttons"> 
+        <div class="info"> 
           <button id="btnTitleScreen" class="btn"> Baak to Herm Skreen</button>
         </div>
 
