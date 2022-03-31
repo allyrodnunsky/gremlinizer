@@ -488,17 +488,21 @@ jQuery(function($){
 
             //click handler for on JoinClick
             onJoinClick: function () {
-                // $("#btnJoinWaitingRoom").on("click", function(){
-                //     var audio = $("#success")[0];
+
+                
+                App.$gameArea.html(App.$templateJoinGame);
+
+                // $('#btnJoinGame').on('click', function(){
+                //     var audio = $('#success')[0];
                 //     audio.play();
                 // });
-                
 
-                App.$gameArea.html(App.$templateJoinGame);
+                //works but doesnt stop
                 document.getElementById('success').autoplay = false; 
                 document.getElementById('success').play();
-                var myAudio = new Audio('audio/gremlaugh.mp3');
+                var myAudio = new Audio('audio/misc_menu.wav');
                 myAudio.play;
+                myAudio.pause;
             },
 
             onInstructionClick: function () {
