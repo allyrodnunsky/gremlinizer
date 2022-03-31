@@ -456,7 +456,17 @@ jQuery(function($){
 
             //click handler for on JoinClick
             onJoinClick: function () {
+                // $("#btnJoinWaitingRoom").on("click", function(){
+                //     var audio = $("#success")[0];
+                //     audio.play();
+                // });
+                
+
                 App.$gameArea.html(App.$templateJoinGame);
+                document.getElementById('success').autoplay = false; 
+                document.getElementById('success').play();
+                var myAudio = new Audio('audio/gremlaugh.mp3');
+                myAudio.play;
             },
 
             onInstructionClick: function () {
