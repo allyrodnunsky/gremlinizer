@@ -18,6 +18,7 @@
 
   <body>
     <div id="gameArea">
+      <audio id="success" src="audio/misc_menu.wav"></audio>
       <!-- this area is where the templates below will be used -->
     </div>
 
@@ -25,7 +26,9 @@
     <script id="title-screen-template" type="text/template">
       <div class="flexContainer">
         <h1 class="titleMain"> Gremlinizer </h1>
+        <audio id="success" src="audio/misc_menu.wav"> </audio>
         <div class ="buttons">
+          <audio id="success" src="audio/misc_menu.wav"> </audio>
          <button id="btnCreateGame" class="btn"> CREATE GAME </button>
          <button id="btnJoinGame" class="btn"> JOIN GAME </button>
          <button id="btnInstructions" class="btn"> HOW TO PLAY </button>
@@ -37,41 +40,34 @@
        <img src="img/gremGIF3.gif" alt="gremlin grrr"  id="purpleGremlin"/>
   
        <!-- audio -->
-      <audio id="audio" autoplay loop>
-        <source src="audio/gremlaugh.mp3" type="audio/mp3">
+      <audio id="laugh" autoplay>
+        <source src="audio/gremlaugh1.wav" type="audio/mp3">
        </audio>
        </div>
     </script>
 
     <!-- host screen -->
     <script id="create-game-template" type="text/template">
+      <audio id="success" src="audio/misc_menu.wav"> </audio>
       <button id="btnTitleScreen" class="backBtn" >
         &larr;
       </button>
         <div class="setUp">
         <div class="flexContainer">
-
           <div class="infoHost">Open this site on your mobile device:</div>
           <div id="gameURL" class="infoBigHost">Error!</div>
           <button id="btnStartGame" class="btn" hidden> STAHHT GAME </button>
-
+          <audio id="success" src="audio/misc_menu.wav"> </audio>
           <div class="infoHost">Then click <strong>JOIN GAME</strong> and enter the following Game ID:</div>
           <div id="spanNewGameCode" class="gameID">Error!</div>
 
-          <!-- <div class="start buttons">
-            <br>
-            <br>
-
-            <button id="btnHostStartsGame" class="btn">Start Game</button>
-          </div> -->
-
-          <!-- <div id="playersWaiting"></div> -->
       </div>
     </script>
 
 
     <!-- player screen -->
     <script id="join-game-template" type="text/template">
+      <audio id="success" src="audio/misc_menu.wav"> </audio>
       <button id="btnTitleScreen" class="backBtn" >
         &larr;
       </button>
@@ -90,7 +86,7 @@
           <div>
               <button id="btnJoinWaitingRoom" class="btn" id="joined">Join Room</button>
               <!-- Audio test -->
-              <audio id="success" src="audio/gremlaugh.mp3">
+              <audio id="success" src="audio/misc_menu.wav">
                 <!-- <source src="" type="audio/mpeg"> -->
               </audio>
               <div id="joinErrorMSG"> </div>
@@ -100,9 +96,10 @@
 
     <!-- player screen -->
     <script id="waiting-room-template" type="text/template">
+      <audio id="success" src="audio/misc_menu.wav"> </audio>
       <div class="flexContainer">
           <div id="playerWaitingMessage" class="infoWaiting"></div>
-
+          <audio id="success" src="audio/misc_menu.wav"> </audio>
           <!-- <div class="start buttons">
             <button id="btnPlayerStartsGame" class="btn">Start Game</button> -->
       </div>
@@ -110,6 +107,7 @@
 
     <!-- instruction screen, player and host -->
     <script id="instruction-screen-template" type="text/template">
+      <audio id="success" src="audio/misc_menu.wav"> </audio>
       <div class="setUp">
         <div class="info"> Instructions ! </div>
         <div class="info"> these are our instructions, pls dont kill the gremlin </div>
@@ -123,6 +121,7 @@
 
     <!-- Round x screen (host)-->
     <script id="round-x-template" type="text/template">
+      <audio id="success" src="audio/misc_menu.wav"> </audio>
       <div class="flexContainer">
         <div class="prompt">
           <h1 id="roundPrompt" class="promptText">
@@ -139,6 +138,8 @@
     <!-- player response screen (player)-->
 
     <script id="round-response-template" type="text/template">
+      <audio id="success" src="audio/misc_menu.wav"> </audio>
+      <audio id="laugh" src="audio/gremlaugh1.wav"> </audio>
         <div class="flexContainer">
           <div id="gremBox" class="gremlinizedScreen">
             <div id="gremlinizedMSG" class="gremMSG"></div>
@@ -163,6 +164,7 @@
     </script>
 
     <script id="game-end-template" type="text/template">
+      <audio id="success" src="audio/misc_menu.wav"> </audio>
       <div class="flexContainer">
         <div class="gameEndWrapper">
           <div class="finalStory">
