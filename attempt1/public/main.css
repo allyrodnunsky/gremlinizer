@@ -64,20 +64,6 @@ ul {
     color: #f7f3e3;
   }
 
-  #leftGremlin {
-    position:absolute;
-    top: 8px;
-    left: 16px;
-    width: 350px;
-  }
-
-  #purpleGremlin {
-    position:absolute;
-    left: 0;
-    top:500px;
-    width: 310px;
-  }
-
   .buttons {
     position: relative;
     margin: auto;
@@ -335,6 +321,45 @@ ul {
     text-align: left;
     line-height: 55px;
     padding: 0px 350px;
+  }
+
+  .greenGremlin1 {
+    position: absolute;
+    top: 50%;
+    left: 90px;
+    width: 310px;
+  }
+
+  .greenGremlin2 {
+    position: absolute;
+    top: 60px;
+    left: 80%;
+    width: 310px;
+  }
+
+  .purpGremlin1 {
+    position: absolute;
+    top: 60%;
+    left: 80%;
+    width: 250px;
+  }
+  .pinkGremlin1 {
+    position: absolute;
+    top: 0%;
+    left: 106px;
+    width: 250px;
+  }
+  .blueGremlin1 {
+    position: absolute;
+    top: 70%;
+    left: 20%;
+    width: 200px;
+  }
+  .blueGremlin2 {
+    position: absolute;
+    top: 70%;
+    left: 70%;
+    width: 220px;
   }
 }
 
@@ -647,6 +672,44 @@ ul {
       line-height: 55px;
       padding: 0px 350px;
     }
+    .greenGremlin1 {
+      position: absolute;
+      top: 70%;
+      left: 10%;
+      width: 30%;
+    }
+
+    .greenGremlin2 {
+      position: absolute;
+      top: 10%;
+      left: 70%;
+      width: 30%;
+    }
+
+    .purpGremlin1 {
+      position: absolute;
+      top: 60%;
+      left: 70%;
+      width: 30%;
+    }
+    .pinkGremlin1 {
+      position: absolute;
+      top: 0%;
+      left: 5%;
+      width: 30%;
+    }
+    .blueGremlin1 {
+      position: absolute;
+      top: 70%;
+      left: 20%;
+      width: 25%;
+    }
+    .blueGremlin2 {
+      position: absolute;
+      top: 80%;
+      left: 60%;
+      width: 20%;
+    }
   }
 }
 
@@ -952,6 +1015,44 @@ ul {
       line-height: 55px;
       padding: 0px 10px;
     }
+    .greenGremlin1 {
+      position: absolute;
+      top: 70%;
+      left: 10%;
+      width: 30%;
+    }
+
+    .greenGremlin2 {
+      position: absolute;
+      top: 10%;
+      left: 70%;
+      width: 30%;
+    }
+
+    .purpGremlin1 {
+      position: absolute;
+      top: 60%;
+      left: 70%;
+      width: 30%;
+    }
+    .pinkGremlin1 {
+      position: absolute;
+      top: 0%;
+      left: 5%;
+      width: 30%;
+    }
+    .blueGremlin1 {
+      position: absolute;
+      top: 70%;
+      left: 20%;
+      width: 25%;
+    }
+    .blueGremlin2 {
+      position: absolute;
+      top: 80%;
+      left: 60%;
+      width: 20%;
+    }
   }
 }
 
@@ -1256,5 +1357,43 @@ ul {
     text-align: left;
     line-height: 55px;
     padding: 0px 10px;
+  }
+  .greenGremlin1 {
+    position: absolute;
+    top: 70%;
+    left: 10%;
+    width: 30%;
+  }
+
+  .greenGremlin2 {
+    position: absolute;
+    top: 10%;
+    left: 70%;
+    width: 30%;
+  }
+
+  .purpGremlin1 {
+    position: absolute;
+    top: 60%;
+    left: 70%;
+    width: 30%;
+  }
+  .pinkGremlin1 {
+    position: absolute;
+    top: 0%;
+    left: 5%;
+    width: 30%;
+  }
+  .blueGremlin1 {
+    position: absolute;
+    top: 70%;
+    left: 20%;
+    width: 25%;
+  }
+  .blueGremlin2 {
+    position: absolute;
+    top: 80%;
+    left: 60%;
+    width: 20%;
   }
 }
