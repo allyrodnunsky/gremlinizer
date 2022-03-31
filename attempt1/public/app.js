@@ -346,7 +346,7 @@ jQuery(function($){
                         console.log('numpvoted: '+App.Host.numPlayersVoted);
                     }
                 }
-                if (App.Host.numPlayersVoted == App.Host.numPlayersInRoom) {
+                if (App.Host.numPlayersVoted >= App.Host.numPlayersInRoom) {
                     console.log('score+gremlinizing!');
                     var gremlins = [];
                     var maxVotes = 0;
