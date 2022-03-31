@@ -45,11 +45,12 @@
 
     <!-- host screen -->
     <script id="create-game-template" type="text/template">
-      <button id="btnTitleScreen" class="backBtn" >
-        &larr;
-      </button>
-        <div class="setUp">
+
+        <div class="setUp">   <button id="btnTitleScreen" class="backBtn" >
+            &larr;
+          </button>
         <div class="flexContainer">
+
 
           <div class="infoHost">Open this site on your mobile device:</div>
           <div id="gameURL" class="infoBigHost">Error!</div>
@@ -68,7 +69,6 @@
           <!-- <div id="playersWaiting"></div> -->
       </div>
     </script>
-
 
     <!-- player screen -->
     <script id="join-game-template" type="text/template">
@@ -110,15 +110,16 @@
 
     <!-- instruction screen, player and host -->
     <script id="instruction-screen-template" type="text/template">
+      <button id="btnTitleScreen" class="backBtn" >
+        &larr;
+      </button>
       <div class="setUp">
-        <div class="info"> Instructions ! </div>
-        <div class="info"> these are our instructions, pls dont kill the gremlin </div>
+        <div class="flexContainer">
+        <div class="infoInstructionsBig"> HOW TO PLAY! </div>
+        <br>
+        <div class="infoInstructions"> these are our instructions, pls dont kill the gremlin </div>
 
-        <div class="info"> 
-          <button id="btnTitleScreen" class="btn"> Baak to Herm Skreen</button>
-        </div>
-
-      </div>
+      </div></div>
     </script>
 
     <!-- Round x screen (host)-->

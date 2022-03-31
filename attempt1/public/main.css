@@ -37,7 +37,7 @@ ul {
     border-radius: 23px;
   }
   .flexContainer {
-    padding-top: 5%;
+    /* padding-top: 5%; */
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -94,7 +94,7 @@ ul {
     border-radius: 25px;
     border: none;
     color: #f7f3e3;
-    min-width: 400px;
+    min-width: 200%;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -113,7 +113,7 @@ ul {
     color: #f7f3e3;
     font-size: 25px;
     justify-content: left;
-    margin: 100px 200px;
+    margin: 100px 0px 0px 200px;
   }
 
   .btn:hover {
@@ -159,7 +159,7 @@ ul {
   }
   .infoHost {
     color: #f7f3e3;
-    padding-top: 5%;
+    /* padding-top: 5%; */
     font-family: "Bungee", cursive;
     font-size: 25px;
     text-align: center;
@@ -184,9 +184,29 @@ ul {
     text-align: center;
   }
 
+  .infoInstructions {
+    color: #f7f3e3;
+    /* padding-top: 5%; */
+    font-family: "Bungee", cursive;
+    font-size: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+  }
+  .infoInstructionsBig {
+    color: #f7f3e3;
+    font-family: "Bungee", cursive;
+    font-size: 45px;
+    text-align: center;
+  }
+
   .infoWaiting {
     color: #f7f3e3;
-    padding-top: 5%;
+    padding: 5% 5% 0% 5%;
     font-family: "Bungee", cursive;
     font-size: 45px;
     text-align: center;
@@ -325,41 +345,73 @@ ul {
 ***********************************************
  */
 
-@media screen and (min-width: 501px) {
+@media screen and (min-width: 601px) {
   @media screen and (max-width: 900px) {
-    .setUp {
-      font-size: 35px;
+    strong {
       font-family: "Gugi", cursive;
-      color: #f7f3e3;
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      justify-content: center;
+      color: #7cc041;
+      margin: 32px 32px;
+      padding: 10px 50px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 40px;
+      justify-content: space-evenly;
       align-items: center;
+      background-color: #f7f3e3;
+      opacity: 0.8;
+      border-radius: 23px;
+    }
+    .flexContainer {
+      /* padding-top: 5%; */
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+    .setUp {
+      font-size: 45px;
+      font-family: "Bungee", cursive;
+      color: #f7f3e3;
+    }
+
+    .titleMain {
+      padding-top: 5%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+      font-size: 60px;
+      font-family: "Bungee", cursive;
+      color: #f7f3e3;
     }
     .buttons {
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, 50%);
-      justify-content: center;
-      align-items: center;
+      position: relative;
       margin: auto;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
     }
     .btn {
       font-family: "Gugi", cursive;
       background: #7cc041;
-      border-radius: 19.5px;
+      border-radius: 25px;
       border: none;
       color: #f7f3e3;
-      min-width: 312px;
-      padding: 12px 25px;
+      min-width: 200%;
+      padding: 15px 32px;
       text-align: center;
       text-decoration: none;
-      font-size: 15.5px;
+      font-size: 20px;
       justify-content: center;
       align-items: center;
+      text-transform: uppercase;
     }
 
     .backBtn {
@@ -371,52 +423,229 @@ ul {
       color: #f7f3e3;
       font-size: 25px;
       justify-content: left;
-      margin: 50px 70px;
+      margin: 40px 0px 0px 40px;
     }
 
-    .info {
+    .btn:hover {
+      background: #629733;
+      cursor: pointer;
+    }
+
+    .btnVote {
       font-family: "Gugi", cursive;
-      font-size: 23px;
+      background: #239bcf;
+      border-radius: 25px;
+      border: none;
+      color: #f7f3e3;
+      min-width: 400px;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 20px;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+    }
+
+    .btnVote:hover {
+      background: #1c7ba4;
+      cursor: pointer;
+    }
+    .prompt {
+      background-color: #f7f3e3;
+      opacity: 0.8;
+      color: #1b3022;
+      border-radius: 54px;
+      padding: 250px 50px;
+      margin: 50px 50px 50px 50px;
+    }
+
+    .promptText {
+      font-family: "Bungee", cursive;
+      text-transform: capitalize;
+      font-size: 76px;
+      color: #1b3022;
+      padding: 50px 10px;
+    }
+    .infoHost {
+      color: #f7f3e3;
+      padding: 2% 5% 0% 5%;
+      font-family: "Bungee", cursive;
+      font-size: 25px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+    .infoBigHost {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 45px;
       text-align: center;
     }
-    .infoBig {
-      font-family: "Gugi", cursive;
-      font-size: 35px;
+
+    .infoBigJoin {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 30px;
       text-align: center;
     }
+
+    .infoInstructions {
+      padding: 2% 5% 0% 5%;
+      color: #f7f3e3;
+      /* padding-top: 5%; */
+      font-family: "Bungee", cursive;
+      font-size: 25px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+    .infoInstructionsBig {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 45px;
+      text-align: center;
+    }
+
+    .infoWaiting {
+      color: #f7f3e3;
+      padding: 5% 5% 0% 5%;
+      font-family: "Bungee", cursive;
+      font-size: 45px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+
     .gameID {
-      font-family: "Gugi", cursive;
-      font-size: 62px;
+      font-family: "Bungee", cursive;
+      font-size: 80px;
       text-align: center;
+      color: #f7f3e3;
     }
 
     .inputLabels {
       font-family: "Gugi", cursive;
-      font-size: 15px;
+      font-size: 25px;
+      color: #f7f3e3;
     }
     .inputField {
-      border-radius: 19.5px;
+      border-radius: 17px;
       border: none;
-      min-width: 171px;
-      padding: 12px 25px;
+      min-width: 300px;
+      padding: 15px 32px;
+      align-items: flex-end;
+      background: #f7f3e3;
+      box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
+      font-size: large;
     }
-    .col-30 {
-      float: left;
-      width: 30%;
-      margin-top: 6px;
+    .row {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0.5em;
+    }
+    .row > label {
+      padding: 0.5em 1em 0.5em 0;
+      flex: 1;
+    }
+    .row > input {
+      flex: 2;
     }
 
-    /* Clear floats after the columns */
-    .row:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
     .answerField {
-      border-radius: 19.4px;
+      border-radius: 17px;
       border: none;
-      min-width: 311px;
-      padding: 12px 25px;
+      min-width: 500px;
+      padding: 15px 32px;
+      align-items: flex-end;
+      background: #f7f3e3;
+      box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
+      font-size: large;
+    }
+    .gremlinizedScreen {
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+    }
+    .gremMSG {
+      font-size: 25px;
+      /* position: absolute; */
+      font-family: "Bungee", cursive;
+      color: #f7f3e3;
+      text-align: center;
+      text-decoration: none;
+      padding: 15px 32px;
+      justify-content: center;
+      align-items: center;
+    }
+    .gremLetter {
+      display: inline-block;
+      font-size: 35px;
+      font-family: "Bungee", cursive;
+      color: #f7f3e3;
+      background: #8f56a3;
+      border-radius: 18px;
+      text-align: center;
+      text-decoration: none;
+      padding: 15px 32px;
+      justify-content: center;
+      align-items: center;
+    }
+    .gremlinizedImg {
+      display: inline-block;
+      width: 15%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .letterGrid {
+      width: 100%;
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    .gameEndWrapper {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 25px;
+      text-align: center;
+    }
+
+    .storyOutput {
+      font-family: "Bungee", cursive;
+      text-transform: uppercase;
+      text-align: left;
+      font-size: 30px;
+      background-color: #f7f3e3;
+      opacity: 0.8;
+      color: #1b3022;
+      border-radius: 54px;
+      padding: 20px 100px;
+      line-height: 60px;
+    }
+    .gameLeaderBoard {
+      padding-bottom: 100px;
+    }
+    .scores {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 25px;
+      text-align: left;
+      line-height: 55px;
+      padding: 0px 350px;
     }
   }
 }
@@ -428,7 +657,312 @@ ul {
 ***********************************************
  */
 
-@media screen and (max-width: 500px) {
+@media screen and (min-width: 401px) {
+  @media screen and (max-width: 600px) {
+    strong {
+      font-family: "Gugi", cursive;
+      color: #7cc041;
+      margin: 10px 10px;
+      padding: 10px 50px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 20px;
+      justify-content: space-evenly;
+      align-items: center;
+      background-color: #f7f3e3;
+      opacity: 0.8;
+      border-radius: 12px;
+    }
+    .flexContainer {
+      padding: 0% 3% 0 3%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+
+    .setUp {
+      /* padding-top: 25%; */
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+      font-size: 45px;
+      font-family: "Bungee", cursive;
+      color: #f7f3e3;
+    }
+
+    .titleMain {
+      padding-top: 25%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+      font-size: 45px;
+      font-family: "Bungee", cursive;
+      color: #f7f3e3;
+    }
+    .buttons {
+      position: relative;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+    .btn {
+      font-family: "Gugi", cursive;
+      background: #7cc041;
+      border-radius: 25px;
+      border: none;
+      color: #f7f3e3;
+      min-width: 280px;
+      padding: 20px 32px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 25px;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+      margin-bottom: 17px;
+    }
+    .backBtn {
+      text-decoration: none;
+      border: none;
+      border-radius: 60px;
+      padding: 10px 10px;
+      background: #7cc041;
+      color: #f7f3e3;
+      font-size: 17px;
+      justify-content: left;
+      margin: 20px 30px;
+    }
+
+    .btn:hover {
+      background: #629733;
+      cursor: pointer;
+    }
+
+    .btnVote {
+      font-family: "Gugi", cursive;
+      background: #239bcf;
+      border-radius: 25px;
+      border: none;
+      color: #f7f3e3;
+      min-width: 280px;
+      padding: 20px 32px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 25px;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+    }
+
+    .btnVote:hover {
+      background: #1c7ba4;
+      cursor: pointer;
+    }
+    .prompt {
+      background-color: #f7f3e3;
+      opacity: 0.8;
+      color: #1b3022;
+      border-radius: 54px;
+      padding: 50px 10px;
+      margin: 40px 40px 40px 40px;
+    }
+
+    .promptText {
+      font-family: "Bungee", cursive;
+      text-transform: capitalize;
+      font-size: 30px;
+      color: #1b3022;
+      padding: 50px 10px;
+    }
+    .infoHost {
+      color: #f7f3e3;
+      padding-top: 15%;
+      font-family: "Bungee", cursive;
+      font-size: 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+    .infoBigHost {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 30px;
+      text-align: center;
+    }
+
+    .infoBigJoin {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 35px;
+      text-align: center;
+    }
+
+    .infoInstructions {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+    .infoInstructionsBig {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 30px;
+      text-align: center;
+    }
+
+    .infoWaiting {
+      color: #f7f3e3;
+      padding: 5% 5% 0% 5%;
+      font-family: "Bungee", cursive;
+      font-size: 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+
+    .gameID {
+      font-family: "Bungee", cursive;
+      font-size: 45px;
+      text-align: center;
+      color: #f7f3e3;
+    }
+
+    .inputLabels {
+      font-family: "Gugi", cursive;
+      font-size: 24px;
+      color: #f7f3e3;
+    }
+    .inputField {
+      font-size: 16px;
+      border-radius: 17px;
+      border: none;
+      min-width: 300px;
+      padding: 20px 16px;
+      align-items: flex-end;
+      background: #f7f3e3;
+      box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
+    }
+
+    .answerField {
+      border-radius: 17px;
+      border: none;
+      min-width: 300px;
+      padding: 15px 32px;
+      align-items: flex-end;
+      background: #f7f3e3;
+      box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
+      font-size: large;
+    }
+    .gremlinizedScreen {
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+    }
+    .gremMSG {
+      font-size: 25px;
+      /* position: absolute; */
+      font-family: "Bungee", cursive;
+      color: #f7f3e3;
+      text-align: center;
+      text-decoration: none;
+      padding: 15px 32px;
+      justify-content: center;
+      align-items: center;
+    }
+    .gremLetter {
+      display: inline-block;
+      font-size: 35px;
+      font-family: "Bungee", cursive;
+      color: #f7f3e3;
+      background: #8f56a3;
+      border-radius: 18px;
+      text-align: center;
+      text-decoration: none;
+      padding: 15px 32px;
+      justify-content: center;
+      align-items: center;
+    }
+    .gremlinizedImg {
+      display: inline-block;
+      width: 45%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .letterGrid {
+      width: 100%;
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    .gameEndWrapper {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 25px;
+      text-align: center;
+    }
+
+    .storyOutput {
+      font-family: "Bungee", cursive;
+      text-transform: uppercase;
+      text-align: left;
+      font-size: 14px;
+      background-color: #f7f3e3;
+      opacity: 0.8;
+      color: #1b3022;
+      border-radius: 54px;
+      padding: 30px 50px;
+      line-height: 20px;
+    }
+    .gameLeaderBoard {
+      padding-bottom: 100px;
+    }
+    .scores {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 15px;
+      text-align: left;
+      line-height: 55px;
+      padding: 0px 10px;
+    }
+  }
+}
+
+/***********************************************
+
+**************** x-small screen*****************
+
+***********************************************
+ */
+
+@media screen and (max-width: 400px) {
   strong {
     font-family: "Gugi", cursive;
     color: #7cc041;
@@ -436,7 +970,7 @@ ul {
     padding: 10px 50px;
     text-align: center;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 17px;
     justify-content: space-evenly;
     align-items: center;
     background-color: #f7f3e3;
@@ -444,7 +978,7 @@ ul {
     border-radius: 12px;
   }
   .flexContainer {
-    padding: 25% 3% 0 3%;
+    padding: 0% 3% 0 3%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -454,8 +988,7 @@ ul {
   }
 
   .setUp {
-    padding-top: 25%;
-    display: flex;
+    /* padding-top: 25%; */
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -474,7 +1007,7 @@ ul {
     justify-content: space-evenly;
     align-items: center;
     align-content: space-evenly;
-    font-size: 45px;
+    font-size: 30px;
     font-family: "Bungee", cursive;
     color: #f7f3e3;
   }
@@ -494,15 +1027,15 @@ ul {
     border-radius: 25px;
     border: none;
     color: #f7f3e3;
-    min-width: 280px;
-    padding: 20px 32px;
+    min-width: 180px;
+    padding: 10px 32px;
     text-align: center;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 15px;
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
-    margin-bottom: 17px;
+    margin-bottom: 10px;
   }
   .backBtn {
     text-decoration: none;
@@ -511,11 +1044,10 @@ ul {
     padding: 10px 10px;
     background: #7cc041;
     color: #f7f3e3;
-    font-size: 17px;
+    font-size: 12px;
     justify-content: left;
     margin: 20px 30px;
   }
-  
 
   .btn:hover {
     background: #629733;
@@ -548,21 +1080,21 @@ ul {
     color: #1b3022;
     border-radius: 54px;
     padding: 50px 10px;
-    margin: 0px 40px 40px 40px;
+    margin: 40px 40px 40px 40px;
   }
 
   .promptText {
     font-family: "Bungee", cursive;
     text-transform: capitalize;
-    font-size: 48px;
+    font-size: 25px;
     color: #1b3022;
     padding: 50px 10px;
   }
   .infoHost {
     color: #f7f3e3;
-    padding-top: 25%;
+    padding: 2% 5% 0% 5%;
     font-family: "Bungee", cursive;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -574,20 +1106,40 @@ ul {
   .infoBigHost {
     color: #f7f3e3;
     font-family: "Bungee", cursive;
-    font-size: 30px;
+    font-size: 25px;
     text-align: center;
   }
 
   .infoBigJoin {
     color: #f7f3e3;
     font-family: "Bungee", cursive;
-    font-size: 35px;
+    font-size: 25px;
+    text-align: center;
+  }
+
+  .infoInstructions {
+    color: #f7f3e3;
+    font-family: "Bungee", cursive;
+    font-size: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+  }
+  .infoInstructionsBig {
+    color: #f7f3e3;
+    padding: 2% 5% 0% 5%;
+    font-family: "Bungee", cursive;
+    font-size: 30px;
     text-align: center;
   }
 
   .infoWaiting {
     color: #f7f3e3;
-    padding-top: 5%;
+    padding: 5% 5% 0% 5%;
     font-family: "Bungee", cursive;
     font-size: 30px;
     text-align: center;
@@ -608,37 +1160,25 @@ ul {
 
   .inputLabels {
     font-family: "Gugi", cursive;
-    font-size: 24px;
+    font-size: 16px;
     color: #f7f3e3;
   }
   .inputField {
     font-size: 16px;
     border-radius: 17px;
     border: none;
-    min-width: 300px;
-    padding: 20px 16px;
+    min-width: 100px;
+    padding: 10px 16px;
     align-items: flex-end;
     background: #f7f3e3;
     box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
   }
-  /* .row {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0.2em;
-  }
-  .row > label {
-    padding: 0.2em 0.5em 0.2em 0;
-    flex: 1;
-  }
-  .row > input {
-    flex: 2;
-  } */
 
   .answerField {
     border-radius: 17px;
     border: none;
-    min-width: 300px;
-    padding: 15px 32px;
+    min-width: 100px;
+    padding: 10px 16px;
     align-items: flex-end;
     background: #f7f3e3;
     box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
