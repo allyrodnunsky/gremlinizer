@@ -68,8 +68,16 @@ jQuery(function($){
             
             //console.log('my role: ' + App.myRole);
             App.Host.numPlayersInRoom = data.numPlayer -1;
-            console.log('player playersUpdated' + App.Host.numPlayersInRoom);
+            console.log('player playersUpdated: ' + App.Host.numPlayersInRoom);
             //playerses = data.numPlayer;
+
+            var dataIn = {
+                gameID: App.gameID,
+                vote: '',
+                round: -1
+            }
+            App.Host.storeVote(dataIn);
+
         },
 
 
@@ -152,7 +160,10 @@ jQuery(function($){
         bindEvents: function () {
             //HOST
             App.$doc.on('click', '#btnCreateGame', App.Host.onCreateClick);
-            App.$doc.on('click', '#btnStartGame', App.Host.onStartClick);
+            //App.$doc.on('click', '#btnStartGame', App.Host.onStartClick);
+            App.$doc.on('click', '#btnStartSong', App.Host.onStartClick);
+            App.$doc.on('click', '#btnStartStory', App.Host.onStartClick);
+            App.$doc.on('click', '#btnStartRecipe', App.Host.onStartClick);
 
             //PLAYER
             App.$doc.on('click', '#btnJoinGame', App.Player.onJoinClick);
@@ -197,6 +208,9 @@ jQuery(function($){
             onStartClick: function () {
                 console.log('clicked start a game' + startGame);
                 //console.log(IO);
+                var $btn = $(this);
+                var promptChoice = $btn.html();
+                console.log('button prompt is ' + promptChoice);
 
                 startGame = true;
                 if(startGame){
@@ -205,8 +219,7 @@ jQuery(function($){
                     buttonClick.play;
                     //call host room start in gremgame
                     //console.log('early Num players in room' +App.Host.numPlayersInRoom)
-                    IO.socket.emit('hostRoomStart', App.gameID); 
-
+                    IO.socket.emit('hostRoomStart', App.gameID, promptChoice);//,promptChoice 
                  }
 
                 console.log('clicked start a game' + startGame);
@@ -270,8 +283,13 @@ jQuery(function($){
                 //console.log('times check');
                 if (App.Host.numPlayersInRoom >= 2) {
                     console.log("App.Host.numPlayersInRoom is greater 2");
-                    $('#btnStartGame')
+                    $('#btnStartSong')
                         .removeAttr('hidden');
+                    $('#btnStartStory')
+                        .removeAttr('hidden');
+                    $('#btnStartRecipe')
+                        .removeAttr('hidden');
+                    
                 }
                 
                 //show start button once correct num of players entered room
@@ -372,7 +390,7 @@ jQuery(function($){
                         console.log('numpvoted: '+App.Host.numPlayersVoted);
                     }
                 }
-                if (App.Host.numPlayersVoted == App.Host.numPlayersInRoom) {
+                if (App.Host.numPlayersVoted >= App.Host.numPlayersInRoom) {
                     console.log('score+gremlinizing!');
                     var gremlins = [];
                     var maxVotes = 0;
@@ -693,7 +711,7 @@ jQuery(function($){
                         timeSub: timeSub
                     }
                     //console.log('myRole1'+App.myRole);
-                    $('#gameArea').html('<div class="flexContainer setUp"> Wait For Other Players Submissions </div>');
+                    $('#gameArea').html('<div class="flexContainer setUp infoWaiting"> Wait For Other Players Submissions </div>');
                     //console.log("sazaahhh");
                     IO.socket.emit('playerAnswer',data);
                 }
