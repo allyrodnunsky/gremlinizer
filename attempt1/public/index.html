@@ -52,7 +52,6 @@
       <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
       <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
       <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
-      <img src="img/PinkGremGIF1.gif" alt="gremlin grrr"  class="pinkGremlin1"/>
       <img src="img/blueGremGIF1.gif" alt="gremlin grrr" class="blueGremlin1"/>
       <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
 
@@ -86,7 +85,6 @@
       <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
       <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
       <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
-      <img src="img/PinkGremGIF1.gif" alt="gremlin grrr"  class="pinkGremlin1"/>
       <img src="img/blueGremGIF1.gif" alt="gremlin grrr" class="blueGremlin1"/>
       <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
 
@@ -138,7 +136,6 @@
       <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
       <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
       <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
-      <img src="img/PinkGremGIF1.gif" alt="gremlin grrr"  class="pinkGremlin1"/>
       <img src="img/blueGremGIF1.gif" alt="gremlin grrr" class="blueGremlin1"/>
       <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
 
@@ -156,12 +153,6 @@
 
     <!-- Round x screen (host)-->
     <script id="round-x-template" type="text/template">
-      <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
-      <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
-      <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
-      <img src="img/PinkGremGIF1.gif" alt="gremlin grrr"  class="pinkGremlin1"/>
-      <img src="img/blueGremGIF1.gif" alt="gremlin grrr" class="blueGremlin1"/>
-      <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
 
       <div class="flexContainer">
         <div class="prompt">
@@ -186,20 +177,19 @@
             <div class="letterGrid">
               <div id="gremlinizedLTRA" class="gremLetter" style="display:none"></div>
               <div id="gremlinizedLTRB"  class="gremLetter" style="display:none"></div>
-            </div>
+
           </div>
           <div class="response">
-            <div id="roundPrompt"></div>
+            <div id="roundPrompt">
              <input id="inputPlayerResponse" class="answerField" type="text" />
-          </div>
-          <div class="submitResponse">
-            <button id="btnSubmit" class="btn">Submit</button>
-          </div>
+            <div>
+             <button id="btnSubmit" class="submitBtn">Submit</button>
+            </div>
+      </div>
+
           <br>
          <div id="playerWaitingMessage" class="flexContainer"></div>
           </div>
-        </div>
-      </div>
     </script>
 
     <script id="game-end-template" type="text/template">
