@@ -13,7 +13,9 @@
 var io;
 var gameSocket;
 var roundTimer;
-var songChoice = 0;
+var indexChoice = 0;
+var activeRooms = [];
+var promptArr = [];
 
 exports.initGame = function(sio, socket){
     io = sio;
@@ -39,6 +41,16 @@ exports.initGame = function(sio, socket){
     //gameSocket.on('stolenLetters', player);
     gameSocket.on('playerAnswer', playerAnswer);
 
+    gameSocket.on('disconnect', function() {
+        console.log('Got disconnect!');
+        
+        for (let i = 0; i < activeRooms.length; i++) {
+            if (io.sockets.adapter.rooms.get(activeRooms[i])) {
+                io.sockets.in(activeRooms[i]).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(activeRooms[i]).size} );
+            }
+        }
+    });
+
 
 }
 
@@ -48,6 +60,9 @@ function hostCreateNewGame() {
     
     //create unique game room ID
     var thisGameID = (Math.random() * 100000) | 0;
+
+
+    activeRooms.push(thisGameID);
     
     //return game room ID and socket ID to browser client
     this.emit('newGameCreated', {gameID: thisGameID, mySocketID: this.id});
@@ -75,7 +90,7 @@ function hostStartGame(gameID) {
 
 function hostNextRound(data) {
     console.log('hostNextRound!');
-    if(data.round < songs[songChoice].length){
+    if(data.round < promptArr[indexChoice].length){
         // console.log(data.gremlins[0]);
         // new phrase to host, players get submit screen
         roundTimer = performance.now();//starts the round timer to track how long each player takes to answer
@@ -91,7 +106,7 @@ function endGame(data) {
         gameID: data.gameID,
         round: 5,
         gremlins: data.gremlins,
-        phrases: songs[songChoice]
+        phrases: promptArr[indexChoice]
     }
     io.sockets.in(data.gameID).emit('gameOver',endData);
 }
@@ -119,13 +134,27 @@ function playerAnswer(data) {
 
 //host prepare game emits the beginNewGame function in app.js, which begins the countdown. 
 // we dont want a countdown so we need to figure that out
-function hostPrepareGame(gameID) {
+function hostPrepareGame(gameID,promptChoice) {//promptChoice
     var sock = this;
     var data = {
         mySocketID : sock.id,
         gameID : gameID
     };
-    //console.log('host prepare game called');
+    console.log('prompt chpoice is: ' + promptChoice);
+ 
+    if (promptChoice == 'Song') {
+        promptArr = songs;
+    }
+    if (promptChoice == 'Story') {
+        promptArr = songs;
+    }
+    if (promptChoice == 'Recipe') {
+        promptArr = songs;
+    }
+    
+    indexChoice = Math.floor(Math.random() * promptArr.length);
+    console.log('Index choice is: '+ indexChoice);
+    console.log('first prompt arr choice is: '+ promptArr[0][1]);
     
     //game starting
     io.sockets.in(data.gameID).emit('beginNewGame', data);
@@ -166,9 +195,9 @@ function playerJoinGame(data) {
 function sendWord (gremlinData) {
     //add a game counter to iterate through songs array
     //also mayve have buttons for a thing
-    //songChoice++;
+    //indexChoice++;
     //promptArray[]
-    var newPhrase = songs[songChoice][gremlinData.round];
+    var newPhrase = promptArr[indexChoice][gremlinData.round];
     var data = {
         gameID: gremlinData.gameID,
         round: gremlinData.round,
