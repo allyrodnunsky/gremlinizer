@@ -23,6 +23,13 @@
 
     <!-- title screen -->
     <script id="title-screen-template" type="text/template">
+             <!-- gremlins -->
+             <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
+             <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
+             <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
+             <img src="img/PinkGremGIF1.gif" alt="gremlin grrr"  class="pinkGremlin1"/>
+             <img src="img/blueGremGIF1.gif" alt="gremlin grrr" class="blueGremlin1"/>
+             <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
       <div class="flexContainer">
         <h1 class="titleMain"> Gremlinizer </h1>
         <div class ="buttons">
@@ -32,10 +39,7 @@
          <div style="clear:both"></div>
        </div>
 
-       <!-- gremlins -->
-       <img src="img/gremgif4.gif" alt="blue gremlin"  id="leftGremlin"/>
-       <img src="img/gremGIF3.gif" alt="gremlin grrr"  id="purpleGremlin"/>
-  
+
        <!-- audio -->
       <audio id="audio" autoplay loop>
         <source src="audio/gremlaugh.mp3" type="audio/mp3">
@@ -45,11 +49,17 @@
 
     <!-- host screen -->
     <script id="create-game-template" type="text/template">
-      <button id="btnTitleScreen" class="backBtn" >
-        &larr;
-      </button>
-        <div class="setUp">
+      <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
+      <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
+      <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
+      <img src="img/blueGremGIF1.gif" alt="gremlin grrr" class="blueGremlin1"/>
+      <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
+
+        <div class="setUp">   <button id="btnTitleScreen" class="backBtn" >
+            &larr;
+          </button>
         <div class="flexContainer">
+
 
           <div class="infoHost">Open this site on your mobile device:</div>
           <div id="gameURL" class="infoBigHost">Error!</div>
@@ -68,12 +78,18 @@
           </div> -->
 
           <!-- <div id="playersWaiting"></div> -->
+
       </div>
     </script>
 
-
     <!-- player screen -->
     <script id="join-game-template" type="text/template">
+      <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
+      <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
+      <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
+      <img src="img/blueGremGIF1.gif" alt="gremlin grrr" class="blueGremlin1"/>
+      <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
+
       <button id="btnTitleScreen" class="backBtn" >
         &larr;
       </button>
@@ -102,6 +118,13 @@
 
     <!-- player screen -->
     <script id="waiting-room-template" type="text/template">
+      <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
+      <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
+      <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
+      <img src="img/PinkGremGIF1.gif" alt="gremlin grrr"  class="pinkGremlin1"/>
+      <img src="img/blueGremGIF1.gif" alt="gremlin grrr" class="blueGremlin1"/>
+      <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
+
       <div class="flexContainer">
           <div id="playerWaitingMessage" class="infoWaiting"></div>
 
@@ -112,19 +135,27 @@
 
     <!-- instruction screen, player and host -->
     <script id="instruction-screen-template" type="text/template">
+      <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
+      <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
+      <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
+      <img src="img/blueGremGIF1.gif" alt="gremlin grrr" class="blueGremlin1"/>
+      <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
+
+      <button id="btnTitleScreen" class="backBtn" >
+        &larr;
+      </button>
       <div class="setUp">
-        <div class="info"> Instructions ! </div>
-        <div class="info"> these are our instructions, pls dont kill the gremlin </div>
+        <div class="flexContainer">
+        <div class="infoInstructionsBig"> HOW TO PLAY! </div>
+        <br>
+        <div class="infoInstructions"> these are our instructions, pls dont kill the gremlin </div>
 
-        <div class="info"> 
-          <button id="btnTitleScreen" class="btn"> Baak to Herm Skreen</button>
-        </div>
-
-      </div>
+      </div></div>
     </script>
 
     <!-- Round x screen (host)-->
     <script id="round-x-template" type="text/template">
+
       <div class="flexContainer">
         <div class="prompt">
           <h1 id="roundPrompt" class="promptText">
@@ -148,23 +179,29 @@
             <div class="letterGrid">
               <div id="gremlinizedLTRA" class="gremLetter" style="display:none"></div>
               <div id="gremlinizedLTRB"  class="gremLetter" style="display:none"></div>
-            </div>
+
           </div>
           <div class="response">
-            <div id="roundPrompt"></div>
+            <div id="roundPrompt">
              <input id="inputPlayerResponse" class="answerField" type="text" />
-          </div>
-          <div class="submitResponse">
-            <button id="btnSubmit" class="btn">Submit</button>
-          </div>
+            <div>
+             <button id="btnSubmit" class="submitBtn">Submit</button>
+            </div>
+      </div>
+
           <br>
          <div id="playerWaitingMessage" class="flexContainer"></div>
           </div>
-        </div>
-      </div>
     </script>
 
     <script id="game-end-template" type="text/template">
+      <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
+      <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
+      <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
+      <img src="img/PinkGremGIF1.gif" alt="gremlin grrr"  class="pinkGremlin1"/>
+      <img src="img/blueGremGIF1.gif" alt="gremlin grrr" class="blueGremlin1"/>
+      <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
+
       <div class="flexContainer">
         <div class="gameEndWrapper">
           <div class="finalStory">
