@@ -79,7 +79,7 @@ ul {
     border-radius: 40px;
     border: none;
     color: #f7f3e3;
-    min-width: 200%;
+    min-width: 600px;
     padding: 20px 30px;
     text-align: center;
     text-decoration: none;
@@ -95,7 +95,7 @@ ul {
     border-radius: 40px;
     border: none;
     color: #f7f3e3;
-    min-width: 100px;
+    min-width: 600px;
     padding: 20px 30px;
     text-align: center;
     text-decoration: none;
@@ -257,7 +257,14 @@ ul {
   .row > input {
     flex: 2;
   }
-
+  .response {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+  }
   .answerField {
     border-radius: 17px;
     border: none;
@@ -276,7 +283,7 @@ ul {
     margin: auto;
   }
   .gremMSG {
-    font-size: 25px;
+    font-size: 45px;
     /* position: absolute; */
     font-family: "Bungee", cursive;
     color: #f7f3e3;
@@ -288,7 +295,7 @@ ul {
   }
   .gremLetter {
     display: inline-block;
-    font-size: 35px;
+    font-size: 55px;
     font-family: "Bungee", cursive;
     color: #f7f3e3;
     background: #8f56a3;
@@ -301,7 +308,7 @@ ul {
   }
   .gremlinizedImg {
     display: inline-block;
-    width: 15%;
+    width: 30%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -345,41 +352,41 @@ ul {
 
   .greenGremlin1 {
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 90px;
-    width: 310px;
+    width: 410px;
   }
 
   .greenGremlin2 {
     position: absolute;
     top: 60px;
     left: 80%;
-    width: 310px;
+    width: 370px;
   }
 
   .purpGremlin1 {
     position: absolute;
     top: 60%;
     left: 80%;
-    width: 250px;
+    width: 350px;
   }
   .pinkGremlin1 {
     position: absolute;
     top: 0%;
-    left: 106px;
-    width: 250px;
+    left: 10px;
+    width: 320px;
   }
   .blueGremlin1 {
     position: absolute;
     top: 70%;
     left: 20%;
-    width: 200px;
+    width: 300px;
   }
   .blueGremlin2 {
     position: absolute;
     top: 70%;
     left: 70%;
-    width: 220px;
+    width: 270px;
   }
 }
 
@@ -395,15 +402,15 @@ ul {
       font-family: "Gugi", cursive;
       color: #7cc041;
       margin: 32px 32px;
-      padding: 10px 50px;
+      padding: 10px 60px;
       text-align: center;
       text-decoration: none;
-      font-size: 40px;
+      font-size: 50px;
       justify-content: space-evenly;
       align-items: center;
       background-color: #f7f3e3;
       opacity: 0.8;
-      border-radius: 23px;
+      border-radius: 25px;
     }
     .flexContainer {
       /* padding-top: 5%; */
@@ -449,7 +456,7 @@ ul {
       border-radius: 25px;
       border: none;
       color: #f7f3e3;
-      min-width: 200%;
+      min-width: 500px;
       padding: 15px 32px;
       text-align: center;
       text-decoration: none;
@@ -458,18 +465,25 @@ ul {
       align-items: center;
       text-transform: uppercase;
     }
-
+    .response {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
     .submitBtn {
       font-family: "Gugi", cursive;
       background: #7cc041;
       border-radius: 40px;
       border: none;
       color: #f7f3e3;
-      min-width: 200%;
+      min-width: 475px;
       padding: 20px 30px;
       text-align: center;
       text-decoration: none;
-      font-size: 35px;
+      font-size: 25px;
       justify-content: center;
       align-items: center;
       text-transform: uppercase;
@@ -477,11 +491,11 @@ ul {
     .backBtn {
       text-decoration: none;
       border: none;
-      border-radius: 30px;
-      padding: 10px 10px;
+      border-radius: 100px;
+      padding: 10px 15px;
       background: #7cc041;
       color: #f7f3e3;
-      font-size: 25px;
+      font-size: 35px;
       justify-content: left;
       margin: 100px 0px 0px 200px;
     }
@@ -516,14 +530,14 @@ ul {
       opacity: 0.8;
       color: #1b3022;
       border-radius: 54px;
-      padding: 250px 50px;
-      margin: 0px 50px 50px 50px;
+      padding: 200px 50px;
+      margin: 50px 50px 50px 50px;
     }
 
     .promptText {
       font-family: "Bungee", cursive;
       text-transform: capitalize;
-      font-size: 96px;
+      font-size: 80px;
       color: #1b3022;
       padding: 50px 10px;
     }
@@ -531,7 +545,7 @@ ul {
       color: #f7f3e3;
       /* padding-top: 5%; */
       font-family: "Bungee", cursive;
-      font-size: 25px;
+      font-size: 35px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -543,7 +557,7 @@ ul {
     .infoBigHost {
       color: #f7f3e3;
       font-family: "Bungee", cursive;
-      font-size: 45px;
+      font-size: 65px;
       text-align: center;
     }
 
@@ -570,7 +584,7 @@ ul {
     .infoInstructionsBig {
       color: #f7f3e3;
       font-family: "Bungee", cursive;
-      font-size: 45px;
+      font-size: 55px;
       text-align: center;
     }
 
@@ -626,12 +640,13 @@ ul {
     .answerField {
       border-radius: 17px;
       border: none;
-      min-width: 500px;
-      padding: 15px 32px;
+      min-width: 400px;
+      padding: 20px 37px;
       align-items: flex-end;
       background: #f7f3e3;
       box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
       font-size: large;
+      margin: 50px 0px;
     }
     .gremlinizedScreen {
       position: relative;
@@ -640,7 +655,7 @@ ul {
       margin: auto;
     }
     .gremMSG {
-      font-size: 25px;
+      font-size: 35px;
       /* position: absolute; */
       font-family: "Bungee", cursive;
       color: #f7f3e3;
@@ -652,7 +667,7 @@ ul {
     }
     .gremLetter {
       display: inline-block;
-      font-size: 35px;
+      font-size: 45px;
       font-family: "Bungee", cursive;
       color: #f7f3e3;
       background: #8f56a3;
@@ -665,7 +680,7 @@ ul {
     }
     .gremlinizedImg {
       display: inline-block;
-      width: 15%;
+      width: 25%;
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -709,41 +724,41 @@ ul {
 
     .greenGremlin1 {
       position: absolute;
-      top: 50%;
+      top: 60%;
       left: 90px;
-      width: 310px;
+      width: 260px;
     }
 
     .greenGremlin2 {
       position: absolute;
       top: 60px;
       left: 80%;
-      width: 310px;
+      width: 260px;
     }
 
     .purpGremlin1 {
       position: absolute;
       top: 60%;
-      left: 80%;
-      width: 250px;
+      left: 90%;
+      width: 190px;
     }
     .pinkGremlin1 {
       position: absolute;
       top: 0%;
-      left: 106px;
-      width: 250px;
+      left: 10px;
+      width: 190px;
     }
     .blueGremlin1 {
       position: absolute;
-      top: 70%;
+      top: 75%;
       left: 20%;
-      width: 200px;
+      width: 150px;
     }
     .blueGremlin2 {
       position: absolute;
-      top: 70%;
+      top: 75%;
       left: 70%;
-      width: 220px;
+      width: 170px;
     }
   }
 }
@@ -824,18 +839,25 @@ ul {
       align-items: center;
       text-transform: uppercase;
     }
-
+    .response {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
     .submitBtn {
       font-family: "Gugi", cursive;
       background: #7cc041;
       border-radius: 40px;
       border: none;
       color: #f7f3e3;
-      min-width: 200%;
-      padding: 20px 30px;
+      min-width: 400px;
+      padding: 15px 0px;
       text-align: center;
       text-decoration: none;
-      font-size: 35px;
+      font-size: 20px;
       justify-content: center;
       align-items: center;
       text-transform: uppercase;
@@ -993,8 +1015,8 @@ ul {
     .answerField {
       border-radius: 17px;
       border: none;
-      min-width: 500px;
-      padding: 15px 32px;
+      min-width: 400px;
+      padding: 15px 0px;
       align-items: flex-end;
       background: #f7f3e3;
       box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
@@ -1032,7 +1054,7 @@ ul {
     }
     .gremlinizedImg {
       display: inline-block;
-      width: 15%;
+      width: 25%;
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -1190,22 +1212,30 @@ ul {
       align-items: center;
       text-transform: uppercase;
     }
-
+    .response {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
     .submitBtn {
       font-family: "Gugi", cursive;
       background: #7cc041;
-      border-radius: 40px;
+      border-radius: 30px;
       border: none;
       color: #f7f3e3;
-      min-width: 200%;
-      padding: 20px 30px;
+      min-width: 300px;
+      padding: 10px 0px;
       text-align: center;
       text-decoration: none;
-      font-size: 35px;
+      font-size: 15px;
       justify-content: center;
       align-items: center;
       text-transform: uppercase;
     }
+
     .backBtn {
       text-decoration: none;
       border: none;
@@ -1359,8 +1389,8 @@ ul {
     .answerField {
       border-radius: 17px;
       border: none;
-      min-width: 500px;
-      padding: 15px 32px;
+      min-width: 300px;
+      padding: 10px 0px;
       align-items: flex-end;
       background: #f7f3e3;
       box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
@@ -1373,7 +1403,7 @@ ul {
       margin: auto;
     }
     .gremMSG {
-      font-size: 25px;
+      font-size: 20px;
       /* position: absolute; */
       font-family: "Bungee", cursive;
       color: #f7f3e3;
@@ -1385,7 +1415,7 @@ ul {
     }
     .gremLetter {
       display: inline-block;
-      font-size: 35px;
+      font-size: 25px;
       font-family: "Bungee", cursive;
       color: #f7f3e3;
       background: #8f56a3;
@@ -1398,7 +1428,7 @@ ul {
     }
     .gremlinizedImg {
       display: inline-block;
-      width: 15%;
+      width: 20%;
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -1487,7 +1517,7 @@ ul {
 ***********************************************
  */
 
-@media screen and (min-width: 601px) {
+@media screen and (min-width: 351px) {
   @media screen and (max-width: 750px) {
     strong {
       font-family: "Gugi", cursive;
@@ -1564,21 +1594,30 @@ ul {
       margin-bottom: 17px;
     }
 
+    .response {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
     .submitBtn {
       font-family: "Gugi", cursive;
       background: #7cc041;
       border-radius: 40px;
       border: none;
       color: #f7f3e3;
-      min-width: 200%;
-      padding: 20px 30px;
+      min-width: 300px;
+      padding: 15px 0px;
       text-align: center;
       text-decoration: none;
-      font-size: 35px;
+      font-size: 20px;
       justify-content: center;
       align-items: center;
       text-transform: uppercase;
     }
+
     .backBtn {
       text-decoration: none;
       border: none;
@@ -1719,7 +1758,7 @@ ul {
       border-radius: 17px;
       border: none;
       min-width: 300px;
-      padding: 15px 32px;
+      padding: 15px 0px;
       align-items: flex-end;
       background: #f7f3e3;
       box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
@@ -1846,366 +1885,7 @@ ul {
 ***********************************************
  */
 
-@media screen and (min-width: 421px) {
-  @media screen and (max-width: 600px) {
-    strong {
-      font-family: "Gugi", cursive;
-      color: #7cc041;
-      margin: 10px 10px;
-      padding: 10px 50px;
-      text-align: center;
-      text-decoration: none;
-      font-size: 17px;
-      justify-content: space-evenly;
-      align-items: center;
-      background-color: #f7f3e3;
-      opacity: 0.8;
-      border-radius: 12px;
-    }
-    .flexContainer {
-      padding: 0% 3% 0 3%;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-      align-items: center;
-      align-content: space-evenly;
-    }
-
-    .setUp {
-      /* padding-top: 25%; */
-      flex-direction: column;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-      align-items: center;
-      align-content: space-evenly;
-      font-size: 45px;
-      font-family: "Bungee", cursive;
-      color: #f7f3e3;
-    }
-
-    .titleMain {
-      padding-top: 25%;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-      align-items: center;
-      align-content: space-evenly;
-      font-size: 30px;
-      font-family: "Bungee", cursive;
-      color: #f7f3e3;
-    }
-    .buttons {
-      position: relative;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-      align-items: center;
-      align-content: space-evenly;
-    }
-    .btn {
-      font-family: "Gugi", cursive;
-      background: #7cc041;
-      border-radius: 25px;
-      border: none;
-      color: #f7f3e3;
-      min-width: 180px;
-      padding: 10px 32px;
-      text-align: center;
-      text-decoration: none;
-      font-size: 15px;
-      justify-content: center;
-      align-items: center;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .submitBtn {
-      font-family: "Gugi", cursive;
-      background: #7cc041;
-      border-radius: 40px;
-      border: none;
-      color: #f7f3e3;
-      min-width: 200%;
-      padding: 20px 30px;
-      text-align: center;
-      text-decoration: none;
-      font-size: 35px;
-      justify-content: center;
-      align-items: center;
-      text-transform: uppercase;
-    }
-    .backBtn {
-      text-decoration: none;
-      border: none;
-      border-radius: 60px;
-      padding: 10px 10px;
-      background: #7cc041;
-      color: #f7f3e3;
-      font-size: 12px;
-      justify-content: left;
-      margin: 20px 30px;
-    }
-
-    .btn:hover {
-      background: #629733;
-      cursor: pointer;
-    }
-
-    .btnVote {
-      font-family: "Gugi", cursive;
-      background: #239bcf;
-      border-radius: 25px;
-      border: none;
-      color: #f7f3e3;
-      min-width: 280px;
-      padding: 20px 32px;
-      text-align: center;
-      text-decoration: none;
-      font-size: 25px;
-      justify-content: center;
-      align-items: center;
-      text-transform: uppercase;
-    }
-
-    .btnVote:hover {
-      background: #1c7ba4;
-      cursor: pointer;
-    }
-    .prompt {
-      background-color: #f7f3e3;
-      opacity: 0.8;
-      color: #1b3022;
-      border-radius: 54px;
-      padding: 50px 10px;
-      margin: 40px 40px 40px 40px;
-    }
-
-    .promptText {
-      font-family: "Bungee", cursive;
-      text-transform: capitalize;
-      font-size: 25px;
-      color: #1b3022;
-      padding: 50px 10px;
-    }
-    .infoHost {
-      color: #f7f3e3;
-      padding: 2% 5% 0% 5%;
-      font-family: "Bungee", cursive;
-      font-size: 16px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-      align-items: center;
-      align-content: space-evenly;
-    }
-    .infoBigHost {
-      color: #f7f3e3;
-      font-family: "Bungee", cursive;
-      font-size: 25px;
-      text-align: center;
-    }
-
-    .infoBigJoin {
-      color: #f7f3e3;
-      font-family: "Bungee", cursive;
-      font-size: 25px;
-      text-align: center;
-    }
-
-    .infoInstructions {
-      color: #f7f3e3;
-      font-family: "Bungee", cursive;
-      font-size: 16px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-      align-items: center;
-      align-content: space-evenly;
-    }
-    .infoInstructionsBig {
-      color: #f7f3e3;
-      padding: 2% 5% 0% 5%;
-      font-family: "Bungee", cursive;
-      font-size: 30px;
-      text-align: center;
-    }
-
-    .infoWaiting {
-      color: #f7f3e3;
-      padding: 5% 5% 0% 5%;
-      font-family: "Bungee", cursive;
-      font-size: 30px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-      align-items: center;
-      align-content: space-evenly;
-    }
-
-    .gameID {
-      font-family: "Bungee", cursive;
-      font-size: 45px;
-      text-align: center;
-      color: #f7f3e3;
-    }
-
-    .inputLabels {
-      font-family: "Gugi", cursive;
-      font-size: 16px;
-      color: #f7f3e3;
-    }
-    .inputField {
-      font-size: 16px;
-      border-radius: 17px;
-      border: none;
-      min-width: 100px;
-      padding: 10px 16px;
-      align-items: flex-end;
-      background: #f7f3e3;
-      box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
-    }
-
-    .answerField {
-      border-radius: 17px;
-      border: none;
-      min-width: 100px;
-      padding: 10px 16px;
-      align-items: flex-end;
-      background: #f7f3e3;
-      box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
-      font-size: large;
-    }
-    .gremlinizedScreen {
-      position: relative;
-      justify-content: center;
-      align-items: center;
-      margin: auto;
-    }
-    .gremMSG {
-      font-size: 25px;
-      /* position: absolute; */
-      font-family: "Bungee", cursive;
-      color: #f7f3e3;
-      text-align: center;
-      text-decoration: none;
-      padding: 15px 32px;
-      justify-content: center;
-      align-items: center;
-    }
-    .gremLetter {
-      display: inline-block;
-      font-size: 35px;
-      font-family: "Bungee", cursive;
-      color: #f7f3e3;
-      background: #8f56a3;
-      border-radius: 18px;
-      text-align: center;
-      text-decoration: none;
-      padding: 15px 32px;
-      justify-content: center;
-      align-items: center;
-    }
-    .gremlinizedImg {
-      display: inline-block;
-      width: 45%;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .letterGrid {
-      width: 100%;
-      text-align: center;
-      padding-bottom: 10px;
-    }
-
-    .gameEndWrapper {
-      color: #f7f3e3;
-      font-family: "Bungee", cursive;
-      font-size: 25px;
-      text-align: center;
-    }
-
-    .storyOutput {
-      font-family: "Bungee", cursive;
-      text-transform: uppercase;
-      text-align: left;
-      font-size: 14px;
-      background-color: #f7f3e3;
-      opacity: 0.8;
-      color: #1b3022;
-      border-radius: 54px;
-      padding: 30px 50px;
-      line-height: 20px;
-    }
-    .gameLeaderBoard {
-      padding-bottom: 100px;
-    }
-    .scores {
-      color: #f7f3e3;
-      font-family: "Bungee", cursive;
-      font-size: 15px;
-      text-align: left;
-      line-height: 55px;
-      padding: 0px 10px;
-    }
-    .greenGremlin1 {
-      position: absolute;
-      top: 80%;
-      left: 10%;
-      width: 30%;
-    }
-
-    .greenGremlin2 {
-      position: absolute;
-      top: 10%;
-      left: 70%;
-      width: 30%;
-    }
-
-    .purpGremlin1 {
-      position: absolute;
-      top: 60%;
-      left: 70%;
-      width: 30%;
-    }
-    .pinkGremlin1 {
-      position: absolute;
-      top: 0%;
-      left: 5%;
-      width: 30%;
-    }
-    .blueGremlin1 {
-      position: absolute;
-      top: 85%;
-      left: 30%;
-      width: 25%;
-    }
-    .blueGremlin2 {
-      position: absolute;
-      top: 90%;
-      left: 70%;
-      width: 20%;
-    }
-  }
-}
-/***********************************************
-
-****************XXsmall screen*****************
-
-***********************************************
- */
-
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 350px) {
   strong {
     font-family: "Gugi", cursive;
     color: #7cc041;
@@ -2213,7 +1893,7 @@ ul {
     padding: 10px 50px;
     text-align: center;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 17px;
     justify-content: space-evenly;
     align-items: center;
     background-color: #f7f3e3;
@@ -2250,7 +1930,7 @@ ul {
     justify-content: space-evenly;
     align-items: center;
     align-content: space-evenly;
-    font-size: 45px;
+    font-size: 30px;
     font-family: "Bungee", cursive;
     color: #f7f3e3;
   }
@@ -2270,31 +1950,38 @@ ul {
     border-radius: 25px;
     border: none;
     color: #f7f3e3;
-    min-width: 280px;
-    padding: 20px 32px;
+    min-width: 180px;
+    padding: 10px 32px;
     text-align: center;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 15px;
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
-    margin-bottom: 17px;
+    margin-bottom: 10px;
   }
 
+  .response {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+  }
   .submitBtn {
     font-family: "Gugi", cursive;
     background: #7cc041;
     border-radius: 40px;
     border: none;
     color: #f7f3e3;
-    min-width: 200%;
-    padding: 20px 30px;
+    min-width: 250px;
+    padding: 15px 0px;
     text-align: center;
     text-decoration: none;
-    font-size: 35px;
+    font-size: 15px;
     justify-content: center;
     align-items: center;
-    text-transform: uppercase;
   }
   .backBtn {
     text-decoration: none;
@@ -2303,7 +1990,7 @@ ul {
     padding: 10px 10px;
     background: #7cc041;
     color: #f7f3e3;
-    font-size: 17px;
+    font-size: 12px;
     justify-content: left;
     margin: 20px 30px;
   }
@@ -2345,15 +2032,15 @@ ul {
   .promptText {
     font-family: "Bungee", cursive;
     text-transform: capitalize;
-    font-size: 30px;
+    font-size: 25px;
     color: #1b3022;
     padding: 50px 10px;
   }
   .infoHost {
     color: #f7f3e3;
-    padding-top: 15%;
+    padding: 2% 5% 0% 5%;
     font-family: "Bungee", cursive;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -2365,21 +2052,21 @@ ul {
   .infoBigHost {
     color: #f7f3e3;
     font-family: "Bungee", cursive;
-    font-size: 30px;
+    font-size: 25px;
     text-align: center;
   }
 
   .infoBigJoin {
     color: #f7f3e3;
     font-family: "Bungee", cursive;
-    font-size: 35px;
+    font-size: 25px;
     text-align: center;
   }
 
   .infoInstructions {
     color: #f7f3e3;
     font-family: "Bungee", cursive;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -2390,6 +2077,7 @@ ul {
   }
   .infoInstructionsBig {
     color: #f7f3e3;
+    padding: 2% 5% 0% 5%;
     font-family: "Bungee", cursive;
     font-size: 30px;
     text-align: center;
@@ -2418,15 +2106,15 @@ ul {
 
   .inputLabels {
     font-family: "Gugi", cursive;
-    font-size: 24px;
+    font-size: 16px;
     color: #f7f3e3;
   }
   .inputField {
     font-size: 16px;
     border-radius: 17px;
     border: none;
-    min-width: 300px;
-    padding: 20px 16px;
+    min-width: 100px;
+    padding: 10px 16px;
     align-items: flex-end;
     background: #f7f3e3;
     box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
@@ -2435,8 +2123,8 @@ ul {
   .answerField {
     border-radius: 17px;
     border: none;
-    min-width: 300px;
-    padding: 15px 32px;
+    min-width: 100px;
+    padding: 10px 16px;
     align-items: flex-end;
     background: #f7f3e3;
     box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
@@ -2531,7 +2219,7 @@ ul {
 
   .purpGremlin1 {
     position: absolute;
-    top: 80%;
+    top: 60%;
     left: 70%;
     width: 30%;
   }
@@ -2543,13 +2231,13 @@ ul {
   }
   .blueGremlin1 {
     position: absolute;
-    top: 80%;
+    top: 85%;
     left: 30%;
     width: 25%;
   }
   .blueGremlin2 {
     position: absolute;
-    top: 85%;
+    top: 90%;
     left: 70%;
     width: 20%;
   }
