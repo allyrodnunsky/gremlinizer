@@ -657,9 +657,12 @@ jQuery(function($){
                             } else {
                               z.style.display = "none";
                             }
-                        $('#gremlinizedMSG').html(`You've been Gremlinized! <br> No using the letters:`);
-                        $('#gremlinizedLTRA').html(gremLett1[i]).css("display, inline-block");
-                        $('#gremlinizedLTRB').html(gremLett2[i]).css("display, inline-block");
+                        $('#gremlinizedMSG')
+                            .text(`You've been Gremlinized! <br> No using the letters:`);
+                        $('#gremlinizedLTRA')
+                            .text(gremLett1[i]).css("display, inline-block");
+                        $('#gremlinizedLTRB')
+                            .text(gremLett2[i]).css("display, inline-block");
                     }
                 }
             },
