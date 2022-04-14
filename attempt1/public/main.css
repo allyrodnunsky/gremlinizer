@@ -750,13 +750,13 @@ ul {
     }
     .blueGremlin1 {
       position: absolute;
-      top: 75%;
+      top: 80%;
       left: 20%;
-      width: 150px;
+      width: 170px;
     }
     .blueGremlin2 {
       position: absolute;
-      top: 75%;
+      top: 80%;
       left: 70%;
       width: 170px;
     }
@@ -830,7 +830,7 @@ ul {
       border-radius: 25px;
       border: none;
       color: #f7f3e3;
-      min-width: 200%;
+      min-width: 400px;
       padding: 15px 32px;
       text-align: center;
       text-decoration: none;
@@ -1096,43 +1096,44 @@ ul {
       padding: 0px 350px;
     }
 
-    .greenGremlin1 {
+    .greenGremlin1 { 
       position: absolute;
-      top: 50%;
+      top: 60%;
       left: 90px;
-      width: 310px;
+      width: 240px;
     }
+    /* btoomGrem */
 
     .greenGremlin2 {
       position: absolute;
       top: 60px;
       left: 80%;
-      width: 310px;
+      width: 240px;
     }
 
     .purpGremlin1 {
       position: absolute;
       top: 60%;
-      left: 80%;
-      width: 250px;
+      left: 83%;
+      width: 200px;
     }
     .pinkGremlin1 {
       position: absolute;
       top: 0%;
-      left: 106px;
-      width: 250px;
+      left: 0px;
+      width: 180px;
     }
     .blueGremlin1 {
       position: absolute;
-      top: 70%;
+      top: 77%;
       left: 20%;
-      width: 200px;
+      width: 150px;
     }
     .blueGremlin2 {
       position: absolute;
-      top: 70%;
+      top: 77%;
       left: 70%;
-      width: 220px;
+      width: 170px;
     }
   }
 }
