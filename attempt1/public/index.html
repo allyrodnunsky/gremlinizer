@@ -68,7 +68,7 @@
 
           <div class="infoHost">Open this site on your mobile device:</div>
           <div id="gameURL" class="infoBigHost">Error!</div>
-          <button id="btnStartGame" class="btn" hidden> STAHHT GAME </button>
+          <button id="btnStartGame" class="btn" hidden> START GAME </button>
           <audio id="success" src="audio/misc_menu.wav"> </audio>
           <button id="btnStartSong" class="btn" hidden>Song</button>
           <button id="btnStartStory" class="btn" hidden>Story</button>
@@ -182,16 +182,16 @@
 
     <!-- player response screen (player)-->
 
-    <!-- <script id="round-response-template" type="text/template"> -->
+    <script id="round-response-template" type="text/template">
       <audio id="success" src="audio/misc_menu.wav"> </audio>
       <audio id="laugh" src="audio/gremlaugh1.wav"> </audio>
         <div class="flexContainer">
           <div id="gremBox" class="gremlinizedScreen">
             <div id="gremlinizedMSG" class="gremMSG"></div>
-            <img src="../img/gremlin1.png" alt="gremlinized" class="gremlinizedImg" id ="gremlinizedImg" />
+            <img src="../img/gremlin1.png" alt="gremlinized" class="gremlinizedImg" id ="gremlinizedImg" style="display:none"/>
             <div class="letterGrid">
-              <div id="gremlinizedLTRA" class="gremLetter" ></div>
-              <div id="gremlinizedLTRB"  class="gremLetter" ></div>
+              <div id="gremlinizedLTRA" class="gremLetter" style="display:none"></div>
+              <div id="gremlinizedLTRB"  class="gremLetter" style="display:none"></div>
 
           </div>
           <div class="response">
@@ -205,7 +205,7 @@
           <br>
          <div id="playerWaitingMessage" class="flexContainer"></div>
           </div>
-    <!-- </script> -->
+    </script>
 
     <script id="game-end-template" type="text/template">
       <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
