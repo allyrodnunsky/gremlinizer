@@ -1472,7 +1472,7 @@ ul {
     }
     .greenGremlin1 {
       position: absolute;
-      top: 70%;
+      top: 80%;
       left: 10%;
       width: 20%;
     }
@@ -1487,13 +1487,13 @@ ul {
     .purpGremlin1 {
       position: absolute;
       top: 60%;
-      left: 70%;
+      left: 80%;
       width: 20%;
     }
     .pinkGremlin1 {
       position: absolute;
       top: 0%;
-      left: 5%;
+      left: 1%;
       width: 20%;
     }
     .blueGremlin1 {
@@ -1518,8 +1518,386 @@ ul {
 ***********************************************
  */
 
-@media screen and (min-width: 351px) {
+@media screen and (min-width: 451px) {
   @media screen and (max-width: 750px) {
+    strong {
+      font-family: "Gugi", cursive;
+      color: #7cc041;
+      margin: 10px 10px;
+      padding: 10px 50px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 20px;
+      justify-content: space-evenly;
+      align-items: center;
+      background-color: #f7f3e3;
+      opacity: 0.8;
+      border-radius: 12px;
+    }
+    .flexContainer {
+      padding: 0% 3% 0 3%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+
+    .setUp {
+      /* padding-top: 25%; */
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+      font-size: 45px;
+      font-family: "Bungee", cursive;
+      color: #f7f3e3;
+    }
+
+    .titleMain {
+      padding-top: 5%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+      font-size: 40px;
+      font-family: "Bungee", cursive;
+      color: #f7f3e3;
+    }
+    .buttons {
+      position: relative;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+    .btn {
+      font-family: "Gugi", cursive;
+      background: #7cc041;
+      border-radius: 25px;
+      border: none;
+      color: #f7f3e3;
+      min-width: 200px;
+      padding: 10px 0px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 15px;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+      margin-bottom: 17px;
+    }
+
+    .response {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+    .submitBtn {
+      font-family: "Gugi", cursive;
+      background: #7cc041;
+      border-radius: 40px;
+      border: none;
+      color: #f7f3e3;
+      min-width: 350px;
+      padding: 15px 0px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 15px;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+    }
+
+    .backBtn {
+      text-decoration: none;
+      border: none;
+      border-radius: 60px;
+      padding: 10px 10px;
+      background: #7cc041;
+      color: #f7f3e3;
+      font-size: 17px;
+      justify-content: left;
+      margin: 0px 10px;
+    }
+
+    .btn:hover {
+      background: #629733;
+      cursor: pointer;
+    }
+
+    .btnVote {
+      font-family: "Gugi", cursive;
+      background: #239bcf;
+      border-radius: 25px;
+      border: none;
+      color: #f7f3e3;
+      min-width: 280px;
+      padding: 20px 32px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 25px;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+    }
+
+    .btnVote:hover {
+      background: #1c7ba4;
+      cursor: pointer;
+    }
+    .prompt {
+      background-color: #f7f3e3;
+      opacity: 0.8;
+      color: #1b3022;
+      border-radius: 54px;
+      padding: 50px 10px;
+      margin: 40px 40px 40px 40px;
+    }
+
+    .promptText {
+      font-family: "Bungee", cursive;
+      text-transform: capitalize;
+      font-size: 30px;
+      color: #1b3022;
+      padding: 50px 10px;
+    }
+    .infoHost {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+    .infoBigHost {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .infoBigJoin {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .infoInstructions {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+    .infoInstructionsBig {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .infoWaiting {
+      color: #f7f3e3;
+      padding: 5% 5% 0% 5%;
+      font-family: "Bungee", cursive;
+      font-size: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      align-content: space-evenly;
+    }
+
+    .gameID {
+      font-family: "Bungee", cursive;
+      font-size: 45px;
+      text-align: center;
+      color: #f7f3e3;
+    }
+
+    .inputLabels {
+      font-family: "Gugi", cursive;
+      font-size: 15px;
+      color: #f7f3e3;
+    }
+    .inputField {
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      min-width: 350px;
+      padding: 5px 16px;
+      align-items: flex-end;
+      background: #f7f3e3;
+      box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
+    }
+    .row {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0.5em;
+    }
+    .row > label {
+      padding: 0.5em 1em 0.5em 0;
+      flex: 1;
+    }
+    .row > input {
+      flex: 2;
+    }
+    .answerField {
+      border-radius: 17px;
+      border: none;
+      min-width: 300px;
+      padding: 5px 16px;
+      align-items: flex-end;
+      background: #f7f3e3;
+      box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
+      font-size: 12px;
+    }
+    .gremlinizedScreen {
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+    }
+    .gremMSG {
+      font-size: 25px;
+      /* position: absolute; */
+      font-family: "Bungee", cursive;
+      color: #f7f3e3;
+      text-align: center;
+      text-decoration: none;
+      padding: 15px 32px;
+      justify-content: center;
+      align-items: center;
+    }
+    .gremLetter {
+      display: inline-block;
+      font-size: 35px;
+      font-family: "Bungee", cursive;
+      color: #f7f3e3;
+      background: #8f56a3;
+      border-radius: 18px;
+      text-align: center;
+      text-decoration: none;
+      padding: 15px 32px;
+      justify-content: center;
+      align-items: center;
+    }
+    .gremlinizedImg {
+      display: inline-block;
+      width: 45%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .letterGrid {
+      width: 100%;
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    .gameEndWrapper {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 25px;
+      text-align: center;
+    }
+
+    .storyOutput {
+      font-family: "Bungee", cursive;
+      text-transform: uppercase;
+      text-align: left;
+      font-size: 14px;
+      background-color: #f7f3e3;
+      opacity: 0.8;
+      color: #1b3022;
+      border-radius: 54px;
+      padding: 30px 50px;
+      line-height: 20px;
+    }
+    .gameLeaderBoard {
+      padding-bottom: 100px;
+    }
+    .scores {
+      color: #f7f3e3;
+      font-family: "Bungee", cursive;
+      font-size: 15px;
+      text-align: left;
+      line-height: 55px;
+      padding: 0px 10px;
+    }
+    .greenGremlin1 {
+      position: absolute;
+      top: 60%;
+      left: 1%;
+      width: 20%;
+    }
+
+    .greenGremlin2 {
+      position: absolute;
+      top: 5%;
+      left: 80%;
+      width: 20%;
+    }
+
+    .purpGremlin1 {
+      position: absolute;
+      top: 60%;
+      left: 80%;
+      width: 20%;
+    }
+    .pinkGremlin1 {
+      position: absolute;
+      top: 0%;
+      left: 1%;
+      width: 20%;
+    }
+    .blueGremlin1 {
+      position: absolute;
+      top: 60%;
+      left: 10%;
+      width: 20%;
+    }
+    .blueGremlin2 {
+      position: absolute;
+      top: 65%;
+      left: 70%;
+      width: 15%;
+    }
+  }
+}
+
+/***********************************************
+
+****************smallISH screen*****************
+
+***********************************************
+ */
+
+@media screen and (min-width: 351px) {
+  @media screen and (max-width: 450px) {
     strong {
       font-family: "Gugi", cursive;
       color: #7cc041;
@@ -1564,7 +1942,7 @@ ul {
       justify-content: space-evenly;
       align-items: center;
       align-content: space-evenly;
-      font-size: 45px;
+      font-size: 40px;
       font-family: "Bungee", cursive;
       color: #f7f3e3;
     }
@@ -1585,10 +1963,10 @@ ul {
       border: none;
       color: #f7f3e3;
       min-width: 280px;
-      padding: 20px 32px;
+      padding: 15px 32px;
       text-align: center;
       text-decoration: none;
-      font-size: 25px;
+      font-size: 20px;
       justify-content: center;
       align-items: center;
       text-transform: uppercase;
@@ -1609,7 +1987,7 @@ ul {
       border-radius: 40px;
       border: none;
       color: #f7f3e3;
-      min-width: 300px;
+      min-width: 350px;
       padding: 15px 0px;
       text-align: center;
       text-decoration: none;
@@ -1741,15 +2119,15 @@ ul {
 
     .inputLabels {
       font-family: "Gugi", cursive;
-      font-size: 24px;
+      font-size: 20px;
       color: #f7f3e3;
     }
     .inputField {
       font-size: 16px;
       border-radius: 17px;
       border: none;
-      min-width: 300px;
-      padding: 20px 16px;
+      min-width: 250px;
+      padding: 15px 16px;
       align-items: flex-end;
       background: #f7f3e3;
       box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
@@ -1759,7 +2137,7 @@ ul {
       border-radius: 17px;
       border: none;
       min-width: 300px;
-      padding: 15px 0px;
+      padding: 10px 16px;
       align-items: flex-end;
       background: #f7f3e3;
       box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
@@ -1841,40 +2219,40 @@ ul {
     .greenGremlin1 {
       position: absolute;
       top: 80%;
-      left: 10%;
-      width: 30%;
+      left: 1%;
+      width: 35%;
     }
 
     .greenGremlin2 {
       position: absolute;
       top: 10%;
       left: 70%;
-      width: 30%;
+      width: 35%;
     }
 
     .purpGremlin1 {
       position: absolute;
       top: 80%;
       left: 70%;
-      width: 30%;
+      width: 35%;
     }
     .pinkGremlin1 {
       position: absolute;
       top: 0%;
-      left: 5%;
-      width: 30%;
+      left: 1%;
+      width: 35%;
     }
     .blueGremlin1 {
       position: absolute;
       top: 80%;
-      left: 30%;
-      width: 25%;
+      left: 10%;
+      width: 30%;
     }
     .blueGremlin2 {
       position: absolute;
       top: 85%;
-      left: 70%;
-      width: 20%;
+      left: 60%;
+      width: 25%;
     }
   }
 }
@@ -1891,7 +2269,7 @@ ul {
     font-family: "Gugi", cursive;
     color: #7cc041;
     margin: 10px 10px;
-    padding: 10px 50px;
+    padding: 10px 30px;
     text-align: center;
     text-decoration: none;
     font-size: 17px;
@@ -1977,12 +2355,13 @@ ul {
     border: none;
     color: #f7f3e3;
     min-width: 250px;
-    padding: 15px 0px;
+    padding: 10px 0px;
     text-align: center;
     text-decoration: none;
     font-size: 15px;
     justify-content: center;
     align-items: center;
+    text-transform: uppercase;
   }
   .backBtn {
     text-decoration: none;
@@ -2041,7 +2420,7 @@ ul {
     color: #f7f3e3;
     padding: 2% 5% 0% 5%;
     font-family: "Bungee", cursive;
-    font-size: 16px;
+    font-size: 12px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -2124,7 +2503,7 @@ ul {
   .answerField {
     border-radius: 17px;
     border: none;
-    min-width: 100px;
+    min-width: 200px;
     padding: 10px 16px;
     align-items: flex-end;
     background: #f7f3e3;
@@ -2208,26 +2587,26 @@ ul {
     position: absolute;
     top: 80%;
     left: 10%;
-    width: 30%;
+    width: 35%;
   }
 
   .greenGremlin2 {
     position: absolute;
-    top: 10%;
+    top: 5%;
     left: 70%;
     width: 30%;
   }
 
   .purpGremlin1 {
     position: absolute;
-    top: 60%;
+    top: 50%;
     left: 70%;
-    width: 30%;
+    width: 35%;
   }
   .pinkGremlin1 {
     position: absolute;
     top: 0%;
-    left: 5%;
+    left: 1%;
     width: 30%;
   }
   .blueGremlin1 {
