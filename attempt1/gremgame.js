@@ -1,10 +1,21 @@
 //Jquery Help https://api.jquery.com
 // https://www.w3schools.com/jquery/jquery_ref_overview.asp
 
+/**
+ * Pass Phrase to voting screen
+ * handle disconnect after voting/voter fraud
+ * selecting what type of game/single prompt
+ * countdown?
+ * 
+ * 
+ */
+
 var io;
 var gameSocket;
 var roundTimer;
-var songChoice = 0;
+var indexChoice = 0;
+var activeRooms = [];
+var promptArr = [];
 
 exports.initGame = function(sio, socket){
     io = sio;
@@ -30,6 +41,16 @@ exports.initGame = function(sio, socket){
     //gameSocket.on('stolenLetters', player);
     gameSocket.on('playerAnswer', playerAnswer);
 
+    gameSocket.on('disconnect', function() {
+        console.log('Got disconnect!');
+        
+        for (let i = 0; i < activeRooms.length; i++) {
+            if (io.sockets.adapter.rooms.get(activeRooms[i])) {
+                io.sockets.in(activeRooms[i]).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(activeRooms[i]).size} );
+            }
+        }
+    });
+
 
 }
 
@@ -39,6 +60,9 @@ function hostCreateNewGame() {
     
     //create unique game room ID
     var thisGameID = (Math.random() * 100000) | 0;
+
+
+    activeRooms.push(thisGameID);
     
     //return game room ID and socket ID to browser client
     this.emit('newGameCreated', {gameID: thisGameID, mySocketID: this.id});
@@ -56,6 +80,9 @@ function hostStartGame(gameID) {
         round: 0,
         gremlins: gremlins
     }
+
+    //if(promptChoice == song) etc
+    //promptArr = songs;
     //console.log('Game Started.');
     roundTimer = performance.now();
     sendWord(gremlinData);
@@ -63,7 +90,7 @@ function hostStartGame(gameID) {
 
 function hostNextRound(data) {
     console.log('hostNextRound!');
-    if(data.round < songs[songChoice].length){
+    if(data.round < promptArr[indexChoice].length){
         // console.log(data.gremlins[0]);
         // new phrase to host, players get submit screen
         roundTimer = performance.now();//starts the round timer to track how long each player takes to answer
@@ -79,7 +106,7 @@ function endGame(data) {
         gameID: data.gameID,
         round: 5,
         gremlins: data.gremlins,
-        phrases: songs[songChoice]
+        phrases: promptArr[indexChoice]
     }
     io.sockets.in(data.gameID).emit('gameOver',endData);
 }
@@ -107,13 +134,27 @@ function playerAnswer(data) {
 
 //host prepare game emits the beginNewGame function in app.js, which begins the countdown. 
 // we dont want a countdown so we need to figure that out
-function hostPrepareGame(gameID) {
+function hostPrepareGame(gameID,promptChoice) {//promptChoice
     var sock = this;
     var data = {
         mySocketID : sock.id,
         gameID : gameID
     };
-    //console.log('host prepare game called');
+    console.log('prompt chpoice is: ' + promptChoice);
+ 
+    if (promptChoice == 'Song') {
+        promptArr = songs;
+    }
+    if (promptChoice == 'Story') {
+        promptArr = songs;
+    }
+    if (promptChoice == 'Recipe') {
+        promptArr = songs;
+    }
+    
+    indexChoice = Math.floor(Math.random() * promptArr.length);
+    console.log('Index choice is: '+ indexChoice);
+    console.log('first prompt arr choice is: '+ promptArr[0][1]);
     
     //game starting
     io.sockets.in(data.gameID).emit('beginNewGame', data);
@@ -154,8 +195,9 @@ function playerJoinGame(data) {
 function sendWord (gremlinData) {
     //add a game counter to iterate through songs array
     //also mayve have buttons for a thing
-    //songChoice++;
-    var newPhrase = songs[songChoice][gremlinData.round];
+    //indexChoice++;
+    //promptArray[]
+    var newPhrase = promptArr[indexChoice][gremlinData.round];
     var data = {
         gameID: gremlinData.gameID,
         round: gremlinData.round,
@@ -295,6 +337,45 @@ var songs = [
         "Makin' wrong ______, only visions of them dividends",
         "Not respectin' each other, ______ thy brother",
         "A war is goin' on, but the reason's ______",
+    ],
+    [
+        "I threw a ______ in the well",
+        "Don't ask me, I'll never ______",
+        "I ______ to you as it fell",
+        "And now you're in my ______",
+        "I trade my ______ for a wish",
+        "Pennies and dimes for a ______",
+        "I wasn't looking for ______",
+        "But now you're in my ______",
+        "Your stare was ______",
+        "Ripped jeans, skin was ______'",
+        "Hot night, ______ was blowin'",
+        "Where you think you're ______, baby?",
+    ],
+    [
+        "Like the legend of the phoenix, huh",
+        "All ends with beginnings",
+        "What keeps the planet spinning, uh-huh",
+        "The force from the beginning",
+        "Look",
+        "We've come too far",
+        "To give up who we are",
+        "So let's raise the bar",
+        "And our cups to the stars",
+        "She's up all night 'til the sun",
+        "I'm up all night to get some",
+        "She's up all night for good fun",
+        "I'm up all night to get lucky",
+    ],
+    [
+        "But every song's like",
+        "Gold teeth, Grey Goose, trippin' in the bathroom",
+        "Bloodstains, ball gowns, trashin' the hotel room",
+        "We don't care, we're driving Cadillacs in our dreams",
+        "But everybody's like",
+        "Cristal, Maybach, diamonds on your timepiece",
+        "Jet planes, islands, tigers on a gold leash",
+        "We don't care, we aren't caught up in your love affair",
     ],
 
 

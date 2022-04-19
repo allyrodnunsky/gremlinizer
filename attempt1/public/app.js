@@ -60,12 +60,7 @@ jQuery(function($){
         playerJoinedRoom : function(data) {
             console.log('player joined room called');
             console.log('my role: ' + App.myRole);
-            //audio test
-            $('#joined').on('click', function(){
-                console.log('audio joined click');
-                $('#success').get(0).play();
-            })
-
+            
             App[App.myRole].updateWaitingScreen(data);
         },
 
@@ -73,8 +68,16 @@ jQuery(function($){
             
             //console.log('my role: ' + App.myRole);
             App.Host.numPlayersInRoom = data.numPlayer -1;
-            console.log('player playersUpdated' + App.Host.numPlayersInRoom);
+            console.log('player playersUpdated: ' + App.Host.numPlayersInRoom);
             //playerses = data.numPlayer;
+
+            var dataIn = {
+                gameID: App.gameID,
+                vote: '',
+                round: -1
+            }
+            App.Host.storeVote(dataIn);
+
         },
 
 
@@ -150,13 +153,17 @@ jQuery(function($){
             App.$templateHostScreen = $('#round-x-template').html();
             App.$templateEndGame = $('#game-end-template').html();
             App.$templateInstructionScreen = $('#instruction-screen-template').html();
+            $( '#success' ).load( 'audio/misc_menu.wav' );
         },
 
         //bind events - events triggered by button clicks
         bindEvents: function () {
             //HOST
             App.$doc.on('click', '#btnCreateGame', App.Host.onCreateClick);
-            App.$doc.on('click', '#btnStartGame', App.Host.onStartClick);
+            //App.$doc.on('click', '#btnStartGame', App.Host.onStartClick);
+            App.$doc.on('click', '#btnStartSong', App.Host.onStartClick);
+            App.$doc.on('click', '#btnStartStory', App.Host.onStartClick);
+            App.$doc.on('click', '#btnStartRecipe', App.Host.onStartClick);
 
             //PLAYER
             App.$doc.on('click', '#btnJoinGame', App.Player.onJoinClick);
@@ -189,18 +196,30 @@ jQuery(function($){
             onCreateClick: function () {
                 //console.log('clicked create a game');
                 //console.log(IO);
+
                 IO.socket.emit('hostCreateNewGame');
+                document.getElementById('success').play();
+                var buttonClick = new Audio('audio/misc_menu.wav');
+                buttonClick.play;
+
+                
                
             },
             onStartClick: function () {
                 console.log('clicked start a game' + startGame);
                 //console.log(IO);
+                var $btn = $(this);
+                var promptChoice = $btn.html();
+                console.log('button prompt is ' + promptChoice);
 
                 startGame = true;
                 if(startGame){
+                    document.getElementById('success').play();
+                    var buttonClick = new Audio('audio/misc_menu.wav');
+                    buttonClick.play;
                     //call host room start in gremgame
                     //console.log('early Num players in room' +App.Host.numPlayersInRoom)
-                    IO.socket.emit('hostRoomStart', App.gameID); 
+                    IO.socket.emit('hostRoomStart', App.gameID, promptChoice);//,promptChoice 
                  }
 
                 console.log('clicked start a game' + startGame);
@@ -217,6 +236,13 @@ jQuery(function($){
                 
                 App.Host.displayNewGameScreen();
                 console.log("game create with id: " + App.gameID);
+
+                document.getElementById('success').play();
+                var buttonClick = new Audio('audio/misc_menu.wav');
+                buttonClick.play;
+
+
+                
             },
 
             //show the host screen with the URL
@@ -224,7 +250,10 @@ jQuery(function($){
                 //fill game screen with html
                 //console.log('display joining screen');
                 App.$gameArea.html(App.$templateNewGame);
-
+                
+                document.getElementById('success').play();
+                var buttonClick = new Audio('audio/misc_menu.wav');
+                buttonClick.play;
                 //display URL
                 $('gameURL').text(window.location.href);
 
@@ -254,8 +283,13 @@ jQuery(function($){
                 //console.log('times check');
                 if (App.Host.numPlayersInRoom >= 2) {
                     console.log("App.Host.numPlayersInRoom is greater 2");
-                    $('#btnStartGame')
+                    $('#btnStartSong')
                         .removeAttr('hidden');
+                    $('#btnStartStory')
+                        .removeAttr('hidden');
+                    $('#btnStartRecipe')
+                        .removeAttr('hidden');
+                    
                 }
                 
                 //show start button once correct num of players entered room
@@ -266,6 +300,10 @@ jQuery(function($){
             onPlayerStartGameClick : function() {
                 //console.log('host screen template game pls');
                 App.$gameArea.html(App.$templateHostScreen);
+
+                document.getElementById('success').play();
+                var buttonClick = new Audio('audio/misc_menu.wav');
+                buttonClick.play;
             },
 
 
@@ -352,7 +390,7 @@ jQuery(function($){
                         console.log('numpvoted: '+App.Host.numPlayersVoted);
                     }
                 }
-                if (App.Host.numPlayersVoted == App.Host.numPlayersInRoom) {
+                if (App.Host.numPlayersVoted >= App.Host.numPlayersInRoom) {
                     console.log('score+gremlinizing!');
                     var gremlins = [];
                     var maxVotes = 0;
@@ -488,33 +526,44 @@ jQuery(function($){
 
             //click handler for on JoinClick
             onJoinClick: function () {
+                $( "#success" ).load( "audio/misc_menu.wav" );
 
-                
                 App.$gameArea.html(App.$templateJoinGame);
 
-                // $('#btnJoinGame').on('click', function(){
-                //     var audio = $('#success')[0];
-                //     audio.play();
-                // });
-
-                //works but doesnt stop
-                document.getElementById('success').autoplay = false; 
+                //audio
                 document.getElementById('success').play();
                 var myAudio = new Audio('audio/misc_menu.wav');
                 myAudio.play;
-                myAudio.pause;
+
             },
 
             onInstructionClick: function () {
+                $( "#success" ).load( "audio/misc_menu.wav" );
                 App.$gameArea.html(App.$templateInstructionScreen);
+
+                  //audio
+                  document.getElementById('success').play();
+                  var myAudio = new Audio('audio/misc_menu.wav');
+                  myAudio.play;
+      
             },
 
             onTitleScreenClick: function () {
                 App.$gameArea.html(App.$templateTitleScreen);
+
+                document.getElementById('success').play();
+                var myAudio = new Audio('audio/misc_menu.wav');
+                myAudio.play;
+
             },
 
             //player enters name and gameID and clicks join room
             onJoinWaitingRoomClick: function () {
+                document.getElementById('success').play();
+                var buttonClick = new Audio('audio/misc_menu.wav');
+                buttonClick.play;
+                console.log("audio joinclick");
+
                 var data = {
                     gameID: +($('#inputGameId').val()),
                     playerName: $('#inputPlayerName').val() || 'anon',
@@ -529,8 +578,10 @@ jQuery(function($){
                 //emit waiting room in this function
                 IO.socket.emit('playerJoinGame', data);
 
+               
                 App.myRole = 'Player';
                 App.Player.myName = data.playerName;
+                
                 
             },
 
@@ -538,6 +589,10 @@ jQuery(function($){
             updateWaitingScreen : function(data) {
                 // console.log('io.socket.id is: ' + IO.socket.id);
                 console.log('data.mySocketID: ' + data.mySocketID + 'ing Gmnae' +  data.gameID);
+
+                document.getElementById('success').play();
+                var myAudio = new Audio('audio/misc_menu.wav');
+                myAudio.play;
 
                 if(IO.socket.id === data.mySocketID){
                     //console.log('player update Waiting Screen called');
@@ -563,6 +618,12 @@ jQuery(function($){
 
             onPlayerStartGameClick : function() {
                 App.$gameArea.html(App.$templatePlayerScreen);
+
+                document.getElementById('success').play();
+                var myAudio = new Audio('audio/misc_menu.wav');
+                myAudio.play;
+
+                
             },
 
             newRound : function (data) {
@@ -574,6 +635,9 @@ jQuery(function($){
                 //console.log (App.mySocketID);
                 for (let i =0; i < data.gremlins.length; i++) {
                     if (data.gremlins[i] == App.mySocketID) {
+                        document.getElementById('laugh').play();
+                        var gremLaugh = new Audio('audio/gremlaugh1.wav');
+                        gremLaugh.play();
                         console.log(App.mySocketID +" should be gremlinized");
                         var x = document.getElementById("gremlinizedImg");
                         if (x.style.display === "none") {
@@ -593,18 +657,27 @@ jQuery(function($){
                             } else {
                               z.style.display = "none";
                             }
-                        $('#gremlinizedMSG').html(`You've been Gremlinized! <br> No using the letters:`);
-                        $('#gremlinizedLTRA').html(gremLett1[i]).css("display, inline-block");
-                        $('#gremlinizedLTRB').html(gremLett2[i]).css("display, inline-block");
+                        $('#gremlinizedMSG')
+                            .text(`You've been Gremlinized! <br> No using the letters:`);
+                        $('#gremlinizedLTRA')
+                            .text(gremLett1[i]).css("display, inline-block");
+                        $('#gremlinizedLTRB')
+                            .text(gremLett2[i]).css("display, inline-block");
                     }
                 }
             },
 
             onPlayerSubmitClick: function() {
                 // console.log('Clicked Answer Button');
+                
+
                 var $sub = $("#inputPlayerResponse");      // the tapped button
                 var $ltr1 = $("#gremlinizedLTRA");
                 var $ltr2 = $("#gremlinizedLTRB");
+
+                document.getElementById('success').play();
+                var myAudio = new Audio('audio/misc_menu.wav');
+                myAudio.play;
                 
                 //console.log($sub);
                 var answer = $sub.val(); // The tapped word
@@ -641,7 +714,7 @@ jQuery(function($){
                         timeSub: timeSub
                     }
                     //console.log('myRole1'+App.myRole);
-                    $('#gameArea').html('<div class="flexContainer setUp"> Wait For Other Players Submissions </div>');
+                    $('#gameArea').html('<div class="flexContainer setUp infoWaiting"> Wait For Other Players Submissions </div>');
                     //console.log("sazaahhh");
                     IO.socket.emit('playerAnswer',data);
                 }
@@ -708,6 +781,10 @@ jQuery(function($){
 
                 console.log('iVoted data: ' +data.vote);
                 IO.socket.emit('playerVote', data);
+                //audio test
+                document.getElementById('success').play();
+                var myAudio = new Audio('audio/misc_menu.wav');
+                myAudio.play;
             }
 
             
