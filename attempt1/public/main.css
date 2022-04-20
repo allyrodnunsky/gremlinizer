@@ -87,7 +87,7 @@ ul {
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
-    margin: 13px;
+    margin-bottom: 17px;
   }
 
   .submitBtn {
@@ -352,39 +352,39 @@ ul {
   }
 
   .greenGremlin1 {
-    position: absolute;
+    position: fixed;
     bottom: -220px;
     left: 90px;
     width: 410px;
   }
 
   .greenGremlin2 {
-    position: absolute;
+    position: fixed;
     top: 10%;
     left: 80%;
     width: 350px;
   }
 
   .purpGremlin1 {
-    position: absolute;
+    position: fixed;
     top: 60%;
     left: 80%;
     width: 350px;
   }
   .pinkGremlin1 {
-    position: absolute;
+    position: fixed;
     top: 0%;
     left: 10px;
     width: 320px;
   }
   .blueGremlin1 {
-    position: absolute;
+    position: fixed;
     top: 70%;
     left: 20%;
     width: 300px;
   }
   .blueGremlin2 {
-    position: absolute;
+    position: fixed;
     top: 85%;
     left: 70%;
     width: 270px;
@@ -465,7 +465,7 @@ ul {
       justify-content: center;
       align-items: center;
       text-transform: uppercase;
-      margin: 12px;
+      margin-bottom: 17px;
     }
     .response {
       display: flex;
@@ -725,39 +725,39 @@ ul {
     }
 
     .greenGremlin1 {
-      position: absolute;
-      top: 80%;
+      position: fixed;
+      top: 79%;
       left: 10%;
       width: 220px;
     }
 
     .greenGremlin2 {
-      position: absolute;
+      position: fixed;
       top: 50px;
       right: 0%;
       width: 220px;
     }
 
     .purpGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 60%;
-      left: 90%;
+      left: 100%;
       width: 190px;
     }
     .pinkGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 0%;
       left: 10px;
       width: 190px;
     }
     .blueGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 20px;
       left: 20%;
       width: 150px;
     }
     .blueGremlin2 {
-      position: absolute;
+      position: fixed;
       top: 520px;
       left: 70%;
       width: 170px;
@@ -840,6 +840,7 @@ ul {
       justify-content: center;
       align-items: center;
       text-transform: uppercase;
+      margin-bottom: 17px;
     }
     .response {
       display: flex;
@@ -1099,40 +1100,40 @@ ul {
     }
 
     .greenGremlin1 {
-      position: absolute;
-      top: 50%;
+      position: fixed;
+      top: 70%;
       left: 90px;
-      width: 310px;
+      width: 200px;
     }
 
     .greenGremlin2 {
-      position: absolute;
-      top: 60px;
-      left: 80%;
-      width: 310px;
+      position: fixed;
+      top: 10px;
+      left: 85%;
+      width: 190px;
     }
 
     .purpGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 60%;
-      left: 80%;
-      width: 250px;
+      left: 85%;
+      width: 190px;
     }
     .pinkGremlin1 {
-      position: absolute;
-      top: 0%;
-      left: 106px;
-      width: 250px;
+      position: fixed;
+      top: -40px;
+      left: 0px;
+      width: 190px;
     }
     .blueGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 70%;
       left: 20%;
       width: 200px;
     }
     .blueGremlin2 {
-      position: absolute;
-      top: 70%;
+      position: fixed;
+      top: 80%;
       left: 70%;
       width: 220px;
     }
@@ -1213,6 +1214,7 @@ ul {
       justify-content: center;
       align-items: center;
       text-transform: uppercase;
+      margin-bottom: 17px;
     }
     .response {
       display: flex;
@@ -1472,39 +1474,39 @@ ul {
       padding: 0px 350px;
     }
     .greenGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 80%;
       left: 10%;
       width: 20%;
     }
 
     .greenGremlin2 {
-      position: absolute;
+      position: fixed;
       top: 10%;
       left: 70%;
       width: 20%;
     }
 
     .purpGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 60%;
       left: 80%;
       width: 20%;
     }
     .pinkGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 0%;
       left: 1%;
       width: 20%;
     }
     .blueGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 70%;
       left: 20%;
       width: 20%;
     }
     .blueGremlin2 {
-      position: absolute;
+      position: fixed;
       top: 80%;
       left: 60%;
       width: 20%;
@@ -1850,39 +1852,39 @@ ul {
       padding: 0px 10px;
     }
     .greenGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 60%;
       left: 1%;
       width: 20%;
     }
 
     .greenGremlin2 {
-      position: absolute;
+      position: fixed;
       top: 5%;
       left: 80%;
       width: 20%;
     }
 
     .purpGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 60%;
       left: 80%;
       width: 20%;
     }
     .pinkGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 0%;
       left: 1%;
       width: 20%;
     }
     .blueGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 60%;
       left: 10%;
       width: 20%;
     }
     .blueGremlin2 {
-      position: absolute;
+      position: fixed;
       top: 65%;
       left: 70%;
       width: 15%;
@@ -2218,34 +2220,34 @@ ul {
       padding: 0px 10px;
     }
     .greenGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 80%;
       left: 1%;
       width: 30%;
     }
 
     .greenGremlin2 {
-      position: absolute;
+      position: fixed;
       top: 0%;
       left: 70%;
       width: 30%;
     }
 
     .purpGremlin1 {
-      position: absolute;
+      position: fixed;
       top: 65%;
       left: 70%;
       width: 35%;
     }
     .pinkGremlin1 {
-      position: absolute;
+      position: fixed;
       top: -20px;
       left: 1%;
       width: 35%;
     }
 
     .blueGremlin2 {
-      position: absolute;
+      position: fixed;
       top: 80%;
       left: 60%;
       width: 30%;
@@ -2580,39 +2582,39 @@ ul {
     padding: 0px 10px;
   }
   .greenGremlin1 {
-    position: absolute;
+    position: fixed;
     top: 80%;
     left: 10%;
     width: 35%;
   }
 
   .greenGremlin2 {
-    position: absolute;
+    position: fixed;
     top: 5%;
     left: 70%;
     width: 30%;
   }
 
   .purpGremlin1 {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 70%;
     width: 35%;
   }
   .pinkGremlin1 {
-    position: absolute;
+    position: fixed;
     top: 0%;
     left: 1%;
     width: 30%;
   }
   .blueGremlin1 {
-    position: absolute;
+    position: fixed;
     top: 85%;
     left: 30%;
     width: 25%;
   }
   .blueGremlin2 {
-    position: absolute;
+    position: fixed;
     top: 90%;
     left: 70%;
     width: 20%;
