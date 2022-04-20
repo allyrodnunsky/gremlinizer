@@ -653,9 +653,7 @@ jQuery(function($){
                               z.style.display = "none";
                             }
                         $('#gremlinizedMSG')
-                            .text(`You've been Gremlinized! No using the letters:`)
-                            //test
-                            .play(misc_menu_2.wav);
+                            .text(`You've been Gremlinized! No using the letters:`);
                         $('#gremlinizedLTRA')
                             .text(gremLett1[i]).css("display, inline-block");
                         $('#gremlinizedLTRB')
@@ -766,10 +764,6 @@ jQuery(function($){
                         .addClass('flexContainer')
                         .addClass('infoWaiting')
                         );
-
-                    document.getElementById('success').play();
-                    var buttonClick = new Audio('audio/misc_menu.wav');
-                    buttonClick.play();
 
                 var data = {
                     gameID: App.gameID,
