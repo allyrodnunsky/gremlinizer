@@ -18,77 +18,63 @@
 
   <body>
     <div id="gameArea">
-      <audio id="success" src="audio/misc_menu.wav"></audio>
       <!-- this area is where the templates below will be used -->
-      <!-- TESTING LOADING IN AUDIO HERE AND CALLIN W JAVASCRIPT IN EACH TEMPLATE -->
-      <audio id="buttonSound"> </audio>
+      <audio id="success" src="audio/misc_menu.wav"> </audio>
+  
     </div>
 
     <!-- title screen -->
     <script id="title-screen-template" type="text/template">
-             <!-- gremlins -->
-             <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
-             <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
-             <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
-             <img src="img/PinkGremGIF1.gif" alt="gremlin grrr"  class="pinkGremlin1"/>
-             <img src="img/blueGremGIF1.gif" alt="gremlin grrr" class="blueGremlin1"/>
-             <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
       <div class="flexContainer">
+        <!-- gremlins -->
+        <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
+        <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
+        <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
+        <img src="img/PinkGremGIF1.gif" alt="gremlin grrr"  class="pinkGremlin1"/>
+        <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
+        
+        <!-- text content -->
         <h1 class="titleMain"> Gremlinizer </h1>
-        <audio id="success" src="audio/misc_menu.wav"> </audio>
         <div class ="buttons">
           <audio id="success" src="audio/misc_menu.wav"> </audio>
-         <button id="btnCreateGame" class="btn"> CREATE GAME </button>
-         <button id="btnJoinGame" class="btn"> JOIN GAME </button>
-         <button id="btnInstructions" class="btn"> HOW TO PLAY </button>
-         <div style="clear:both"></div>
-       </div>
-
-
-       <!-- audio -->
-      <audio id="laugh" autoplay>
-        <source src="audio/gremlaugh1.wav" type="audio/mp3">
-       </audio>
-       </div>
+          <button id="btnCreateGame" class="btn"> CREATE GAME </button>
+          <button id="btnJoinGame" class="btn"> JOIN GAME </button>
+          <button id="btnInstructions" class="btn"> HOW TO PLAY </button>
+          <div style="clear:both"></div>
+        </div>
+      </div>
     </script>
 
     <!-- host screen -->
     <script id="create-game-template" type="text/template">
-      <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
-      <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
-      <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
-      <img src="img/blueGremGIF1.gif" alt="gremlin grrr" class="blueGremlin1"/>
-      <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
+      <!-- gremlins -->
       <audio id="success" src="audio/misc_menu.wav"> </audio>
       <button id="btnTitleScreen" class="backBtn" >
         &larr;
       </button>
         <div class="setUp">
-        <div class="flexContainer">
+          <div class="flexContainer">
+            <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
+            <img src="img/greenGremGIF2.gif" alt="gremlin grrr"  class="greenGremlin2"/>
+            <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
+            <img src="img/blueGremGIF1.gif" alt="gremlin grrr" class="blueGremlin1"/>
+            <img src="img/blueGremGIF1.gif" alt="gremlin grrr"  class="blueGremlin2"/>
 
+            <div class="infoHost">Open this site on your mobile device:</div>
+            <div id="gameURL" class="infoBigHost"> </div>
+            <button id="btnStartGame" class="btn" hidden> START GAME </button>
+            <audio id="success" src="audio/misc_menu.wav"> </audio>
+            <!-- types of rounds -->
+            <button id="btnStartSong" class="btn" hidden>Song</button>
+            <button id="btnStartStory" class="btn" hidden>Story</button>
+            <button id="btnStartRecipe" class="btn" hidden>Recipe</button>
 
+            <div class="infoHost">Then click <strong>JOIN GAME</strong> and enter the following Game ID:</div>
+            <div id="spanNewGameCode" class="gameID"></div>
 
-          <div class="infoHost">Open this site on your mobile device:</div>
-          <div id="gameURL" class="infoBigHost">Error!</div>
-          <button id="btnStartGame" class="btn" hidden> START GAME </button>
-          <audio id="success" src="audio/misc_menu.wav"> </audio>
-          <button id="btnStartSong" class="btn" hidden>Song</button>
-          <button id="btnStartStory" class="btn" hidden>Story</button>
-          <button id="btnStartRecipe" class="btn" hidden>Recipe</button>
-
-          <div class="infoHost">Then click <strong>JOIN GAME</strong> and enter the following Game ID:</div>
-          <div id="spanNewGameCode" class="gameID">Error!</div>
-
-          <!-- <div class="start buttons">
-            <br>
-            <br>
-
-            <button id="btnHostStartsGame" class="btn">Start Game</button>
-          </div> -->
-
-          <!-- <div id="playersWaiting"></div> -->
-
-      </div>
+            <div id="playersWaiting"> </div>
+          </div>
+        </div>
     </script>
 
     <!-- player screen -->
@@ -99,26 +85,26 @@
       <button id="btnTitleScreen" class="backBtn" >
         &larr;
       </button>
+      <!-- container for content -->
       <div class="flexContainer">
         <p class="infoBigJoin"> Complete information to begin game: </p>
-       <ul>
+        <ul>
         <li class="row">
-              <label for="inputPlayerName" class="inputLabels">Name:</label>
-              <input id="inputPlayerName" class="inputField" type="text" />
+          <label for="inputPlayerName" class="inputLabels">Name:</label>
+          <input id="inputPlayerName" class="inputField" type="text" />
         </li>
-          <li class="row">
-              <label for="inputGameId" class="inputLabels">Game ID:</label>
-              <input id="inputGameId" class="inputField" type="text"/>
-          </li>
+        <li class="row">
+          <label for="inputGameId" class="inputLabels">Game ID:</label>
+          <input id="inputGameId" class="inputField" type="text"/>
+        </li>
         </ul>
-          <div>
-              <button id="btnJoinWaitingRoom" class="btn" id="joined">Join Room</button>
-              <!-- Audio test -->
-              <audio id="success" src="audio/misc_menu.wav">
-                <!-- <source src="" type="audio/mpeg"> -->
-              </audio>
-              <div id="joinErrorMSG"> </div>
-          </div>
+        <div>
+          
+          <button id="btnJoinWaitingRoom" class="btn" id="joined">Join Room
+            <audio id="success" src="audio/misc_menu.wav"></audio>
+          </button>
+          <div id="joinErrorMSG"> </div>
+        </div>
       </div>
     </script>
 
@@ -132,10 +118,9 @@
 
       <audio id="success" src="audio/misc_menu.wav"> </audio>
       <div class="flexContainer">
-          <div id="playerWaitingMessage" class="infoWaiting"></div>
-          <audio id="success" src="audio/misc_menu.wav"> </audio>
-          <!-- <div class="start buttons">
-            <button id="btnPlayerStartsGame" class="btn">Start Game</button> -->
+        <div id="playerWaitingMessage" class="infoWaiting"></div>
+        <audio id="success" src="audio/misc_menu.wav"> </audio>
+        <audio id="laugh" src="audio/gremlaugh-short.wav"></audio>
       </div>
     </script>
 
@@ -160,7 +145,6 @@
 
     <!-- Round x screen (host)-->
     <script id="round-x-template" type="text/template">
-
       <audio id="success" src="audio/misc_menu.wav"> </audio>
       <div class="flexContainer">
         <div class="prompt">
@@ -168,15 +152,10 @@
             Prompt will go here when _________.
           </h1>
         </div>
-
-        <!-- timer stuff -->
-          <div id="hostWord">60</div>
-
       </div>
     </script>
 
     <!-- player response screen (player)-->
-
     <script id="round-response-template" type="text/template">
       <audio id="success" src="audio/misc_menu.wav"> </audio>
       <audio id="laugh" src="audio/gremlaugh1.wav"> </audio>
@@ -184,30 +163,35 @@
           <div id="gremBox" class="gremlinizedScreen">
             <div id="gremlinizedMSG" class="gremMSG"></div>
             <img src="../img/gremlin1.png" alt="gremlinized" class="gremlinizedImg" id ="gremlinizedImg" style="display:none"/>
+            <!-- test: error sound -->
+            <audio id="error" src="audio/misc_menu_2.wav"> </audio>
+            
             <div class="letterGrid">
               <div id="gremlinizedLTRA" class="gremLetter" style="display:none"></div>
               <div id="gremlinizedLTRB"  class="gremLetter" style="display:none"></div>
-
-          </div>
-          <div class="response">
-            <div id="roundPrompt">
-             <input id="inputPlayerResponse" class="answerField" type="text" />
-            <div>
-             <button id="btnSubmit" class="submitBtn">Submit</button>
             </div>
-      </div>
-
-          <br>
-         <div id="playerWaitingMessage" class="flexContainer"></div>
+            <div class="response">
+              <div id="roundPrompt">
+                <input id="inputPlayerResponse" class="answerField" type="text" />
+                <div>
+                  <audio id="success" src="audio/misc_menu.wav"> </audio>
+                  <button id="btnSubmit" class="submitBtn">Submit</button>
+                </div>
+              </div>
+            </div>
           </div>
+          <div id="playerWaitingMessage" class="flexContainer"></div>
+        </div>
     </script>
 
+    <!-- end game screen -->
     <script id="game-end-template" type="text/template">
       <img src="img/greenGremGIF1.gif" alt="blue gremlin"  class="greenGremlin1"/>
       <img src="img/purpGremGIF1.gif" alt="gremlin grrr"  class="purpGremlin1"/>
       <img src="img/PinkGremGIF1.gif" alt="gremlin grrr"  class="pinkGremlin1"/>
 
       <audio id="success" src="audio/misc_menu.wav"> </audio>
+      <audio id="laugh" src="audio/gremlaugh1.wav"> </audio>
       <div class="flexContainer">
         <div class="gameEndWrapper">
           <div class="finalStory">
