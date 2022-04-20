@@ -87,11 +87,7 @@ ul {
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
-<<<<<<< HEAD
     margin-bottom: 17px;
-=======
-    margin: 5px 0px
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
   }
 
   .submitBtn {
@@ -357,11 +353,7 @@ ul {
 
   .greenGremlin1 {
     position: fixed;
-<<<<<<< HEAD
     bottom: -220px;
-=======
-    bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
     left: 90px;
     width: 410px;
   }
@@ -387,21 +379,13 @@ ul {
   }
   .blueGremlin1 {
     position: fixed;
-<<<<<<< HEAD
     top: 70%;
-=======
-    bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
     left: 20%;
     width: 300px;
   }
   .blueGremlin2 {
     position: fixed;
-<<<<<<< HEAD
-    top: 85%;
-=======
     bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
     left: 70%;
     width: 270px;
   }
@@ -481,11 +465,7 @@ ul {
       justify-content: center;
       align-items: center;
       text-transform: uppercase;
-<<<<<<< HEAD
       margin-bottom: 17px;
-=======
-      margin: 5px 0px
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
     }
     .response {
       display: flex;
@@ -746,15 +726,9 @@ ul {
 
     .greenGremlin1 {
       position: fixed;
-<<<<<<< HEAD
       top: 79%;
       left: 10%;
       width: 220px;
-=======
-      bottom:0px;
-      left: 90px;
-      width: 260px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
     }
 
     .greenGremlin2 {
@@ -778,21 +752,13 @@ ul {
     }
     .blueGremlin1 {
       position: fixed;
-<<<<<<< HEAD
-      top: 20px;
-=======
       bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
       left: 20%;
       width: 170px;
     }
     .blueGremlin2 {
       position: fixed;
-<<<<<<< HEAD
-      top: 520px;
-=======
       bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
       left: 70%;
       width: 170px;
     }
@@ -874,11 +840,7 @@ ul {
       justify-content: center;
       align-items: center;
       text-transform: uppercase;
-<<<<<<< HEAD
       margin-bottom: 17px;
-=======
-      margin: 10px 0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
     }
     .response {
       display: flex;
@@ -1139,40 +1101,24 @@ ul {
       padding: 0px 350px;
     }
 
-<<<<<<< HEAD
     .greenGremlin1 {
       position: fixed;
       top: 70%;
       left: 90px;
       width: 200px;
-=======
-    .greenGremlin1 { 
-      position: fixed;
-      bottom:0px;
-      left: 90px;
-      width: 240px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
     }
     /* btoomGrem */
 
     .greenGremlin2 {
-<<<<<<< HEAD
       position: fixed;
       top: 10px;
       left: 85%;
       width: 190px;
-=======
-      position: absolute;
-      top: 60px;
-      left: 80%;
-      width: 240px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
     }
 
     .purpGremlin1 {
       position: fixed;
       top: 60%;
-<<<<<<< HEAD
       left: 85%;
       width: 190px;
     }
@@ -1185,30 +1131,12 @@ ul {
     .blueGremlin1 {
       position: fixed;
       top: 70%;
-=======
-      left: 83%;
-      width: 200px;
-    }
-    .pinkGremlin1 {
-      position: absolute;
-      top: 0%;
-      left: 0px;
-      width: 180px;
-    }
-    .blueGremlin1 {
-      position: fixed;
-      bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
       left: 20%;
       width: 150px;
     }
     .blueGremlin2 {
       position: fixed;
-<<<<<<< HEAD
       top: 80%;
-=======
-      bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
       left: 70%;
       width: 170px;
     }
@@ -1289,11 +1217,7 @@ ul {
       justify-content: center;
       align-items: center;
       text-transform: uppercase;
-<<<<<<< HEAD
       margin-bottom: 17px;
-=======
-      margin: 5px 0px
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
     }
     .response {
       display: flex;
@@ -1554,11 +1478,7 @@ ul {
     }
     .greenGremlin1 {
       position: fixed;
-<<<<<<< HEAD
       top: 80%;
-=======
-      bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
       left: 10%;
       width: 20%;
     }
@@ -1584,21 +1504,13 @@ ul {
     }
     .blueGremlin1 {
       position: fixed;
-<<<<<<< HEAD
       top: 70%;
-=======
-      bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
       left: 20%;
       width: 20%;
     }
     .blueGremlin2 {
       position: fixed;
-<<<<<<< HEAD
       top: 80%;
-=======
-      bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
       left: 60%;
       width: 20%;
     }
@@ -1944,11 +1856,7 @@ ul {
     }
     .greenGremlin1 {
       position: fixed;
-<<<<<<< HEAD
       top: 60%;
-=======
-      bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
       left: 1%;
       width: 20%;
     }
@@ -1974,21 +1882,13 @@ ul {
     }
     .blueGremlin1 {
       position: fixed;
-<<<<<<< HEAD
       top: 60%;
-=======
-      bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
       left: 10%;
       width: 20%;
     }
     .blueGremlin2 {
       position: fixed;
-<<<<<<< HEAD
       top: 65%;
-=======
-      bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
       left: 70%;
       width: 15%;
     }
@@ -2324,11 +2224,7 @@ ul {
     }
     .greenGremlin1 {
       position: fixed;
-<<<<<<< HEAD
       top: 80%;
-=======
-      bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
       left: 1%;
       width: 30%;
     }
@@ -2352,22 +2248,10 @@ ul {
       left: 1%;
       width: 35%;
     }
-<<<<<<< HEAD
 
     .blueGremlin2 {
       position: fixed;
       top: 80%;
-=======
-    .blueGremlin1 {
-      position: fixed;
-      bottom:0px;
-      left: 10%;
-      width: 30%;
-    }
-    .blueGremlin2 {
-      position: fixed;
-      bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
       left: 60%;
       width: 30%;
     }
@@ -2702,11 +2586,7 @@ ul {
   }
   .greenGremlin1 {
     position: fixed;
-<<<<<<< HEAD
     top: 80%;
-=======
-    bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
     left: 10%;
     width: 35%;
   }
@@ -2732,21 +2612,13 @@ ul {
   }
   .blueGremlin1 {
     position: fixed;
-<<<<<<< HEAD
     top: 85%;
-=======
-    bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
     left: 30%;
     width: 25%;
   }
   .blueGremlin2 {
     position: fixed;
-<<<<<<< HEAD
     top: 90%;
-=======
-    bottom:0px;
->>>>>>> 99332fc80223779f8ba5d7165ce586ec4335cede
     left: 70%;
     width: 20%;
   }
