@@ -746,7 +746,7 @@ ul {
     }
     .pinkGremlin1 {
       position: fixed;
-      top: 0%;
+      top: -40px;
       left: 10px;
       width: 190px;
     }
@@ -761,6 +761,14 @@ ul {
       bottom:0px;
       left: 70%;
       width: 170px;
+    }
+
+    .spinGremlin {
+      position: fixed;
+      left:0px;
+      top: 45%;
+      width: 170px;
+
     }
   }
 }
@@ -1119,7 +1127,7 @@ ul {
     .purpGremlin1 {
       position: fixed;
       top: 60%;
-      left: 85%;
+      left: 88%;
       width: 190px;
     }
     .pinkGremlin1 {
@@ -1563,7 +1571,7 @@ ul {
     }
 
     .titleMain {
-      padding-top: 5%;
+      padding-top: 10%;
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
@@ -1689,6 +1697,7 @@ ul {
       justify-content: space-evenly;
       align-items: center;
       align-content: space-evenly;
+      margin-top: 30px;
     }
     .infoBigHost {
       color: #f7f3e3;
@@ -1882,14 +1891,14 @@ ul {
     }
     .blueGremlin1 {
       position: fixed;
-      top: 60%;
+      top: 70%;
       left: 10%;
       width: 20%;
     }
     .blueGremlin2 {
       position: fixed;
-      top: 65%;
-      left: 70%;
+      top: 75%;
+      left: 60%;
       width: 15%;
     }
   }
