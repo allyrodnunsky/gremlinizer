@@ -33,6 +33,7 @@ exports.initGame = function(sio, socket){
     gameSocket.on('allAnswered', allAnswered);
     gameSocket.on('playerVote', votingMachine);
     gameSocket.on('allVoted', hostNextRound);
+    gameSocket.on('restartGame', restartGame)
 
 
     //player functions
@@ -70,6 +71,12 @@ function hostCreateNewGame() {
     //join the room, wait for players
     this.join(thisGameID);
     //console.log("thus many players are in the room after host joins"+io.sockets.adapter.rooms.get(thisGameID).size);
+}
+
+function restartGame(gameID) {
+    console.log("restarting game");
+    io.sockets.in(gameID).emit('restartClientGames');
+    io.sockets.in(gameID).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(data.gameID).size} );
 }
 
 function hostStartGame(gameID) {
@@ -335,7 +342,11 @@ var songs = [
 
 ]
 
-var story = [
+var story = [ [
+    "Goose ______ under sauce:",
+    "Wash ______ giblets",
+    "place them in a pan and pour with ______",
+]
 
 ]
 

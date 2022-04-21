@@ -31,6 +31,7 @@ jQuery(function($){
             IO.socket.on('storeVote', IO.storePlayerVote );
             IO.socket.on('nextRoundInit', IO.nextRound );
             IO.socket.on('numPlayerUpdate', IO.numPlayerUpdate );
+            IO.socket.on('restartClientGames', IO.restartFresh);
             
 
             //IO.socket.on('beginNewGame', IO.beginNewGame );
@@ -116,6 +117,10 @@ jQuery(function($){
             if(App.myRole === 'Host') {
                 App.Host.endGame(data);
             }
+        },
+        restartFresh : function() {
+            console.log("restart fresh called");
+            App.Player.onJoinClick();
         },
 
 
@@ -503,6 +508,17 @@ jQuery(function($){
                 
 
             },
+
+            // restartGame : function() {
+            //     App.$gameArea.html(App.$templateNewGame);
+            //     $('#spanNewGameCode').text(App.gameID);
+            //     this.players= []; //contains references to player data
+            //     this.isNewGame= false; //flag to indicate if a new game is starting
+            //     this.numPlayersInRoom=  0;
+            //     this.rounds= [];
+            //     this.numPlayersVoted= 0;
+            //     IO.socket.emit('restartGame', App.gameID);
+            // },
 
             //host countdown pg
             gameCountdown : function() {
