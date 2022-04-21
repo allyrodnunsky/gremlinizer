@@ -68,7 +68,7 @@ jQuery(function($){
             
             //console.log('my role: ' + App.myRole);
             App.Host.numPlayersInRoom = data.numPlayer -1;
-            //console.log('player playersUpdated: ' + App.Host.numPlayersInRoom);
+            console.log('player playersUpdated: ' + App.Host.numPlayersInRoom);
             //playerses = data.numPlayer;
 
             var dataIn = {
@@ -176,6 +176,8 @@ jQuery(function($){
             App.$doc.on('click', '#btnPlayerStartsGame', App.Player.onPlayerStartGameClick);
             App.$doc.on('click', '#btnInstructions', App.Player.onInstructionClick);
             App.$doc.on('click', '#btnTitleScreen', App.Player.onTitleScreenClick);
+            //App.$doc.on('click', '#btnRestart', App.onRestartClick);
+
         },
 
         //show intial title screen
@@ -280,7 +282,7 @@ jQuery(function($){
                 //console.log("host num p room" + App.Host.numPlayersInRoom);
                 //App.Host.numPlayersInRoom += 1;
                 //console.log('times check');
-                if (App.Host.numPlayersInRoom >= 2) {
+                if (App.Host.numPlayersInRoom >= 3) {
                     //console.log("App.Host.numPlayersInRoom is greater 2");
                     $('#btnStartSong')
                         .removeAttr('hidden');
@@ -379,7 +381,9 @@ jQuery(function($){
              */
 
             storeVote : function (data) {
-                //console.log("storing Votes With a Host");
+                console.log("storing Votes With a Host");
+                console.log("num players as known by host" + App.Host.numPlayersInRoom);
+                console.log("num P Voted" + App.Host.numPlayersVoted);
                 for (let i = 0; i < App.Host.rounds.length; i++) {
                     if (App.Host.rounds[i].answer == data.vote && data.round == App.currentRound && App.Host.rounds[i].round == App.currentRound) {
                         App.Host.rounds[i].votes +=1;//stores the vote from player
@@ -387,7 +391,7 @@ jQuery(function($){
                         //console.log('numpvoted: '+App.Host.numPlayersVoted);
                     }
                 }
-                if (App.Host.numPlayersVoted >= App.Host.numPlayersInRoom) {
+                if (App.Host.numPlayersVoted >= App.Host.numPlayersInRoom && data.round == App.currentRound) {
                     //console.log('score+gremlinizing!');
                     var gremlins = [];
                     var maxVotes = 0;
@@ -495,6 +499,8 @@ jQuery(function($){
                 //console.log($fs);
                 $('#storyOutput').html($fs);
                 $('#finalLeaderBoard').html($plrs);
+
+                
 
             },
 
