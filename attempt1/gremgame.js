@@ -42,7 +42,7 @@ exports.initGame = function(sio, socket){
     gameSocket.on('playerAnswer', playerAnswer);
 
     gameSocket.on('disconnect', function() {
-        console.log('Got disconnect!');
+        //console.log('Got disconnect!');
         
         for (let i = 0; i < activeRooms.length; i++) {
             if (io.sockets.adapter.rooms.get(activeRooms[i])) {
@@ -69,7 +69,7 @@ function hostCreateNewGame() {
 
     //join the room, wait for players
     this.join(thisGameID);
-    console.log("thus many players are in the room after host joins"+io.sockets.adapter.rooms.get(thisGameID).size);
+    //console.log("thus many players are in the room after host joins"+io.sockets.adapter.rooms.get(thisGameID).size);
 }
 
 function hostStartGame(gameID) {
@@ -89,7 +89,7 @@ function hostStartGame(gameID) {
 }
 
 function hostNextRound(data) {
-    console.log('hostNextRound!');
+    //console.log('hostNextRound!');
     if(data.round < promptArr[indexChoice].length){
         // console.log(data.gremlins[0]);
         // new phrase to host, players get submit screen
@@ -112,21 +112,21 @@ function endGame(data) {
 }
 
 function allAnswered (data) {
-    console.log('round answers: '+ data);
+    //console.log('round answers: '+ data);
     io.sockets.in(data.gameID).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(data.gameID).size} );
     io.sockets.in(data.gameID).emit('loadVote', data);
 }
 
 function playerAnswer(data) {
-    console.log('pleyers answers: '+ JSON.stringify(data));
-    console.log('Player ID: ' + data.playerID + ' answered a question with: ' + data.answer);
+    //console.log('pleyers answers: '+ JSON.stringify(data));
+    //console.log('Player ID: ' + data.playerID + ' answered a question with: ' + data.answer);
 
     // The player's answer is attached to the data object.  \
     var answerTimer = performance.now();//tracks when any particular answer is submitted
     //console.log(answerTimer);
 
     data.timeSub = answerTimer - roundTimer;//tracks the time it took for that player to submit
-    console.log('submission time: '+ data.timeSub);
+    //console.log('submission time: '+ data.timeSub);
 
     io.sockets.in(data.gameID).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(data.gameID).size} );
     io.sockets.in(data.gameID).emit('storePlayerAnswer', data);
@@ -140,7 +140,7 @@ function hostPrepareGame(gameID,promptChoice) {//promptChoice
         mySocketID : sock.id,
         gameID : gameID
     };
-    console.log('prompt chpoice is: ' + promptChoice);
+    //console.log('prompt chpoice is: ' + promptChoice);
  
     if (promptChoice == 'Song') {
         promptArr = songs;
@@ -153,8 +153,8 @@ function hostPrepareGame(gameID,promptChoice) {//promptChoice
     }
     
     indexChoice = Math.floor(Math.random() * promptArr.length);
-    console.log('Index choice is: '+ indexChoice);
-    console.log('first prompt arr choice is: '+ promptArr[0][1]);
+    //console.log('Index choice is: '+ indexChoice);
+    //console.log('first prompt arr choice is: '+ promptArr[0][1]);
     
     //game starting
     io.sockets.in(data.gameID).emit('beginNewGame', data);
@@ -162,31 +162,31 @@ function hostPrepareGame(gameID,promptChoice) {//promptChoice
 
 
 function votingMachine(data) {
-    console.log("storing Votes With a machine");
+    //console.log("storing Votes With a machine");
     io.sockets.in(data.gameID).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(data.gameID).size} );
     io.sockets.in(data.gameID).emit('storeVote', data);
 }
 
 function playerJoinGame(data) {
     var sock = this;
-    console.log(data);
+    //console.log(data);
     // var room = gameSocket.rooms["/" + data.gameID];
     var room = data.gameID;
-    console.log('player html input: ', data.gameID);
-    console.log('io.sockets.adapter.rooms[room]: ', io.sockets.adapter.rooms[room]);
+    //console.log('player html input: ', data.gameID);
+    //console.log('io.sockets.adapter.rooms[room]: ', io.sockets.adapter.rooms[room]);
 
     if(io.sockets.adapter.rooms.get(room)) {
         data.mySocketID = sock.id;
         sock.join(data.gameID);
-        console.log("playerjoin game func");
-        console.log("thus many players are in the room after player joins"+io.sockets.adapter.rooms.get(room).size);
+        //console.log("playerjoin game func");
+        //console.log("thus many players are in the room after player joins"+io.sockets.adapter.rooms.get(room).size);
 
         io.sockets.in(data.gameID).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(data.gameID).size} );
         io.sockets.in(data.gameID).emit('playerJoinedRoom', data);
         
         
         } else {
-            console.log("should throw error in client");
+            //console.log("should throw error in client");
             this.emit('error',{message: "This room does not exist."} ); //error message
     }
 
@@ -204,7 +204,7 @@ function sendWord (gremlinData) {
         gremlins: gremlinData.gremlins,
         phrase: newPhrase
     }
-    console.log(gremlinData.gremlins +': should be gremlinized')
+    //console.log(gremlinData.gremlins +': should be gremlinized')
     io.sockets.in(gremlinData.gameID).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(gremlinData.gameID).size} );
     io.sockets.in(gremlinData.gameID).emit('nextRoundInit', data);
 }

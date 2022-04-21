@@ -46,7 +46,7 @@ jQuery(function($){
         onConnected : function() {
             //console.log("IO");
             App.mySocketID = IO.socket.id;
-            console.log(App.mySocketID + ' myRole: ' + App.myRole);
+            //console.log(App.mySocketID + ' myRole: ' + App.myRole);
             
         },
 
@@ -58,8 +58,8 @@ jQuery(function($){
 
 
         playerJoinedRoom : function(data) {
-            console.log('player joined room called');
-            console.log('my role: ' + App.myRole);
+            //console.log('player joined room called');
+            //console.log('my role: ' + App.myRole);
             
             App[App.myRole].updateWaitingScreen(data);
         },
@@ -68,7 +68,7 @@ jQuery(function($){
             
             //console.log('my role: ' + App.myRole);
             App.Host.numPlayersInRoom = data.numPlayer -1;
-            console.log('player playersUpdated: ' + App.Host.numPlayersInRoom);
+            //console.log('player playersUpdated: ' + App.Host.numPlayersInRoom);
             //playerses = data.numPlayer;
 
             var dataIn = {
@@ -106,7 +106,7 @@ jQuery(function($){
         },
 
         loadVote : function(data) {
-            console.log(App.mySocketID + ' myRole: ' + App.myRole + 'triggerVote');
+            //console.log(App.mySocketID + ' myRole: ' + App.myRole + 'triggerVote');
             if(App.myRole === 'Player') {
                 App.Player.triggerVote(data);
             }
@@ -206,11 +206,11 @@ jQuery(function($){
                
             },
             onStartClick: function () {
-                console.log('clicked start a game' + startGame);
+                //console.log('clicked start a game' + startGame);
                 //console.log(IO);
                 var $btn = $(this);
                 var promptChoice = $btn.html();
-                console.log('button prompt is ' + promptChoice);
+                //console.log('button prompt is ' + promptChoice);
 
                 startGame = true;
                 if(startGame){
@@ -222,7 +222,7 @@ jQuery(function($){
                     IO.socket.emit('hostRoomStart', App.gameID, promptChoice);//,promptChoice 
                  }
 
-                console.log('clicked start a game' + startGame);
+                //console.log('clicked start a game' + startGame);
             },
 
 
@@ -235,7 +235,7 @@ jQuery(function($){
                 //App.Host.numPlayersInRoom = 0;
                 
                 App.Host.displayNewGameScreen();
-                console.log("game create with id: " + App.gameID);
+                //console.log("game create with id: " + App.gameID);
 
                 document.getElementById('success').play();
                 var buttonClick = new Audio('audio/misc_menu.wav');
@@ -269,7 +269,7 @@ jQuery(function($){
                     App.Host.displayNewGameScreen();
                 }
 
-                console.log('host update waiting screen called');
+                //console.log('host update waiting screen called');
 
                 $('#playersWaiting')
                     .append('<p/>')
@@ -277,12 +277,12 @@ jQuery(function($){
 
                 //populate players[] with data
                 App.Host.players.push(data);
-                console.log('my name is: ' + data.playerName +'in gameID ' + data.gameID);
-                console.log("host num p room" + App.Host.numPlayersInRoom);
+                //console.log('my name is: ' + data.playerName +'in gameID ' + data.gameID);
+                //console.log("host num p room" + App.Host.numPlayersInRoom);
                 //App.Host.numPlayersInRoom += 1;
                 //console.log('times check');
                 if (App.Host.numPlayersInRoom >= 2) {
-                    console.log("App.Host.numPlayersInRoom is greater 2");
+                    //console.log("App.Host.numPlayersInRoom is greater 2");
                     $('#btnStartSong')
                         .removeAttr('hidden');
                     $('#btnStartStory')
@@ -322,7 +322,7 @@ jQuery(function($){
 
             storeAnswer : function(data) {
                 //console.log('Datums');
-                console.log('score should be 0 ' + data.score);
+                //console.log('score should be 0 ' + data.score);
                 for (let i = 0; i < App.Host.players.length; i++) {
                     console.log('playerID grem status'+App.Host.players[i].playerID + '  ' + App.Host.players[i].gremStatus)
                     if (data.playerID == App.Host.players[i].playerID && App.Host.players[i].gremStatus ==true) {
@@ -332,14 +332,14 @@ jQuery(function($){
                 }
                 
                 //these show the correct names
-                console.log('1 player name: ', App.Host.players[0].playerName);
-                console.log('2 player name: ', App.Host.players[1].playerName);
+                //console.log('1 player name: ', App.Host.players[0].playerName);
+                //console.log('2 player name: ', App.Host.players[1].playerName);
 
                 //this was giving an error bc i
                 //console.log(App.Host.players[i].gremStatus + ' had timeSlow on store: ' + data.timesSlow);
                 
                 App.Host.rounds.push(data);
-                console.log(this.rounds[0].score);
+                //console.log(this.rounds[0].score);
                 App.Host.answerCheck();
                 
                 //console.log(App.Host.gameID);
@@ -349,19 +349,19 @@ jQuery(function($){
                 var numAnswers = 0;
                 var roundAnswers = [];
                 var roundPID = [];
-                console.log('answerCheck running: current round:' +App.currentRound);
+                //console.log('answerCheck running: current round:' +App.currentRound);
                 for (let i = 0; i < App.Host.rounds.length; i++) {
                     if (App.Host.rounds[i].round == App.currentRound) {
                         roundAnswers.push(App.Host.rounds[i].answer);
                         roundPID.push(App.Host.rounds[i].playerID);
                         numAnswers ++;
-                        console.log('answerCheck: '+numAnswers+ '  i:' +i + ' numPlayersInRoom: ' + App.Host.numPlayersInRoom + ' players length:' + App.Host.players.length);
+                        //console.log('answerCheck: '+numAnswers+ '  i:' +i + ' numPlayersInRoom: ' + App.Host.numPlayersInRoom + ' players length:' + App.Host.players.length);
                     }
                 }
                 //triggering vote screen
                 //if all players answered
                 if (numAnswers == App.Host.numPlayersInRoom) {
-                    console.log('allAnswered from answer check');
+                    //console.log('allAnswered from answer check');
                     numAnswers = 0;
                     var data = {
                         gameID: App.gameID,
@@ -382,16 +382,16 @@ jQuery(function($){
              */
 
             storeVote : function (data) {
-                console.log("storing Votes With a Host");
+                //console.log("storing Votes With a Host");
                 for (let i = 0; i < App.Host.rounds.length; i++) {
                     if (App.Host.rounds[i].answer == data.vote && data.round == App.currentRound && App.Host.rounds[i].round == App.currentRound) {
                         App.Host.rounds[i].votes +=1;//stores the vote from player
                         this.numPlayersVoted ++;//watch out for this :0
-                        console.log('numpvoted: '+App.Host.numPlayersVoted);
+                        //console.log('numpvoted: '+App.Host.numPlayersVoted);
                     }
                 }
                 if (App.Host.numPlayersVoted >= App.Host.numPlayersInRoom) {
-                    console.log('score+gremlinizing!');
+                    //console.log('score+gremlinizing!');
                     var gremlins = [];
                     var maxVotes = 0;
                     var leadPlayer = 0; //index for most voted player
@@ -412,8 +412,8 @@ jQuery(function($){
                     var bestPlayer = this.rounds[leadPlayer].playerID;
                     this.rounds[leadPlayer].score =10;
 
-                    console.log('winning answer is ' + this.rounds[leadPlayer].answer);
-                    console.log('length of players aray' +App.Host.players.length)
+                    //console.log('winning answer is ' + this.rounds[leadPlayer].answer);
+                    //console.log('length of players aray' +App.Host.players.length)
 
                     for (let i = 0; i < App.Host.players.length; i++) {                       
                         
@@ -437,9 +437,9 @@ jQuery(function($){
                             App.Host.players[i].score += 10;
                         }
                         //check this log
-                        console.log('players name and times slow' + this.players[i].playerName + ' ||||| ' + this.players[i].timesSlow);
+                        //console.log('players name and times slow' + this.players[i].playerName + ' ||||| ' + this.players[i].timesSlow);
                     }
-                    console.log (gremlins[0]);
+                    //console.log (gremlins[0]);
                     //this.rounds[leadPlayer].score = 10;
                     //console.log(this.rounds[leadPlayer].playerID +'has score'+ this.rounds[leadPlayer].score + '||||||' + this.rounds[slowPoke].playerID + ': is the slowpoke');
                 
@@ -461,7 +461,7 @@ jQuery(function($){
             endGame : function (data) {
                 var topAnswers = [];
                 var temp = [];
-                console.log('currentRound at endgame:  ' + App.currentRound);
+                //console.log('currentRound at endgame:  ' + App.currentRound);
 
                 App.$gameArea.html(App.$templateEndGame);
 
@@ -471,8 +471,8 @@ jQuery(function($){
                 this.players.sort(function(a, b){return b.score - a.score});
 
                 for (let i = 0; i < this.rounds.length; i++) {
-                    console.log (this.rounds[i].score);
-                    console.log (this.rounds[i].answer);
+                    //console.log (this.rounds[i].score);
+                    //console.log (this.rounds[i].answer);
                     if (this.rounds[i].score == 10) {
                         topAnswers.push(this.rounds[i].answer);
                         //console.log(topAnswers[i]);
@@ -480,7 +480,7 @@ jQuery(function($){
                 }
                 for (let i = 0; i <topAnswers.length; i++) {
                     temp[i] = data.phrases[i].replace('______', topAnswers[i]);
-                    console.log(temp[i]);
+                    //console.log(temp[i]);
                 }
 
 
@@ -507,7 +507,7 @@ jQuery(function($){
                 // Prepare the game screen with new HTML
                 App.$gameArea.html(App.$templateHostScreen);
                 IO.socket.emit('hostStartGame', App.gameID);
-                console.log('gameCntdown ID:' + App.gameID);
+                //console.log('gameCntdown ID:' + App.gameID);
                     
                 //unnecessary TODO: display names on screen
                 //App.doTextFit('#hostWord');
@@ -562,7 +562,7 @@ jQuery(function($){
                 document.getElementById('success').play();
                 var buttonClick = new Audio('audio/misc_menu.wav');
                 buttonClick.play;
-                console.log("audio joinclick");
+                //console.log("audio joinclick");
 
                 var data = {
                     gameID: +($('#inputGameId').val()),
@@ -588,7 +588,7 @@ jQuery(function($){
             //update player waiting screen
             updateWaitingScreen : function(data) {
                 // console.log('io.socket.id is: ' + IO.socket.id);
-                console.log('data.mySocketID: ' + data.mySocketID + 'ing Gmnae' +  data.gameID);
+                //console.log('data.mySocketID: ' + data.mySocketID + 'ing Gmnae' +  data.gameID);
 
                 document.getElementById('success').play();
                 var myAudio = new Audio('audio/misc_menu.wav');
@@ -638,7 +638,7 @@ jQuery(function($){
                         document.getElementById('laugh').play();
                         var gremLaugh = new Audio('audio/gremlaugh1.wav');
                         gremLaugh.play;
-                        console.log(App.mySocketID +" should be gremlinized");
+                        //console.log(App.mySocketID +" should be gremlinized");
                         var x = document.getElementById("gremlinizedImg");
                         if (x.style.display === "none") {
                             x.style.display = "block";
@@ -697,7 +697,7 @@ jQuery(function($){
                     var score = 0;
                     var gremStatus = false;
                     var timeSub = 0;
-                    console.log('current round on player submit' + App.currentRound);
+                    //console.log('current round on player submit' + App.currentRound);
 
                     // Send the player info and tapped word to the server so
                     // the host can check the answer.
@@ -779,7 +779,7 @@ jQuery(function($){
                     round: App.currentRound
                 }
 
-                console.log('iVoted data: ' +data.vote);
+                //console.log('iVoted data: ' +data.vote);
                 IO.socket.emit('playerVote', data);
                 //audio test
                 document.getElementById('success').play();
@@ -794,7 +794,7 @@ jQuery(function($){
             // Display the starting time on the screen.
             $el.text(startTime);
 
-            console.log('Starting Countdown...');
+            //console.log('Starting Countdown...');
 
             // Start a 1 second timer
             var timer = setInterval(countItDown,1000);
