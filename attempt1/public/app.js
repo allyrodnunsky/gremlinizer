@@ -181,7 +181,7 @@ jQuery(function($){
             App.$doc.on('click', '#btnPlayerStartsGame', App.Player.onPlayerStartGameClick);
             App.$doc.on('click', '#btnInstructions', App.Player.onInstructionClick);
             App.$doc.on('click', '#btnTitleScreen', App.Player.onTitleScreenClick);
-            //App.$doc.on('click', '#btnRestart', App.onRestartClick);
+            App.$doc.on('click', '#btnRestart', App.Host.restartGame);
 
         },
 
@@ -387,12 +387,14 @@ jQuery(function($){
 
             storeVote : function (data) {
                 console.log("storing Votes With a Host");
-                console.log("num players as known by host" + App.Host.numPlayersInRoom);
-                console.log("num P Voted" + App.Host.numPlayersVoted);
+                console.log("num players as known by host " + App.Host.numPlayersInRoom);
+                console.log("num P Voted " + App.Host.numPlayersVoted);
+                console.log("round " + App.currentRound);
                 for (let i = 0; i < App.Host.rounds.length; i++) {
                     if (App.Host.rounds[i].answer == data.vote && data.round == App.currentRound && App.Host.rounds[i].round == App.currentRound) {
                         App.Host.rounds[i].votes +=1;//stores the vote from player
                         this.numPlayersVoted ++;//watch out for this :0
+                        console.log("num P Voted$ " + App.Host.numPlayersVoted);
                         //console.log('numpvoted: '+App.Host.numPlayersVoted);
                     }
                 }
@@ -509,16 +511,16 @@ jQuery(function($){
 
             },
 
-            // restartGame : function() {
-            //     App.$gameArea.html(App.$templateNewGame);
-            //     $('#spanNewGameCode').text(App.gameID);
-            //     this.players= []; //contains references to player data
-            //     this.isNewGame= false; //flag to indicate if a new game is starting
-            //     this.numPlayersInRoom=  0;
-            //     this.rounds= [];
-            //     this.numPlayersVoted= 0;
-            //     IO.socket.emit('restartGame', App.gameID);
-            // },
+            restartGame : function() {
+                App.$gameArea.html(App.$templateNewGame);
+                $('#spanNewGameCode').text(App.gameID);
+                this.players= []; //contains references to player data
+                this.isNewGame= false; //flag to indicate if a new game is starting
+                this.numPlayersInRoom=  0;
+                this.rounds= [];
+                this.numPlayersVoted= 0;
+                IO.socket.emit('restartGame', App.gameID);
+            },
 
             //host countdown pg
             gameCountdown : function() {
