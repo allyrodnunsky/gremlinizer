@@ -137,6 +137,8 @@ jQuery(function($){
             App.cacheElements(); //refernece to on-screen html elements
             App.bindEvents();
             App.showInitScreen();
+
+            
         },
 
         //display html elements
@@ -198,13 +200,16 @@ jQuery(function($){
                 //console.log(IO);
 
                 IO.socket.emit('hostCreateNewGame');
-                document.getElementById('success').play();
-                var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play;
+                // document.getElementById('success').play();
+                // var buttonClick = new Audio('audio/misc_menu.wav');
+                // buttonClick.play();
 
-                
+                var backgroundMusic = new Audio('audio/background-track.wav');
+                backgroundMusic.play();
+
                
             },
+
             onStartClick: function () {
                 //console.log('clicked start a game' + startGame);
                 //console.log(IO);
@@ -214,9 +219,8 @@ jQuery(function($){
 
                 startGame = true;
                 if(startGame){
-                    document.getElementById('success').play();
                     var buttonClick = new Audio('audio/misc_menu.wav');
-                    buttonClick.play;
+                    buttonClick.play();
                     //call host room start in gremgame
                     //console.log('early Num players in room' +App.Host.numPlayersInRoom)
                     IO.socket.emit('hostRoomStart', App.gameID, promptChoice);//,promptChoice 
@@ -237,11 +241,6 @@ jQuery(function($){
                 App.Host.displayNewGameScreen();
                 //console.log("game create with id: " + App.gameID);
 
-                document.getElementById('success').play();
-                var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play;
-
-
                 
             },
 
@@ -253,7 +252,7 @@ jQuery(function($){
                 
                 document.getElementById('success').play();
                 var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play;
+                buttonClick.play();
                 //display URL
                 $('gameURL').text(window.location.href);
 
@@ -273,7 +272,7 @@ jQuery(function($){
 
                 $('#playersWaiting')
                     .append('<p/>')
-                    .text('Player' + data.playerName + 'joined the game.');
+                    .text(data.playerName + ' joined the game.');
 
                 //populate players[] with data
                 App.Host.players.push(data);
@@ -291,7 +290,6 @@ jQuery(function($){
                         .removeAttr('hidden');
                     
                 }
-                
                 //show start button once correct num of players entered room
   
             },
@@ -301,9 +299,8 @@ jQuery(function($){
                 //console.log('host screen template game pls');
                 App.$gameArea.html(App.$templateHostScreen);
 
-                document.getElementById('success').play();
                 var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play;
+                buttonClick.play();
             },
 
 
@@ -513,10 +510,11 @@ jQuery(function($){
                 //App.doTextFit('#hostWord');
 
             },
-
-
         },
 
+        ///////***********/////
+        // PLAYER FUNCTIONS //
+        //////***********/////
         Player : {
             hostSocketID: '',
             myName: '',
@@ -526,14 +524,14 @@ jQuery(function($){
 
             //click handler for on JoinClick
             onJoinClick: function () {
-                $( "#success" ).load( "audio/misc_menu.wav" );
+                //$( "#success" ).load( "audio/misc_menu.wav" );
 
                 App.$gameArea.html(App.$templateJoinGame);
 
                 //audio
-                document.getElementById('success').play();
+
                 var myAudio = new Audio('audio/misc_menu.wav');
-                myAudio.play;
+                myAudio.play();
 
             },
 
@@ -541,10 +539,14 @@ jQuery(function($){
                 $( "#success" ).load( "audio/misc_menu.wav" );
                 App.$gameArea.html(App.$templateInstructionScreen);
 
-                  //audio
-                  document.getElementById('success').play();
-                  var myAudio = new Audio('audio/misc_menu.wav');
-                  myAudio.play;
+                //audio
+                document.getElementById('success').play();
+                var myAudio = new Audio('audio/misc_menu.wav');
+                myAudio.play();
+
+                //test
+                var gremLaugh = new Audio('audio/gremlaugh1.wav');
+                gremLaugh.play();
       
             },
 
@@ -552,8 +554,8 @@ jQuery(function($){
                 App.$gameArea.html(App.$templateTitleScreen);
 
                 document.getElementById('success').play();
-                var myAudio = new Audio('audio/misc_menu.wav');
-                myAudio.play;
+                var buttonClick = new Audio('audio/misc_menu.wav');
+                buttonClick.play();
 
             },
 
@@ -561,9 +563,9 @@ jQuery(function($){
             onJoinWaitingRoomClick: function () {
                 document.getElementById('success').play();
                 var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play;
-                //console.log("audio joinclick");
+                buttonClick.play();
 
+                
                 var data = {
                     gameID: +($('#inputGameId').val()),
                     playerName: $('#inputPlayerName').val() || 'anon',
@@ -577,11 +579,9 @@ jQuery(function($){
                 
                 //emit waiting room in this function
                 IO.socket.emit('playerJoinGame', data);
-
                
                 App.myRole = 'Player';
                 App.Player.myName = data.playerName;
-                
                 
             },
 
@@ -591,8 +591,8 @@ jQuery(function($){
                 //console.log('data.mySocketID: ' + data.mySocketID + 'ing Gmnae' +  data.gameID);
 
                 document.getElementById('success').play();
-                var myAudio = new Audio('audio/misc_menu.wav');
-                myAudio.play;
+                var buttonClick = new Audio('audio/misc_menu.wav');
+                buttonClick.play();
 
                 if(IO.socket.id === data.mySocketID){
                     //console.log('player update Waiting Screen called');
@@ -620,9 +620,8 @@ jQuery(function($){
                 App.$gameArea.html(App.$templatePlayerScreen);
 
                 document.getElementById('success').play();
-                var myAudio = new Audio('audio/misc_menu.wav');
-                myAudio.play;
-
+                var buttonClick = new Audio('audio/misc_menu.wav');
+                buttonClick.play();
                 
             },
 
@@ -637,8 +636,8 @@ jQuery(function($){
                     if (data.gremlins[i] == App.mySocketID) {
                         document.getElementById('laugh').play();
                         var gremLaugh = new Audio('audio/gremlaugh1.wav');
-                        gremLaugh.play;
-                        //console.log(App.mySocketID +" should be gremlinized");
+                        gremLaugh.play();
+                        console.log(App.mySocketID +" should be gremlinized");
                         var x = document.getElementById("gremlinizedImg");
                         if (x.style.display === "none") {
                             x.style.display = "block";
@@ -658,7 +657,7 @@ jQuery(function($){
                               z.style.display = "none";
                             }
                         $('#gremlinizedMSG')
-                            .text(`You've been Gremlinized! <br> No using the letters:`);
+                            .text(`You've been Gremlinized! No using the letters:`);
                         $('#gremlinizedLTRA')
                             .text(gremLett1[i]).css("display, inline-block");
                         $('#gremlinizedLTRB')
@@ -668,16 +667,16 @@ jQuery(function($){
             },
 
             onPlayerSubmitClick: function() {
-                // console.log('Clicked Answer Button');
-                
+                //console.log('submitted answer');
+                //audio
+                // document.getElementById('success').play();
+                var buttonClick = new Audio('audio/misc_menu.wav');
+                buttonClick.play();
 
                 var $sub = $("#inputPlayerResponse");      // the tapped button
                 var $ltr1 = $("#gremlinizedLTRA");
                 var $ltr2 = $("#gremlinizedLTRB");
 
-                document.getElementById('success').play();
-                var myAudio = new Audio('audio/misc_menu.wav');
-                myAudio.play;
                 
                 //console.log($sub);
                 var answer = $sub.val(); // The tapped word
@@ -752,7 +751,6 @@ jQuery(function($){
                     
                 });
                 //console.log($list);
-                
 
                 // Insert the list onto the screen.
                 $('#gameArea').html('');
@@ -760,6 +758,8 @@ jQuery(function($){
             },
             
             iVoted : function () {//this player has voted, submits their answer to server to be passed to host
+                var buttonClick = new Audio('audio/misc_menu.wav');
+                buttonClick.play();
                 var $btn = $(this);
                 var vote = $btn.val();
 
@@ -771,8 +771,6 @@ jQuery(function($){
                         .addClass('infoWaiting')
                         );
 
-
-
                 var data = {
                     gameID: App.gameID,
                     vote: vote,
@@ -781,10 +779,6 @@ jQuery(function($){
 
                 //console.log('iVoted data: ' +data.vote);
                 IO.socket.emit('playerVote', data);
-                //audio test
-                document.getElementById('success').play();
-                var myAudio = new Audio('audio/misc_menu.wav');
-                myAudio.play;
             }
 
             
