@@ -33,6 +33,7 @@ exports.initGame = function(sio, socket){
     gameSocket.on('allAnswered', allAnswered);
     gameSocket.on('playerVote', votingMachine);
     gameSocket.on('allVoted', hostNextRound);
+    gameSocket.on('restartGame', restartGame)
 
 
     //player functions
@@ -70,6 +71,12 @@ function hostCreateNewGame() {
     //join the room, wait for players
     this.join(thisGameID);
     //console.log("thus many players are in the room after host joins"+io.sockets.adapter.rooms.get(thisGameID).size);
+}
+
+function restartGame(gameID) {
+    console.log("restarting game");
+    io.sockets.in(gameID).emit('restartClientGames');
+    io.sockets.in(gameID).emit('numPlayerUpdate', {numPlayer: io.sockets.adapter.rooms.get(data.gameID).size} );
 }
 
 function hostStartGame(gameID) {
@@ -146,10 +153,10 @@ function hostPrepareGame(gameID,promptChoice) {//promptChoice
         promptArr = songs;
     }
     if (promptChoice == 'Story') {
-        promptArr = songs;
+        promptArr = story;
     }
     if (promptChoice == 'Recipe') {
-        promptArr = songs;
+        promptArr = recipe;
     }
     
     indexChoice = Math.floor(Math.random() * promptArr.length);
@@ -247,44 +254,8 @@ var songs = [
        "The smell of ______ and cheap perfume",
        "and cheap ______"
    ],
-   [
-        "Goose ______ under sauce:",
-        "Wash ______ giblets",
-        "place them in a pan and pour with ______",
-        "Bring water to a ______ a few times" ,
-        "______ off the foam",
-        "Transfer the giblets on a plate and ______" , 
-        "Filter the ______ and add chopped carrot", 
-        "______ the prunes separately.",
-        "Combine the emerged ______ with the meat broth.",
-        "Next add ______ vinegar",
-        "______ your meal!"
-    ],
-    [
-        "Five little ______ jumping on the bed,",
-        "One fell down and bumped his ______,",
-        "Mama called the ______ and the ______ said,",
-        "No more ______ jumping on the bed!" ,
-        "Four little ______ jumping on the bed,",
-        "One fell down and ______ his head," , 
-        "Mama called the ______ and the ______ said,", 
-        "No more ______ jumping on the bed!"
-    ],
-    [
-        "We're goin' on a ______ hunt,",
-        "We're going to catch a ______ one,",
-        "I'm not ______",
-        "What a beautiful ______!" ,
-        "Oh look! It's some long, wavy ______!",
-        "Can't go ______ it," , 
-        "Can't go ______ it,", 
-        "Can't go ______ it,",
-        "Got to go ______ it!",
-        "We're goin' on a ______ hunt,",
-        "We're going to ______ a big one,",
-        "I'm not ______",
-        "What a ______ day!"
-    ],
+   
+
     [
         "Today is a great day for ______",
         "I woke up and ______ my friends",
@@ -304,15 +275,6 @@ var songs = [
         "Make 'em go ______",
         "As you shoot ______",
         "Baby, you're a ______"
-    ],
-    [
-        "Use of ______ notes or study aids;",
-        "Allowing another party to do one's work/exam and ______ in that work/exam as one's own;",
-        "Copying coursework from another student or from a ______ source;",
-        "______ on course work when prohibited;" ,
-        "Failing to ______ by the specific written course instructions, including, but not limited to, exams, homework assignments, and syllabi;",
-        "Use of electronic devices when not ______ permitted;" , 
-        "Clicker Fraud. Using, or ______ someone else use, clicker technology improperly in an effort to receive academic credit.", 
     ],
 
     [
@@ -378,4 +340,28 @@ var songs = [
     ],
 
 
+]
+
+var story = [ [
+    "Goose ______ under sauce:",
+    "Wash ______ giblets",
+    "place them in a pan and pour with ______",
+]
+
+]
+
+var recipe = [
+    [
+        "Goose ______ under sauce:",
+        "Wash ______ giblets",
+        "place them in a pan and pour with ______",
+        "Bring water to a ______ a few times" ,
+        "______ off the foam",
+        "Transfer the giblets on a plate and ______" , 
+        "Filter the ______ and add chopped carrot", 
+        "______ the prunes separately.",
+        "Combine the emerged ______ with the meat broth.",
+        "Next add ______ vinegar",
+        "______ your meal!"
+    ],
 ]
