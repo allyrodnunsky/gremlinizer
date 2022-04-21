@@ -280,7 +280,7 @@ jQuery(function($){
                 //console.log("host num p room" + App.Host.numPlayersInRoom);
                 //App.Host.numPlayersInRoom += 1;
                 //console.log('times check');
-                if (App.Host.numPlayersInRoom >= 2) {
+                if (App.Host.numPlayersInRoom >= 3) {
                     //console.log("App.Host.numPlayersInRoom is greater 2");
                     $('#btnStartSong')
                         .removeAttr('hidden');
