@@ -137,6 +137,8 @@ jQuery(function($){
             App.cacheElements(); //refernece to on-screen html elements
             App.bindEvents();
             App.showInitScreen();
+
+            
         },
 
         //display html elements
@@ -198,9 +200,13 @@ jQuery(function($){
                 //console.log(IO);
 
                 IO.socket.emit('hostCreateNewGame');
-                document.getElementById('success').play();
-                var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play();
+                // document.getElementById('success').play();
+                // var buttonClick = new Audio('audio/misc_menu.wav');
+                // buttonClick.play();
+
+                var backgroundMusic = new Audio('audio/background-track.wav');
+                backgroundMusic.play();
+
                
             },
 
@@ -213,7 +219,6 @@ jQuery(function($){
 
                 startGame = true;
                 if(startGame){
-                    document.getElementById('success').play();
                     var buttonClick = new Audio('audio/misc_menu.wav');
                     buttonClick.play();
                     //call host room start in gremgame
@@ -293,7 +298,6 @@ jQuery(function($){
                 //console.log('host screen template game pls');
                 App.$gameArea.html(App.$templateHostScreen);
 
-                document.getElementById('success').play();
                 var buttonClick = new Audio('audio/misc_menu.wav');
                 buttonClick.play();
             },
@@ -524,7 +528,7 @@ jQuery(function($){
                 App.$gameArea.html(App.$templateJoinGame);
 
                 //audio
-                document.getElementById('success').play();
+
                 var myAudio = new Audio('audio/misc_menu.wav');
                 myAudio.play();
 
@@ -540,7 +544,6 @@ jQuery(function($){
                 myAudio.play();
 
                 //test
-                document.getElementById('laugh').play();
                 var gremLaugh = new Audio('audio/gremlaugh1.wav');
                 gremLaugh.play();
       
@@ -665,7 +668,7 @@ jQuery(function($){
             onPlayerSubmitClick: function() {
                 //console.log('submitted answer');
                 //audio
-                document.getElementById('success').play();
+                // document.getElementById('success').play();
                 var buttonClick = new Audio('audio/misc_menu.wav');
                 buttonClick.play();
 
@@ -754,6 +757,8 @@ jQuery(function($){
             },
             
             iVoted : function () {//this player has voted, submits their answer to server to be passed to host
+                var buttonClick = new Audio('audio/misc_menu.wav');
+                buttonClick.play();
                 var $btn = $(this);
                 var vote = $btn.val();
 
