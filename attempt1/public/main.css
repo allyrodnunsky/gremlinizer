@@ -90,6 +90,23 @@ ul {
     margin-bottom: 17px;
   }
 
+  .btnPrompt {
+    font-family: "Gugi", cursive;
+    background: #7cc041;
+    border-radius: 40px;
+    border: none;
+    color: #f7f3e3;
+    min-width: 250px;
+    padding: 20px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 35px;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    margin-bottom: 17px;
+  }
+
   .submitBtn {
     font-family: "Gugi", cursive;
     background: #7cc041;
@@ -108,13 +125,13 @@ ul {
   .backBtn {
     text-decoration: none;
     border: none;
-    border-radius: 100px;
+    border-radius: 70px;
     padding: 20px 30px;
     background: #7cc041;
     color: #f7f3e3;
     font-size: 45px;
     justify-content: left;
-    margin: 100px 0px 0px 200px;
+    margin: 20px 0px 0px 100px;
   }
 
   .btn:hover {
@@ -215,6 +232,7 @@ ul {
     padding: 5% 5% 0% 5%;
     font-family: "Bungee", cursive;
     font-size: 45px;
+    margin-top: 40px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -228,13 +246,14 @@ ul {
     font-family: "Bungee", cursive;
     font-size: 90px;
     text-align: center;
-    color: #f7f3e3;
+    color: #7cc041;
   }
 
   .inputLabels {
     font-family: "Gugi", cursive;
     font-size: 40px;
     color: #f7f3e3;
+    margin-left: 5px;
   }
   .inputField {
     border-radius: 17px;
@@ -245,6 +264,7 @@ ul {
     background: #f7f3e3;
     box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
     font-size: large;
+    margin-bottom: 15px;
   }
   .row {
     display: flex;
@@ -323,7 +343,7 @@ ul {
   .gameEndWrapper {
     color: #f7f3e3;
     font-family: "Bungee", cursive;
-    font-size: 25px;
+    font-size: 35px;
     text-align: center;
   }
 
@@ -340,12 +360,12 @@ ul {
     line-height: 60px;
   }
   .gameLeaderBoard {
-    padding-bottom: 100px;
+    padding-bottom: 70px;
   }
   .scores {
     color: #f7f3e3;
     font-family: "Bungee", cursive;
-    font-size: 25px;
+    font-size: 28px;
     text-align: left;
     line-height: 55px;
     padding: 0px 350px;
@@ -353,29 +373,29 @@ ul {
 
   .greenGremlin1 {
     position: fixed;
-    bottom: -220px;
-    left: 90px;
-    width: 410px;
+    bottom: -200px;
+    left: 150px;
+    width: 310px;
   }
 
   .greenGremlin2 {
     position: fixed;
     top: 10%;
-    left: 80%;
-    width: 350px;
+    right: 0px;
+    width: 300px;
   }
 
   .purpGremlin1 {
     position: fixed;
     top: 60%;
-    left: 80%;
-    width: 350px;
+    right: 0px;
+    width: 300px;
   }
   .pinkGremlin1 {
     position: fixed;
     top: 0%;
     left: 10px;
-    width: 320px;
+    width: 300px;
   }
   .blueGremlin1 {
     position: fixed;
@@ -387,8 +407,14 @@ ul {
     position: fixed;
     bottom:0px;
     left: 70%;
-    width: 270px;
+    width: 280px;
   }
+  .spinGremlin{
+    position: fixed;
+    bottom: 155px;
+    left: 0px;
+    width: 320px;
+    }
 }
 
 /***********************************************
@@ -475,6 +501,23 @@ ul {
       align-items: center;
       align-content: space-evenly;
     }
+    .btnPrompt {
+      font-family: "Gugi", cursive;
+      background: #7cc041;
+      border-radius: 40px;
+      border: none;
+      color: #f7f3e3;
+      min-width: 200px;
+      padding: 20px 30px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 35px;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+      margin-bottom: 17px;
+    }
+
     .submitBtn {
       font-family: "Gugi", cursive;
       background: #7cc041;
@@ -493,13 +536,13 @@ ul {
     .backBtn {
       text-decoration: none;
       border: none;
-      border-radius: 100px;
+      border-radius: 30px;
       padding: 10px 15px;
       background: #7cc041;
       color: #f7f3e3;
       font-size: 35px;
       justify-content: left;
-      margin: 100px 0px 0px 200px;
+      margin: 20px 0px 0px 100px;
     }
 
     .btn:hover {
@@ -595,6 +638,7 @@ ul {
       padding: 5% 5% 0% 5%;
       font-family: "Bungee", cursive;
       font-size: 45px;
+      margin-top: 40px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -608,13 +652,14 @@ ul {
       font-family: "Bungee", cursive;
       font-size: 80px;
       text-align: center;
-      color: #f7f3e3;
+      color: #7cc041;
     }
 
     .inputLabels {
       font-family: "Gugi", cursive;
       font-size: 30px;
       color: #f7f3e3;
+      margin-left: 5px;
     }
     .inputField {
       border-radius: 17px;
@@ -625,6 +670,7 @@ ul {
       background: #f7f3e3;
       box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
       font-size: large;
+      margin-bottom: 15px;
     }
     .row {
       display: flex;
@@ -728,46 +774,46 @@ ul {
       position: fixed;
       top: 79%;
       left: 10%;
-      width: 220px;
+      width: 240px;
     }
 
     .greenGremlin2 {
       position: fixed;
       top: 50px;
-      right: 0%;
-      width: 220px;
+      right: 0px;
+      width: 250px;
     }
 
     .purpGremlin1 {
       position: fixed;
       top: 60%;
-      left: 100%;
-      width: 190px;
+      right: 0px;
+      width: 240px;
     }
     .pinkGremlin1 {
       position: fixed;
       top: -40px;
       left: 10px;
-      width: 190px;
+      width: 250px;
     }
     .blueGremlin1 {
       position: fixed;
       bottom:0px;
       left: 20%;
-      width: 170px;
+      width: 230px;
     }
     .blueGremlin2 {
       position: fixed;
       bottom:0px;
       left: 70%;
-      width: 170px;
+      width: 230px;
     }
 
     .spinGremlin {
       position: fixed;
       left:0px;
-      top: 45%;
-      width: 170px;
+      bottom: 180px;
+      width: 280px;
 
     }
   }
@@ -858,6 +904,23 @@ ul {
       align-items: center;
       align-content: space-evenly;
     }
+    .btnPrompt {
+      font-family: "Gugi", cursive;
+      background: #7cc041;
+      border-radius: 40px;
+      border: none;
+      color: #f7f3e3;
+      min-width: 190px;
+      padding: 20px 30px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 35px;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+      margin-bottom: 17px;
+    }
+
     .submitBtn {
       font-family: "Gugi", cursive;
       background: #7cc041;
@@ -877,13 +940,13 @@ ul {
     .backBtn {
       text-decoration: none;
       border: none;
-      border-radius: 30px;
+      border-radius: 70px;
       padding: 10px 10px;
       background: #7cc041;
       color: #f7f3e3;
       font-size: 25px;
       justify-content: left;
-      margin: 100px 0px 0px 200px;
+      margin: 60px 0px 0px 130px;
     }
 
     .btn:hover {
@@ -979,6 +1042,7 @@ ul {
       padding: 5% 5% 0% 5%;
       font-family: "Bungee", cursive;
       font-size: 45px;
+      margin-top: 40px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -992,13 +1056,14 @@ ul {
       font-family: "Bungee", cursive;
       font-size: 80px;
       text-align: center;
-      color: #f7f3e3;
+      color: #7cc041;
     }
 
     .inputLabels {
       font-family: "Gugi", cursive;
       font-size: 30px;
       color: #f7f3e3;
+      margin-left: 5px;
     }
     .inputField {
       border-radius: 17px;
@@ -1009,6 +1074,7 @@ ul {
       background: #f7f3e3;
       box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
       font-size: large;
+      margin-bottom: 15px;
     }
     .row {
       display: flex;
@@ -1120,14 +1186,14 @@ ul {
     .greenGremlin2 {
       position: fixed;
       top: 10px;
-      left: 85%;
+      right:0px;
       width: 190px;
     }
 
     .purpGremlin1 {
       position: fixed;
       top: 60%;
-      left: 88%;
+      right:0px;
       width: 190px;
     }
     .pinkGremlin1 {
@@ -1148,6 +1214,12 @@ ul {
       left: 70%;
       width: 170px;
     }
+    .spinGremlin{
+      position: fixed;
+      bottom: 110px;
+      left: 0px;
+      width: 25%;
+      }
   }
 }
 
@@ -1235,6 +1307,22 @@ ul {
       align-items: center;
       align-content: space-evenly;
     }
+    .btnPrompt {
+      font-family: "Gugi", cursive;
+      background: #7cc041;
+      border-radius: 40px;
+      border: none;
+      color: #f7f3e3;
+      min-width: 150px;
+      padding: 20px 30px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 35px;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+      margin-bottom: 17px;
+    }
     .submitBtn {
       font-family: "Gugi", cursive;
       background: #7cc041;
@@ -1254,7 +1342,7 @@ ul {
     .backBtn {
       text-decoration: none;
       border: none;
-      border-radius: 30px;
+      border-radius: 65px;
       padding: 10px 10px;
       background: #7cc041;
       color: #f7f3e3;
@@ -1357,6 +1445,7 @@ ul {
       padding: 5% 5% 0% 5%;
       font-family: "Bungee", cursive;
       font-size: 45px;
+      margin-top: 40px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -1370,13 +1459,14 @@ ul {
       font-family: "Bungee", cursive;
       font-size: 80px;
       text-align: center;
-      color: #f7f3e3;
+      color: #7cc041;
     }
 
     .inputLabels {
       font-family: "Gugi", cursive;
       font-size: 25px;
       color: #f7f3e3;
+      margin-left: 5px;
     }
     .inputField {
       border-radius: 17px;
@@ -1387,6 +1477,7 @@ ul {
       background: #f7f3e3;
       box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
       font-size: large;
+      margin-bottom: 15px;
     }
     .row {
       display: flex;
@@ -1410,6 +1501,7 @@ ul {
       background: #f7f3e3;
       box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
       font-size: large;
+      margin: 20px 0px;
     }
     .gremlinizedScreen {
       position: relative;
@@ -1494,14 +1586,14 @@ ul {
     .greenGremlin2 {
       position: fixed;
       top: 10%;
-      left: 70%;
+      right:0px;
       width: 20%;
     }
 
     .purpGremlin1 {
       position: fixed;
       top: 60%;
-      left: 80%;
+      right:0px;
       width: 20%;
     }
     .pinkGremlin1 {
@@ -1522,6 +1614,12 @@ ul {
       left: 60%;
       width: 20%;
     }
+    .spinGremlin{
+      position: fixed;
+      bottom: 110px;
+      left: 0px;
+      width: 20%;
+        }
   }
 }
 
@@ -1617,6 +1715,22 @@ ul {
       align-items: center;
       align-content: space-evenly;
     }
+    .btnPrompt {
+      font-family: "Gugi", cursive;
+      background: #7cc041;
+      border-radius: 40px;
+      border: none;
+      color: #f7f3e3;
+      min-width: 120px;
+      padding: 20px 30px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 35px;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+      margin-bottom: 17px;
+    }
     .submitBtn {
       font-family: "Gugi", cursive;
       background: #7cc041;
@@ -1636,13 +1750,13 @@ ul {
     .backBtn {
       text-decoration: none;
       border: none;
-      border-radius: 60px;
+      border-radius: 50px;
       padding: 10px 10px;
       background: #7cc041;
       color: #f7f3e3;
       font-size: 17px;
       justify-content: left;
-      margin: 0px 10px;
+      margin: 20px 10px 10px 15px;
     }
 
     .btn:hover {
@@ -1736,7 +1850,8 @@ ul {
       color: #f7f3e3;
       padding: 5% 5% 0% 5%;
       font-family: "Bungee", cursive;
-      font-size: 20px;
+      font-size: 35px;
+      margin-top: 40px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -1750,13 +1865,14 @@ ul {
       font-family: "Bungee", cursive;
       font-size: 45px;
       text-align: center;
-      color: #f7f3e3;
+      color: #7cc041;
     }
 
     .inputLabels {
       font-family: "Gugi", cursive;
       font-size: 15px;
       color: #f7f3e3;
+      margin-left: 5px;
     }
     .inputField {
       font-size: 16px;
@@ -1766,7 +1882,8 @@ ul {
       padding: 5px 16px;
       align-items: flex-end;
       background: #f7f3e3;
-      box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
+      box-shadow: 9px 9px 5px rgb(151, 151, 125) inset;
+      margin-bottom: 15px;
     }
     .row {
       display: flex;
@@ -1789,6 +1906,7 @@ ul {
       background: #f7f3e3;
       box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
       font-size: 12px;
+      margin: 15px 0px;
     }
     .gremlinizedScreen {
       position: relative;
@@ -1873,14 +1991,14 @@ ul {
     .greenGremlin2 {
       position: fixed;
       top: 5%;
-      left: 80%;
+      right:0px;
       width: 20%;
     }
 
     .purpGremlin1 {
       position: fixed;
       top: 60%;
-      left: 80%;
+      right:0px;
       width: 20%;
     }
     .pinkGremlin1 {
@@ -1899,8 +2017,14 @@ ul {
       position: fixed;
       top: 75%;
       left: 60%;
-      width: 15%;
+      width: 20%;
     }
+    .spinGremlin{
+      position: fixed;
+      bottom: 120px;
+      left: 0px;
+      width: 20%;
+        }
   }
 }
 
@@ -1996,6 +2120,22 @@ ul {
       align-items: center;
       align-content: space-evenly;
     }
+    .btnPrompt {
+      font-family: "Gugi", cursive;
+      background: #7cc041;
+      border-radius: 40px;
+      border: none;
+      color: #f7f3e3;
+      min-width: 90px;
+      padding: 20px 30px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 35px;
+      justify-content: center;
+      align-items: center;
+      text-transform: uppercase;
+      margin-bottom: 17px;
+    }
     .submitBtn {
       font-family: "Gugi", cursive;
       background: #7cc041;
@@ -2015,11 +2155,11 @@ ul {
     .backBtn {
       text-decoration: none;
       border: none;
-      border-radius: 60px;
+      border-radius: 25px;
       padding: 10px 10px;
       background: #7cc041;
       color: #f7f3e3;
-      font-size: 17px;
+      font-size: 18px;
       justify-content: left;
       margin: 20px 30px;
     }
@@ -2115,7 +2255,8 @@ ul {
       color: #f7f3e3;
       padding: 5% 5% 0% 5%;
       font-family: "Bungee", cursive;
-      font-size: 30px;
+      font-size: 35px;
+      margin-top: 35px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -2129,13 +2270,14 @@ ul {
       font-family: "Bungee", cursive;
       font-size: 45px;
       text-align: center;
-      color: #f7f3e3;
+      color: #7cc041;
     }
 
     .inputLabels {
       font-family: "Gugi", cursive;
       font-size: 20px;
       color: #f7f3e3;
+      margin-left: 15px;
     }
     .inputField {
       font-size: 16px;
@@ -2146,6 +2288,8 @@ ul {
       align-items: flex-end;
       background: #f7f3e3;
       box-shadow: 8px 8px 3px rgb(151, 151, 125) inset;
+      margin-bottom: 15px;
+      margin-left: 10px;
     }
 
     .answerField {
@@ -2157,6 +2301,7 @@ ul {
       background: #f7f3e3;
       box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
       font-size: large;
+      margin: 10px 0px;
     }
     .gremlinizedScreen {
       position: relative;
@@ -2241,14 +2386,14 @@ ul {
     .greenGremlin2 {
       position: fixed;
       top: 0%;
-      left: 70%;
+      right:0px;
       width: 30%;
     }
 
     .purpGremlin1 {
       position: fixed;
       top: 65%;
-      left: 70%;
+      right:0px;
       width: 35%;
     }
     .pinkGremlin1 {
@@ -2267,8 +2412,15 @@ ul {
       position: fixed;
       bottom: 0px;
       left: 60%;
-      width: 15%;
+      width: 25%;
     }
+
+    .spinGremlin{
+      position: fixed;
+      bottom: 110px;
+      left: 0px;
+      width: 30%;
+        }
   }
 }
 
@@ -2363,6 +2515,23 @@ ul {
     align-items: center;
     align-content: space-evenly;
   }
+  .btnPrompt {
+    font-family: "Gugi", cursive;
+    background: #7cc041;
+    border-radius: 40px;
+    border: none;
+    color: #f7f3e3;
+    min-width: 50px;
+    padding: 20px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 35px;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    margin-bottom: 17px;
+  }
+
   .submitBtn {
     font-family: "Gugi", cursive;
     background: #7cc041;
@@ -2497,13 +2666,14 @@ ul {
     font-family: "Bungee", cursive;
     font-size: 45px;
     text-align: center;
-    color: #f7f3e3;
+    color: #7cc041;
   }
 
   .inputLabels {
     font-family: "Gugi", cursive;
     font-size: 16px;
     color: #f7f3e3;
+    margin-left: 5px;
   }
   .inputField {
     font-size: 16px;
@@ -2513,7 +2683,9 @@ ul {
     padding: 10px 16px;
     align-items: flex-end;
     background: #f7f3e3;
-    box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
+    box-shadow: 7px 7px 3px rgb(151, 151, 125) inset;
+    margin-bottom: 12px;
+    margin-left: 7px;
   }
 
   .answerField {
@@ -2525,6 +2697,7 @@ ul {
     background: #f7f3e3;
     box-shadow: 10px 10px 5px rgb(151, 151, 125) inset;
     font-size: large;
+    margin: 10px 0px;
   }
   .gremlinizedScreen {
     position: relative;
@@ -2609,14 +2782,14 @@ ul {
   .greenGremlin2 {
     position: fixed;
     top: 5%;
-    left: 70%;
+    right:0px;
     width: 30%;
   }
 
   .purpGremlin1 {
     position: fixed;
     top: 50%;
-    left: 70%;
+    right:0px;
     width: 35%;
   }
   .pinkGremlin1 {
@@ -2635,6 +2808,12 @@ ul {
     position: fixed;
     top: 90%;
     left: 70%;
-    width: 20%;
+    width: 30%;
   }
+  .spinGremlin{
+    position: fixed;
+    bottom: 120px;
+    left: 0px;
+    width: 30%;
+      }
 }

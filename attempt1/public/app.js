@@ -155,7 +155,6 @@ jQuery(function($){
             App.$templateHostScreen = $('#round-x-template').html();
             App.$templateEndGame = $('#game-end-template').html();
             App.$templateInstructionScreen = $('#instruction-screen-template').html();
-            $( '#success' ).load( 'audio/misc_menu.wav' );
         },
 
         //bind events - events triggered by button clicks
@@ -219,8 +218,6 @@ jQuery(function($){
 
                 startGame = true;
                 if(startGame){
-                    var buttonClick = new Audio('audio/misc_menu.wav');
-                    buttonClick.play();
                     //call host room start in gremgame
                     //console.log('early Num players in room' +App.Host.numPlayersInRoom)
                     IO.socket.emit('hostRoomStart', App.gameID, promptChoice);//,promptChoice 
@@ -250,9 +247,6 @@ jQuery(function($){
                 //console.log('display joining screen');
                 App.$gameArea.html(App.$templateNewGame);
                 
-                document.getElementById('success').play();
-                var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play();
                 //display URL
                 $('gameURL').text(window.location.href);
 
@@ -282,6 +276,8 @@ jQuery(function($){
                 //console.log('times check');
                 if (App.Host.numPlayersInRoom >= 3) {
                     //console.log("App.Host.numPlayersInRoom is greater 2");
+                    $('#prompt')
+                        .removeAttr('style');
                     $('#btnStartSong')
                         .removeAttr('hidden');
                     $('#btnStartStory')
@@ -298,9 +294,6 @@ jQuery(function($){
             onPlayerStartGameClick : function() {
                 //console.log('host screen template game pls');
                 App.$gameArea.html(App.$templateHostScreen);
-
-                var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play();
             },
 
 
@@ -524,25 +517,12 @@ jQuery(function($){
 
             //click handler for on JoinClick
             onJoinClick: function () {
-                //$( "#success" ).load( "audio/misc_menu.wav" );
-
                 App.$gameArea.html(App.$templateJoinGame);
-
-                //audio
-
-                var myAudio = new Audio('audio/misc_menu.wav');
-                myAudio.play();
 
             },
 
             onInstructionClick: function () {
-                $( "#success" ).load( "audio/misc_menu.wav" );
                 App.$gameArea.html(App.$templateInstructionScreen);
-
-                //audio
-                document.getElementById('success').play();
-                var myAudio = new Audio('audio/misc_menu.wav');
-                myAudio.play();
 
                 //test
                 var gremLaugh = new Audio('audio/gremlaugh1.wav');
@@ -553,19 +533,11 @@ jQuery(function($){
             onTitleScreenClick: function () {
                 App.$gameArea.html(App.$templateTitleScreen);
 
-                document.getElementById('success').play();
-                var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play();
 
             },
 
             //player enters name and gameID and clicks join room
             onJoinWaitingRoomClick: function () {
-                document.getElementById('success').play();
-                var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play();
-
-                
                 var data = {
                     gameID: +($('#inputGameId').val()),
                     playerName: $('#inputPlayerName').val() || 'anon',
@@ -589,10 +561,6 @@ jQuery(function($){
             updateWaitingScreen : function(data) {
                 // console.log('io.socket.id is: ' + IO.socket.id);
                 //console.log('data.mySocketID: ' + data.mySocketID + 'ing Gmnae' +  data.gameID);
-
-                document.getElementById('success').play();
-                var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play();
 
                 if(IO.socket.id === data.mySocketID){
                     //console.log('player update Waiting Screen called');
@@ -618,10 +586,6 @@ jQuery(function($){
 
             onPlayerStartGameClick : function() {
                 App.$gameArea.html(App.$templatePlayerScreen);
-
-                document.getElementById('success').play();
-                var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play();
                 
             },
 
@@ -668,10 +632,6 @@ jQuery(function($){
 
             onPlayerSubmitClick: function() {
                 //console.log('submitted answer');
-                //audio
-                // document.getElementById('success').play();
-                var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play();
 
                 var $sub = $("#inputPlayerResponse");      // the tapped button
                 var $ltr1 = $("#gremlinizedLTRA");
@@ -758,8 +718,6 @@ jQuery(function($){
             },
             
             iVoted : function () {//this player has voted, submits their answer to server to be passed to host
-                var buttonClick = new Audio('audio/misc_menu.wav');
-                buttonClick.play();
                 var $btn = $(this);
                 var vote = $btn.val();
 
