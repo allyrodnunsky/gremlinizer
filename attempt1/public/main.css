@@ -2638,6 +2638,7 @@ ul {
     justify-content: space-evenly;
     align-items: center;
     align-content: space-evenly;
+    padding: 200px;
   }
   .infoInstructionsBig {
     color: #f7f3e3;
